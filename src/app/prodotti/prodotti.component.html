@@ -1,0 +1,40 @@
+ciao
+<br>
+<br>
+<br>
+<br>
+<p>You can introduce custom directives for table headers to sort columns</p>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col" sortable="id" (sort)="onSort($event)">#</th>
+			<th scope="col" sortable="name" (sort)="onSort($event)">Country</th>
+			<th scope="col" sortable="area" (sort)="onSort($event)">Area</th>
+			<th scope="col" sortable="population" (sort)="onSort($event)">Population</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (country of countries; track country.name) {
+           
+			<tr>
+				<th scope="row">{{ country.id }}</th>
+                <td> <button [class.selected]="country === selectedCountry" type="button" (click)="onSelect(country)"></button></td>
+				<td>
+					<img
+						[src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag"
+						[alt]="'The flag of ' + country.name"
+						class="me-2"
+						style="width: 20px"
+					/>
+					{{ country.name }}
+				</td>
+				<td>{{ country.area | number }}</td>
+				<td>{{ country.population | number }}</td>
+			</tr>
+            
+		}
+	</tbody>
+</table>
+
+<app-prodotti-detail [country]="selectedCountry"></app-prodotti-detail>
