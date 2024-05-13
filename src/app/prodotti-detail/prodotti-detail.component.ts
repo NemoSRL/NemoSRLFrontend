@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Country } from '../Country';
-
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import {NgIf, UpperCasePipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
