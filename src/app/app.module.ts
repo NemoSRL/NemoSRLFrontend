@@ -15,6 +15,7 @@ import { NgbHighlight } from '@ng-bootstrap/ng-bootstrap';
 import { ProdottiDetailComponent } from './prodotti-detail/prodotti-detail.component';
 import { NgIf } from '@angular/common';
 import { UpperCasePipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UpperCasePipe } from '@angular/common';
     NgbModule,
     DecimalPipe, 
     AsyncPipe, ReactiveFormsModule, NgbHighlight,
-    FormsModule, NgIf, UpperCasePipe
+    FormsModule, NgIf, UpperCasePipe,
+    HttpClientModule
   ],
   providers: [
     { provide: "API_URL", useValue: NemoConfig.apiUrl }, DecimalPipe
