@@ -6,7 +6,6 @@ import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChild
 import { Observable, of } from 'rxjs';
 
 
-import { CountryService } from '../country.service';
 
 export type SortColumn = keyof Prodotto| '';
 export type SortDirection = 'asc' | 'desc' | '';
