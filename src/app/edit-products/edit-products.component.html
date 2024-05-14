@@ -6,22 +6,53 @@
 	<div class="modal-body">
 		<form>
 			<div class="mb-3">
-				<label for="nome">{{product?.nome}}</label>
-				<div class="input-group">
-					<input
-						id="dateOfBirth"
-						class="form-control"
-						placeholder="nome"
-						name="nome"
-                        value={{product?.nome}}
-					/>
-					
-				</div>
+			  <label for="nome">Nome</label>
+			  <div class="input-group">
+				<input
+				  id="nome"
+				  placeholder="nome"
+				  name="nome"
+                  value="{{product?.nome}}"
+				  [(ngModel)]="nome"
+				/>
+			  </div>
+			  <label for="qualita">Qualità</label>
+			  <div class="input-group">
+				<input
+				  id="qualita"
+				  placeholder="Qualità"
+				  name="qualita"
+                  value="{{product?.qualita}}"
+				  [(ngModel)]="qualita"
+				/>
+                
+			  </div>
+			  <label for="qntMinima">Quantità Minima</label>
+			  <div class="input-group">
+				<input
+				  id="qntMinima"
+				  placeholder="Quantità Minima"
+				  name="qntMinima"
+                  value="{{product?.sogliaminima}}"
+				  [(ngModel)]="qntMinima"
+				/>
+			  </div>
+			  <label for="qnt">Quantità</label>
+			  <div class="input-group">
+				<input
+				  id="qnt"
+				  placeholder="Quantità"
+				  name="qnt"
+                  value="{{product?.quantita}}"
+				  [(ngModel)]="qnt"
+				/>
+			  </div>
 			</div>
-		</form>
+		  </form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        <button type="button" class="btn-danger btn" (click)="deleteProduct();modal.close('Delete click')"></button>
+		<button type="button" class="btn btn-outline-dark" (click)="editProduct(); modal.close('Save click')">Save</button>
 	</div>
 </ng-template>
 
