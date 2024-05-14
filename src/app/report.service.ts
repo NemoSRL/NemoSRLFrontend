@@ -11,11 +11,10 @@ const UPDATE_REPORT="ciao";
 const DELETE_REPORT="ciao";
 
 export interface Report{
-    readonly np:number
+    readonly id:number
     readonly etichetta:number
     readonly data: Date
     readonly dettagli: string
-    readonly motivazione: string
     readonly personale: number
 }
     export type Codice=number
@@ -28,9 +27,9 @@ export interface Report{
     providedIn: 'root'
   })
 export class ReportService{
-    
+
     constructor(
-        @Inject('API_URL') private readonly apiUrl: string, 
+        @Inject('API_URL') private readonly apiUrl: string,
         private readonly httpClient: HttpClient
     ) { }
 

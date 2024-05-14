@@ -13,19 +13,19 @@ const GET_ATTRIBUTI="ciao";
 
 
 export interface etichette{
-    readonly codice: number
-    readonly dataArrivo: Date
+    readonly id: number
+    readonly dataarrivo: Date
     readonly descrizione: string
-    readonly abbattuto: boolean
+    readonly abbattimento: boolean
     readonly peso: number
     readonly prodotto: string
-    readonly venditaNP: number
-    readonly venditaData: Data
+    readonly venditanp: number
+    readonly venditadata: Data
     readonly ordineUscita: number
     readonly cliente: string
-    readonly scontoExtra: number
-    readonly posizioneId: number
-    readonly posizioneNp: number
+    readonly scontoextra: number
+    readonly posizioneid: number
+    readonly posizionenp: number
     readonly prenotazione: string
 }
 
@@ -42,9 +42,9 @@ export type Tipologia=string
     providedIn: 'root'
   })
 export class EtichetteService{
-    
+
     constructor(
-        @Inject('API_URL') private readonly apiUrl: string, 
+        @Inject('API_URL') private readonly apiUrl: string,
         private readonly httpClient: HttpClient
     ) { }
 
@@ -56,7 +56,7 @@ export class EtichetteService{
         peso:Peso,posizioneId:PosizioneId,posizioneNp:PosizioneNp,
         duc:DataUltimoControllo,tipologia:Tipologia):Observable<etichette[]>{
         return this.httpClient.get<etichette[]>(`${this.apiUrl}/${READ_BY_ETICHETTE_ENDPOINT}`,
-         {params:{codice,dataArrivo: dataArrivo.toISOString(), peso 
+         {params:{codice,dataArrivo: dataArrivo.toISOString(), peso
          ,posizioneId,posizioneNp,duc: duc.toISOString(),tipologia}})
     }
 
@@ -65,7 +65,8 @@ export class EtichetteService{
     }
 
     public deleteEtichette(codice:Codice){
-        return this.httpClient.delete(`${this.apiUrl}/${DELETE_ETICHETTE}`,{body:{codice}})
+        return this.httpClient.delete(`${this.apiUrl}/${DELETE_ETICHETTE}`,
+          {body:{codice}})
     }
 
     public getAttributi():Observable<string[]>{
