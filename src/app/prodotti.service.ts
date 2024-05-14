@@ -44,8 +44,8 @@ export class ProdottiService {
     return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_BY}`, { params: {codice,nome,dataArrivo: dataArrivo.toISOString()}})
   }
 
-  public updateProdotto(prodotto: Prodotto) {
-    return this.httpClient.put(`${this.apiUrl}/${UPDATE_PRODOTTO_ENDPOINT}`,prodotto)
+  public updateProdotto(prodotto: Prodotto) :Observable<Prodotto> {
+    return this.httpClient.put<Prodotto>(`${this.apiUrl}/${UPDATE_PRODOTTO_ENDPOINT}`,prodotto)
   }
 
   public getAttributi(): Observable<string[]>{
@@ -53,9 +53,9 @@ export class ProdottiService {
     return this.httpClient.get<string[]>(url1)
   }
 
-  public deleteProdotto(codice:Codice){
+  public deleteProdotto(codice:Codice) :Observable<Prodotto>{
     const url= `${this.apiUrl}/${DELETE_PRODOTTO_ENDPOINT}`
-    return this.httpClient.delete(url, {body: {codice}})
+    return this.httpClient.delete<Prodotto>(url, {body: {codice}})
   }
 
 }

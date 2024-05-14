@@ -66,12 +66,12 @@ export class EtichetteService{
          ,posizioneId,posizioneNp,duc: duc.toISOString(),tipologia}})
   }
 
-  public updateEtichetta(etichetta:etichette){
-        return this.httpClient.put(`${this.apiUrl}/${UPDATE_ETICHETTE}`,etichetta)
+  public updateEtichetta(etichetta:etichette):Observable<etichette>{
+        return this.httpClient.put<etichette>(`${this.apiUrl}/${UPDATE_ETICHETTE}`,etichetta)
   }
 
-  public deleteEtichette(codice:Codice){
-        return this.httpClient.delete(`${this.apiUrl}/${DELETE_ETICHETTE}`,
+  public deleteEtichette(codice:Codice) :Observable<etichette>{
+        return this.httpClient.delete<etichette>(`${this.apiUrl}/${DELETE_ETICHETTE}`,
           {body:{codice}})
   }
 

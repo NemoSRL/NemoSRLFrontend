@@ -53,11 +53,11 @@ export class ReportService{
         return this.httpClient.get<string[]>(`${this.apiUrl}/${GET_ATTRIBUTI}`)
     }
 
-    public updateReport(Report:Report){
-        return this.httpClient.put(`${this.apiUrl}/${UPDATE_REPORT}`,Report)
+    public updateReport(Report:Report):Observable<Report>{
+        return this.httpClient.put<Report>(`${this.apiUrl}/${UPDATE_REPORT}`,Report)
     }
 
-    public deleteReport(codice:Codice){
-        return this.httpClient.delete(`${this.apiUrl}/${DELETE_REPORT}`,{body:{codice}})
+    public deleteReport(codice:Codice) :Observable<Report>{
+        return this.httpClient.delete<Report>(`${this.apiUrl}/${DELETE_REPORT}`,{body:{codice}})
     }
 }
