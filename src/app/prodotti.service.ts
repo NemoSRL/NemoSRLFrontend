@@ -7,13 +7,21 @@ const READ_BY= "ciao";
 const UPDATE_PRODOTTO_ENDPOINT="ciao";
 const DELETE_PRODOTTO_ENDPOINT="ciao";
 const GET_ATTRIBUTI_ENDPOINT="ciao";
+const ADD_PRODOTTO="ciao";
 
 export interface Prodotto {
   readonly id : number;
   readonly nome : string;
   readonly quantita : number;
   readonly sogliaminima : number;
-  readonly qualita : string; 
+  readonly qualita : string;
+}
+
+export interface ProdottoParziale{
+  readonly nome?: string;
+  readonly quantita?: number;
+  readonly sogliaminima?: number;
+  readonly qualita?: string;
 }
 
 export type Codice = number
@@ -25,11 +33,15 @@ export type DataArrivo= Date
   providedIn: 'root'
 })
 export class ProdottiService {
-  
+
   constructor(
-    @Inject('API_URL') private readonly apiUrl: string, 
+    @Inject('API_URL') private readonly apiUrl: string,
     private readonly httpClient: HttpClient
   ) { }
+
+  public addProdotto(prodotto:Prodotto): Observable<Prodotto>{
+    return this.httpClient.post<Prodotto>(`${this.apiUrl}/${ADD_PRODOTTO}`,prodotto)
+  }
 
   public readAllProdotti(): Observable<Prodotto[]> {
     return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_ALL_ENDPOINT}`)
@@ -39,7 +51,7 @@ export class ProdottiService {
     return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_BY}`, { params: {codice,nome,dataArrivo: dataArrivo.toISOString()}})
   }
 
-  public updateProdotto(prodotto: Prodotto) {
+  public updateProdotto(prodotto: ProdottoParziale) {
     return this.httpClient.put(`${this.apiUrl}/${UPDATE_PRODOTTO_ENDPOINT}`,prodotto)
   }
 

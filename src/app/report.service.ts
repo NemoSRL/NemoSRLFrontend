@@ -9,6 +9,7 @@ const READ_BY_REPORT="ciao";
 const GET_ATTRIBUTI="ciao";
 const UPDATE_REPORT="ciao";
 const DELETE_REPORT="ciao";
+const ADD_REPORT="ciao";
 
 export interface Report{
     readonly id:number
@@ -16,6 +17,13 @@ export interface Report{
     readonly data: Date
     readonly dettagli: string
     readonly personale: number
+}
+
+export interface ReportParziale{
+  readonly etichetta?:number
+  readonly data?: Date
+  readonly dettagli?: string
+  readonly personale?: number
 }
     export type Codice=number
     export type Data=Date
@@ -33,6 +41,10 @@ export class ReportService{
         private readonly httpClient: HttpClient
     ) { }
 
+    public addReport(report:Report): Observable<Report>{
+      return this.httpClient.post<Report>(`${this.apiUrl}/${ADD_REPORT}`,
+        report)
+    }
     public readAllReport(): Observable<Report[]>{
         return this.httpClient.get<Report[]>(`${this.apiUrl}/${READ_ALL_REPORT}`)
     }
@@ -47,7 +59,7 @@ export class ReportService{
         return this.httpClient.get<string[]>(`${this.apiUrl}/${GET_ATTRIBUTI}`)
     }
 
-    public updateReport(Report:Report){
+    public updateReport(Report:ReportParziale){
         return this.httpClient.put(`${this.apiUrl}/${UPDATE_REPORT}`,Report)
     }
 
