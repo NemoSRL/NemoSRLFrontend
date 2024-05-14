@@ -1,43 +1,135 @@
-<div>
-    <nav class="navbar bg-body-tertiary fixed-top">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Offcanvas navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <form class="d-flex mt-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </nav>
-</div>
+<style type="text/css">
+
+  .sidebar li .submenu{ 
+    list-style: none; 
+    margin: 0; 
+    padding: 0; 
+    padding-left: 1rem; 
+    padding-right: 1rem;
+  }
+  
+  .sidebar .nav-link {
+      font-weight: 500;
+      color: var(--bs-dark);
+  }
+  .sidebar .nav-link:hover {
+      color: var(--bs-primary);
+  }
+  
+  </style>
+  
+  
+  <script type="text/javascript">
+  
+    document.addEventListener("DOMContentLoaded", function(){
+  
+      document.querySelectorAll('.sidebar .nav-link').forEach(function(element){
+  
+        element.addEventListener('click', function (e) {
+  
+          let nextEl = element.nextElementSibling;
+          let parentEl  = element.parentElement;	
+  
+          if(nextEl) {
+            e.preventDefault();	
+            let mycollapse = new bootstrap.Collapse(nextEl);
+  
+              if(nextEl.classList.contains('show')){
+                mycollapse.hide();
+              } else {
+                mycollapse.show();
+                // find other submenus with class=show
+                var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                // if it exists, then close all of them
+              if(opened_submenu){
+                new bootstrap.Collapse(opened_submenu);
+              }
+  
+              }
+            }
+  
+        });
+      })
+  
+    }); 
+    // DOMContentLoaded  end
+  </script>
+  
+  
+ 
+  <body class="bg-light">
+  
+  <header class="section-header py-3">
+  <div class="container">
+    
+    <ul class="nav flex-column">
+
+      <li><button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+        <i class="bi bi-list"></i>
+      </button></li>
+    </ul>
+  </div>
+  </header> <!-- section-header.// -->
+  
+  
+  
+  <!-- ============= COMPONENT ============== -->
+  <div class="offcanvas offcanvas-start text-bg-dark" id="offcanvas">
+    <div class="offcanvas-header">
+      
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+  <nav class="sidebar card py-2 mb-4">
+  <ul class="nav flex-column" id="nav_accordion">
+    <li class="nav-item">
+      <a class="nav-link" href="#"> Link name </a>
+    </li>
+    <li class="nav-item has-submenu">
+      <a class="nav-link" href="#"> Submenu links <i class="bi small bi-caret-down-fill"></i> </a>
+      <ul class="submenu collapse">
+        <li><a class="nav-link" href="#">Submenu item 1 </a></li>
+          <li><a class="nav-link" href="#">Submenu item 2 </a></li>
+          <li><a class="nav-link" href="#">Submenu item 3 </a> </li>
+      </ul>
+    </li>
+    <li class="nav-item has-submenu">
+      <a class="nav-link" href="#"> More menus <i class="bi small bi-caret-down-fill"></i> </a>
+      <ul class="submenu collapse">
+        <li><a class="nav-link" href="#">Submenu item 4 </a></li>
+          <li><a class="nav-link" href="#">Submenu item 5 </a></li>
+          <li><a class="nav-link" href="#">Submenu item 6 </a></li>
+          <li><a class="nav-link" href="#">Submenu item 7 </a></li>
+      </ul>
+    </li>
+    <li class="nav-item has-submenu">
+      <a class="nav-link" href="#"> Another submenus <i class="bi small bi-caret-down-fill"></i> </a>
+      <ul class="submenu collapse">
+        <li><a class="nav-link" href="#">Submenu item 8 </a></li>
+          <li><a class="nav-link" href="#">Submenu item 9 </a></li>
+          <li><a class="nav-link" href="#">Submenu item 10 </a></li>
+          <li><a class="nav-link" href="#">Submenu item 11 </a></li>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"> Demo link </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"> Menu item </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"> Something </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#"> Other link </a>
+    </li>
+  </ul>
+  </nav>
+    </div>
+  <!-- ============= COMPONENT END// ============== -->	
+      
+  
+
+
+
+
