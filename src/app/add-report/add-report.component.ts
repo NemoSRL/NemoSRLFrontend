@@ -12,7 +12,7 @@ export class AddReportComponent {
   etichetta?:number
   data?: Date
   dettagli?: string
-  personale?: number
+  personale?: string
   
   private modalService = inject(NgbModal);
 	closeResult = '';

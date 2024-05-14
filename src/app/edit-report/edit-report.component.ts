@@ -8,10 +8,10 @@ import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstra
   styleUrl: './edit-report.component.css'
 })
 export class EditReportComponent {
-  nome: string = '';
-  qualita: string = '';
-  qntMinima: number = 0;
-  qnt: number = 0;
+  etichetta?:number
+  data?: Date
+  dettagli?: string
+  personale?: string
   constructor(private reportService : ReportService){}
   @Input() report?: Report
 
@@ -40,21 +40,15 @@ export class EditReportComponent {
         return `with: ${reason}`;
     }
   }
-  /*editReport(): void{
+  editReport(): void{
     this.modalService.dismissAll()
-    const updatedProduct: Report = {
-      id: this.report?.id ?? -1, 
-      nome: this.nome,
-      qualita: this.qualita,
-      sogliaminima: this.qntMinima,
-      quantita: this.qnt
-    };
-    console.log(updatedProduct)
-    t//his.productService.updateProdotto(updatedProduct).subscribe()
+    
+    
+    this.reportService.updateReport({id: this.report?.id, data:this.data, dettagli: this.dettagli, etichetta : this.etichetta, personale : this.personale}).subscribe()
   
   }
-  deleteProduct(): void{
+  deleteReport(): void{
     this.modalService.dismissAll()
-    this.productService.deleteProdotto(this.product?.id ?? -1).subscribe()
-  }*/
+    this.reportService.deleteReport(this.report?.id ?? -1).subscribe()
+  }
 }
