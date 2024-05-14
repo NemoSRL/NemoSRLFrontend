@@ -5,12 +5,12 @@ import { Data } from '@angular/router';
 import { Observable } from 'rxjs';
 
 
-const READ_ALL_ETICHETTE_ENDPOINT="ciao";
-const READ_BY_ETICHETTE_ENDPOINT="ciao";
-const UPDATE_ETICHETTE="ciao";
-const DELETE_ETICHETTE="ciao";
-const GET_ATTRIBUTI="ciao";
-const ADD_ETICHETTA="ciao";
+const READ_ALL_ETICHETTE_ENDPOINT="etichette";
+const READ_BY_ETICHETTE_ENDPOINT="etichette";
+const UPDATE_ETICHETTE="etichette";
+const DELETE_ETICHETTE="etichette";
+const GET_ATTRIBUTI="etichette";
+const ADD_ETICHETTA="etichette";
 
 export interface etichette{
     readonly id?: number

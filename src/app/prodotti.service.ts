@@ -18,7 +18,7 @@ export interface Prodotto {
 
 export type Codice = number
 export type Nome = string
-export type DataArrivo= Date
+
 
 
 @Injectable({
@@ -35,8 +35,8 @@ export class ProdottiService {
     return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_ALL_ENDPOINT}`)
   }
 
-  public readProdottiBy(codice:Codice,nome:Nome,dataArrivo:DataArrivo): Observable<Prodotto[]> {
-    return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_BY}`, { params: {codice,nome,dataArrivo: dataArrivo.toISOString()}})
+  public readProdottiBy(codice:Codice,nome:Nome): Observable<Prodotto[]> {
+    return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_BY}`, { params: {codice,nome}})
   }
 
   public updateProdotto(prodotto: Prodotto) {

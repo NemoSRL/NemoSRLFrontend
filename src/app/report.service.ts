@@ -4,19 +4,19 @@ import { inject } from '@angular/core/testing';
 import { read } from '@popperjs/core';
 import { Observable } from 'rxjs';
 
-const READ_ALL_REPORT="ciao";
-const READ_BY_REPORT="ciao";
-const GET_ATTRIBUTI="ciao";
-const UPDATE_REPORT="ciao";
-const DELETE_REPORT="ciao";
-const ADD_REPORT="ciao";
+const READ_ALL_REPORT="report";
+const READ_BY_REPORT="report";
+const GET_ATTRIBUTI="report";
+const UPDATE_REPORT="report";
+const DELETE_REPORT="report";
+const ADD_REPORT="report";
 
 export interface Report{
     readonly id?:number
     readonly etichetta?:number
     readonly data?: Date
     readonly dettagli?: string
-    readonly personale?: number
+    readonly personale?: string
 }
 
     export type Codice=number
