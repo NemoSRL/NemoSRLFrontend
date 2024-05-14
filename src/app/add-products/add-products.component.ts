@@ -8,13 +8,23 @@ import { ProdottiService } from '../prodotti.service';
   styleUrl: './add-products.component.css'
 })
 export class AddProductsComponent {
-  nome: string = '';
-  qualita: string = '';
-  qntMinima: number = 0;
-  qnt: number = 0;
+  id: number=0;
+  dataArrivo? : Date ;
+  descrizione: string="";
+  abbattimento: boolean=true;
+  peso: number=0;
+  prodotto: string="";
+  venditanp:number=0;
+  venditadata?: Date;
+  ordineuscita: number=0;
+  cliente:string="";
+  scontoextra:number=0;
+  posizioneid?: number;
+  posizionenp?: number;
+  prenotazione?: string;
   private modalService = inject(NgbModal);
 	closeResult = '';
-  constructor(private productService : ProdottiService){}
+  constructor(private Service : ProdottiService){}
 	open(content: TemplateRef<any>) {
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
 			(result) => {
