@@ -18,6 +18,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './products/products.component';
 import { EditProductsComponent } from './edit-products/edit-products.component';
 import { AddProductsComponent } from './add-products/add-products.component';
+import { LabelComponent } from './label/label.component';
+import { AddLabelComponent } from './add-label/add-label.component';
+import { EditLabelComponent } from './edit-label/edit-label.component';
+import { EditReportComponent } from './edit-report/edit-report.component';
+import { AddReportComponent } from './add-report/add-report.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,13 @@ import { AddProductsComponent } from './add-products/add-products.component';
     
     ProductsComponent,
     EditProductsComponent,
-    AddProductsComponent
+    AddProductsComponent,
+    LabelComponent,
+    AddLabelComponent,
+    EditLabelComponent,
+    EditReportComponent,
+    AddReportComponent,
+    ReportComponent
   ],
   imports: [ 
 
