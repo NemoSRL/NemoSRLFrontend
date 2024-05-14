@@ -16,6 +16,11 @@ import { ProdottiDetailComponent } from './prodotti-detail/prodotti-detail.compo
 import { NgIf } from '@angular/common';
 import { UpperCasePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { AddProdottiComponent } from './add-prodotti/add-prodotti.component';
+import { EditProdottiComponent } from './edit-prodotti/edit-prodotti.component';
+import { ProductsComponent } from './products/products.component';
+import { EditProductsComponent } from './edit-products/edit-products.component';
+import { AddProductsComponent } from './add-products/add-products.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,12 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     ProdottiComponent,
     NavbarComponent,
-    ProdottiDetailComponent
+    ProdottiDetailComponent,
+    AddProdottiComponent,
+    EditProdottiComponent,
+    ProductsComponent,
+    EditProductsComponent,
+    AddProductsComponent
   ],
   imports: [ 
     NgbdSortableHeader,

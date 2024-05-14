@@ -2,17 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const READ_ALL_ENDPOINT= "ciao";
+const READ_ALL_ENDPOINT= "prodotti";
 const READ_BY= "ciao";
 const UPDATE_PRODOTTO_ENDPOINT="ciao";
 const DELETE_PRODOTTO_ENDPOINT="ciao";
 const GET_ATTRIBUTI_ENDPOINT="ciao";
 
 export interface Prodotto {
-  readonly codice : number;
+  readonly id : number;
   readonly nome : string;
   readonly quantita : number;
-  readonly sogliaMinima : number;
+  readonly sogliaminima : number;
   readonly qualita : string; 
 }
 

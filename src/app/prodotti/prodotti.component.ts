@@ -1,9 +1,9 @@
 import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 import { Country } from '../Country';
-import { count } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { COUNTRIES } from '../mock-countries';
 
-
+import { CountryService } from '../country.service';
 
 export type SortColumn = keyof Country | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -43,8 +43,20 @@ export class NgbdSortableHeader {
   styleUrl: './prodotti.component.css'
 })
 export class ProdottiComponent {
+	constructor(private countryService : CountryService){}
 
-	countries = COUNTRIES;
+	getCountries() : void {
+		
+			this.countryService.getCountries()
+				.subscribe(countries => this.countries = countries);
+		  
+	}
+
+	ngOnInit(): void {
+		this.getCountries();
+	}
+
+	countries : Country[] = [];
 	selectedCountry? : Country
 	onSelect(country: Country): void {
 		this.selectedCountry=country
@@ -70,7 +82,10 @@ export class ProdottiComponent {
 				return direction === 'asc' ? res : -res;
 			});
 		}
+		
 	}
+
+	
 }
 
 
