@@ -13,7 +13,7 @@ const GET_ATTRIBUTI="ciao";
 const ADD_ETICHETTA="ciao";
 
 export interface etichette{
-    readonly id: number
+    readonly id?: number
     readonly dataarrivo?: Date
     readonly descrizione?: string
     readonly abbattimento?: boolean
