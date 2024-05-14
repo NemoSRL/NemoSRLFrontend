@@ -14,36 +14,21 @@ const ADD_ETICHETTA="ciao";
 
 export interface etichette{
     readonly id: number
-    readonly dataarrivo: Date
-    readonly descrizione: string
-    readonly abbattimento: boolean
-    readonly peso: number
-    readonly prodotto: string
-    readonly venditanp: number
-    readonly venditadata: Data
-    readonly ordineUscita: number
-    readonly cliente: string
-    readonly scontoextra: number
-    readonly posizioneid: number
-    readonly posizionenp: number
-    readonly prenotazione: string
+    readonly dataarrivo?: Date
+    readonly descrizione?: string
+    readonly abbattimento?: boolean
+    readonly peso?: number
+    readonly prodotto?: string
+    readonly venditanp?: number
+    readonly venditadata?: Data
+    readonly ordineUscita?: number
+    readonly cliente?: string
+    readonly scontoextra?: number
+    readonly posizioneid?: number
+    readonly posizionenp?: number
+    readonly prenotazione?: string
 }
 
-export interface etichetteParziale{
-  readonly dataarrivo?: Date
-  readonly descrizione?: string
-  readonly abbattimento?: boolean
-  readonly peso?: number
-  readonly prodotto?: string
-  readonly venditanp?: number
-  readonly venditadata?: Data
-  readonly ordineUscita?: number
-  readonly cliente?: string
-  readonly scontoextra?: number
-  readonly posizioneid?: number
-  readonly posizionenp?: number
-  readonly prenotazione?: string
-}
 
 export type Codice=number
 export type DataArrivo=Date
@@ -81,7 +66,7 @@ export class EtichetteService{
          ,posizioneId,posizioneNp,duc: duc.toISOString(),tipologia}})
   }
 
-  public updateEtichetta(etichetta:etichetteParziale){
+  public updateEtichetta(etichetta:etichette){
         return this.httpClient.put(`${this.apiUrl}/${UPDATE_ETICHETTE}`,etichetta)
   }
 

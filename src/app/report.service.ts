@@ -12,19 +12,13 @@ const DELETE_REPORT="ciao";
 const ADD_REPORT="ciao";
 
 export interface Report{
-    readonly id:number
-    readonly etichetta:number
-    readonly data: Date
-    readonly dettagli: string
-    readonly personale: number
+    readonly id?:number
+    readonly etichetta?:number
+    readonly data?: Date
+    readonly dettagli?: string
+    readonly personale?: number
 }
 
-export interface ReportParziale{
-  readonly etichetta?:number
-  readonly data?: Date
-  readonly dettagli?: string
-  readonly personale?: number
-}
     export type Codice=number
     export type Data=Date
     export type Operaio=number
@@ -59,7 +53,7 @@ export class ReportService{
         return this.httpClient.get<string[]>(`${this.apiUrl}/${GET_ATTRIBUTI}`)
     }
 
-    public updateReport(Report:ReportParziale){
+    public updateReport(Report:Report){
         return this.httpClient.put(`${this.apiUrl}/${UPDATE_REPORT}`,Report)
     }
 

@@ -10,14 +10,7 @@ const GET_ATTRIBUTI_ENDPOINT="ciao";
 const ADD_PRODOTTO="ciao";
 
 export interface Prodotto {
-  readonly id : number;
-  readonly nome : string;
-  readonly quantita : number;
-  readonly sogliaminima : number;
-  readonly qualita : string;
-}
-
-export interface ProdottoParziale{
+  readonly id?: number;
   readonly nome?: string;
   readonly quantita?: number;
   readonly sogliaminima?: number;
@@ -51,7 +44,7 @@ export class ProdottiService {
     return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_BY}`, { params: {codice,nome,dataArrivo: dataArrivo.toISOString()}})
   }
 
-  public updateProdotto(prodotto: ProdottoParziale) {
+  public updateProdotto(prodotto: Prodotto) {
     return this.httpClient.put(`${this.apiUrl}/${UPDATE_PRODOTTO_ENDPOINT}`,prodotto)
   }
 
