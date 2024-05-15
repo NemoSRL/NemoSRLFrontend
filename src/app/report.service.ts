@@ -43,9 +43,9 @@ export class ReportService{
         return this.httpClient.get<Report[]>(`${this.apiUrl}/${READ_ALL_REPORT}`)
     }
 
-    public readByReport(data:Data,personale:Operaio,peso:Peso,tipologia:Tipologia): Observable<Report[]>{
+    public readReportBy(attributo: string ,ricerca :string): Observable<Report[]>{
         return this.httpClient.get<Report[]>(`${this.apiUrl}/${READ_BY_REPORT  }`,
-            {params:{data: data.toISOString(),personale,peso,tipologia }}
+            {params:{attributo, ricerca }}
         )
     }
 

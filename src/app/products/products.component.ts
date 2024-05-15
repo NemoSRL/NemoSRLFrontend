@@ -1,19 +1,19 @@
 import { Prodotto } from '../prodotti.service';
 import { ProdottiService } from '../prodotti.service';
 
-import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
+import { Component, Directive, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
 
 
 
-export type SortColumn = keyof Prodotto| '';
-export type SortDirection = 'asc' | 'desc' | '';
+ type SortColumn = keyof Prodotto | '';
+ type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = { asc: 'desc', desc: '', '': 'asc' };
 
-const compare = (v1: string | number, v2: string | number) => (v1 < v2 ? -1 : v1 > v2 ? 1 : 0);
+const compare = (v1: string | number | undefined, v2: string | number | undefined) => ((v1 ?? 0) < (v2 ?? 0) ? -1 : (v1 ?? 0) > (v2 ?? 0) ? 1 : 0);
 
-export interface SortEvent {
+ interface SortEvent {
 	column: SortColumn;
 	direction: SortDirection;
 }
@@ -43,9 +43,41 @@ export class NgbdSortableHeader {
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent {
-  constructor(private productService : ProdottiService){}
+export class ProductsComponent implements OnInit {
+	
+	@ViewChildren(NgbdSortableHeader)
+	headers!: QueryList<NgbdSortableHeader>;
 
+	onSort({ column, direction }: SortEvent) {
+		// resetting other headers
+		for (const header of this.headers) {
+			if (header.sortable !== column) {
+				header.direction = '';
+			}
+		}
+
+		// sorting countries
+		if (direction === '' || column === '') {
+			this.products = this.products;
+		} else {
+			this.products = [...this.products].sort((a, b) => {
+				const res = compare(a[column], b[column]);
+				return direction === 'asc' ? res : -res;
+			});
+		}
+	}
+
+  constructor(private productService : ProdottiService){}
+  	textSearch: string = ""
+	attributeSearch: string = ""
+	getProductsBy() : void {
+		if(this.attributeSearch === "" && this.textSearch===""){
+			this.getProducts()
+		} else {
+			this.productService.readProdottiBy(this.attributeSearch, this.textSearch)
+			.subscribe(products => this.products = products)
+		}
+	}
 	getProducts() : void {
 		
 			this.productService.readAllProdotti()
@@ -58,9 +90,6 @@ export class ProductsComponent {
 	}
 
 	products : Prodotto[] = [];
-	selectedProduct? : Prodotto
-	onSelect(prodotto: Prodotto): void {
-		this.selectedProduct=prodotto
-	}
+	
 	
 }

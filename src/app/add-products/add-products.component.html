@@ -15,16 +15,15 @@
 				  [(ngModel)]="nome"
 				/>
 			  </div>
-			  <label for="qualita">Qualità</label>
-			  <div class="input-group">
-				<input
-				  id="qualita"
-				  placeholder="Qualità"
-				  name="qualita"
-				  [(ngModel)]="qualita"
-				/>
-                
-			  </div>
+			  <label >Qualità</label>
+			<div class="input-group">	
+<select name="qualita" id="qualita"  [(ngModel)]="qualita">
+	<option  [ngValue]="'Vivo'" >Vivo</option>
+	<option [ngValue]="'Fresco'">Fresco</option>
+	<option [ngValue]="'Congelato'">Congelato</option>
+  </select>
+</div>       
+			  
 			  <label for="qntMinima">Quantità Minima</label>
 			  <div class="input-group">
 				<input
@@ -51,8 +50,5 @@
 	</div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Aggiungi</button>
+<button class="btn btn-lg btn-primary" (click)="open(content)">Aggiungi</button>
 
-<hr />
-
-<pre>{{ closeResult }}</pre>

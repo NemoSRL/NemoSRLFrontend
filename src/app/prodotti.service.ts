@@ -9,11 +9,11 @@ const DELETE_PRODOTTO_ENDPOINT="prodotti";
 const GET_ATTRIBUTI_ENDPOINT="prodotti";
 
 export interface Prodotto {
-  readonly id : number;
-  readonly nome : string;
-  readonly quantita : number;
-  readonly sogliaminima : number;
-  readonly qualita : string; 
+  readonly id? : number;
+  readonly nome? : string;
+  readonly quantita? : number;
+  readonly sogliaminima? : number;
+  readonly qualita? : string; 
 }
 
 export type Codice = number
@@ -35,8 +35,8 @@ export class ProdottiService {
     return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_ALL_ENDPOINT}`)
   }
 
-  public readProdottiBy(codice:Codice,nome:Nome): Observable<Prodotto[]> {
-    return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_BY}`, { params: {codice,nome}})
+  public readProdottiBy(attributo: string ,ricerca :string): Observable<Prodotto[]> {
+    return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_BY}`, { params: {attributo,ricerca}})
   }
 
   public updateProdotto(prodotto: Prodotto) {

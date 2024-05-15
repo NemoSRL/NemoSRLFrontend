@@ -27,7 +27,8 @@ export class AddProductsComponent {
 	}
 
   addProduct(): void{
-    this.productService.updateProdotto({id:-1, nome:this.nome, qualita: this.qualita, sogliaminima : this.qntMinima, quantita : this.qnt}).subscribe()
+	//console.log({id:-1, nome:this.nome, qualita: this.qualita, sogliaminima : this.qntMinima, quantita : this.qnt})
+    this.productService.updateProdotto({id: undefined, nome:this.nome, qualita: this.qualita, sogliaminima : this.qntMinima, quantita : this.qnt}).subscribe()
   }
 	private getDismissReason(reason: any): string {
 		switch (reason) {

@@ -5,11 +5,11 @@ import { Observable, of } from 'rxjs';
 import { Report } from '../report.service';
 import { ReportService } from '../report.service';
 
-export type SortColumn = keyof Report| '';
+export type SortColumn = keyof Report | '';
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = { asc: 'desc', desc: '', '': 'asc' };
 
-const compare = (v1: string | number, v2: string | number) => (v1 < v2 ? -1 : v1 > v2 ? 1 : 0);
+const compare = (v1: string | number | Date | undefined, v2: string | number | Date | undefined) => ((v1 ?? 0) < (v2 ?? 0) ? -1 : (v1 ?? 0) > (v2 ?? 0) ? 1 : 0);
 
 export interface SortEvent {
 	column: SortColumn;
@@ -42,6 +42,37 @@ export class NgbdSortableHeader {
   styleUrl: './report.component.css'
 })
 export class ReportComponent {
+	@ViewChildren(NgbdSortableHeader)
+	headers!: QueryList<NgbdSortableHeader>;
+
+	onSortReport({ column, direction }: SortEvent) {
+		// resetting other headers
+		for (const header of this.headers) {
+			if (header.sortable !== column) {
+				header.direction = '';
+			}
+		}
+
+		// sorting countries
+		if (direction === '' || column === '') {
+			this.reports = this.reports;
+		} else {
+			this.reports = [...this.reports].sort((a, b) => {
+				const res = compare(a[column], b[column]);
+				return direction === 'asc' ? res : -res;
+			});
+		}
+	}
+	textSearch: string = ""
+	attributeSearch: string = ""
+	getReportsBy() : void {
+		if(this.attributeSearch === "" && this.textSearch===""){
+			this.getReports()
+		} else {
+			this.reportService.readReportBy(this.attributeSearch, this.textSearch)
+			.subscribe(reports => this.reports = reports);
+		}
+	}
   constructor(private reportService : ReportService){}
 
 	getReports() : void {
@@ -56,9 +87,6 @@ export class ReportComponent {
 	}
 
 	reports : Report[] = [];
-	selectedReport? : Report
-	onSelect(report: Report): void {
-		this.selectedReport=report
-	}
+	
 	
 }

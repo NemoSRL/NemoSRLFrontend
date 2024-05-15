@@ -18,13 +18,12 @@
 			  </div>
 			  <label for="qualita">Qualità</label>
 			  <div class="input-group">
-				<input
-				  id="qualita"
-				  placeholder="Qualità"
-				  name="qualita"
-                  value="{{product?.qualita}}"
-				  [(ngModel)]="qualita"
-				/>
+				<select name="qualita" id="qualita"  [(ngModel)]="qualita">
+					<option selected>Open this select menu</option>
+					<option  [ngValue]="'Vivo'" >Vivo</option>
+					<option [ngValue]="'Fresco'">Fresco</option>
+					<option [ngValue]="'Congelato'">Congelato</option>
+				  </select>
                 
 			  </div>
 			  <label for="qntMinima">Quantità Minima</label>

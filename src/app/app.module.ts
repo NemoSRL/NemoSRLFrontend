@@ -24,7 +24,8 @@ import { EditLabelComponent } from './edit-label/edit-label.component';
 import { EditReportComponent } from './edit-report/edit-report.component';
 import { AddReportComponent } from './add-report/add-report.component';
 import { ReportComponent } from './report/report.component';
-
+import { NgbdSortableHeader } from './products/products.component';
+import { DetailEtichettaComponent } from './detail-etichetta/detail-etichetta.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { ReportComponent } from './report/report.component';
     EditLabelComponent,
     EditReportComponent,
     AddReportComponent,
-    ReportComponent
+    ReportComponent,
+    DetailEtichettaComponent
   ],
   imports: [ 
 
@@ -50,7 +52,7 @@ import { ReportComponent } from './report/report.component';
     DecimalPipe, 
     AsyncPipe, ReactiveFormsModule, NgbHighlight,
     FormsModule, NgIf, UpperCasePipe,
-    HttpClientModule
+    HttpClientModule, NgbdSortableHeader
   ],
   providers: [
     { provide: "API_URL", useValue: NemoConfig.apiUrl }, DecimalPipe

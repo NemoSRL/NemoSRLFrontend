@@ -11,6 +11,7 @@ const UPDATE_ETICHETTE="etichette";
 const DELETE_ETICHETTE="etichette";
 const GET_ATTRIBUTI="etichette";
 const ADD_ETICHETTA="etichette";
+const READ_ETICHETTA_BY_ID_ENDPOINT="";
 
 export interface etichette{
     readonly id?: number
@@ -77,5 +78,9 @@ export class EtichetteService{
 
   public getAttributi():Observable<string[]>{
         return this.httpClient.get<string[]>(`${this.apiUrl}/${GET_ATTRIBUTI}`)
+  }
+
+  public readEtichettaById(codice:number): Observable<etichette>{
+        return this.httpClient.get<etichette>(`${this.apiUrl}/${READ_ETICHETTA_BY_ID_ENDPOINT}/${codice}`)
   }
 }

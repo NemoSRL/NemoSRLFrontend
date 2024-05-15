@@ -3,20 +3,32 @@ ciao
 <br>
 <br>
 <br>
-<p>You can introduce custom directives for table headers to sort columns</p>
-<div class="main-container">
 
+<div class="main-container">
+<h2>Prodotti</h2>
+	
 
 <app-add-products></app-add-products>
+
+<button class="btn btn-primary" (click)="getProductsBy()">Cerca</button>
+<input [(ngModel)]="textSearch">
+<select name="attributeSearch" id="attributeSearch"  [(ngModel)]="attributeSearch">
+	<option  [ngValue]="'Codice'" >Codice</option>
+	<option [ngValue]="'Nome'">Nome</option>
+	<option [ngValue]="'Qualita'">Qualita</option>
+	<option [ngValue]="'SogliaMinima'">Soglia Minima</option>
+	<option [ngValue]="'Quantita'">Quantità</option>
+	<option [ngValue]="'reset'" selected></option>
+  </select>
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th scope="col" >codice</th>
-			<th scope="col" [width]="10">Dettagli/Modifica</th>
-			<th scope="col" >Nome</th>
-			<th scope="col" >Qualita</th>
-			<th scope="col" >Quantità minima</th>
-			<th scope="col" >Quantità</th>
+			<th scope="col" class="cliccabile" sortable="id" (sort)="onSort($event)">codice</th>
+			<th scope="col" >Dettagli/Modifica</th>
+			<th scope="col" class="cliccabile" sortable="nome" (sort)="onSort($event)">Nome</th>
+			<th scope="col"class="cliccabile" sortable="qualita" (sort)="onSort($event)">Qualita</th>
+			<th scope="col" class="cliccabile" sortable="sogliaminima" (sort)="onSort($event)">Quantità minima</th>
+			<th scope="col" class="cliccabile" sortable="quantita" (sort)="onSort($event)">Quantità</th>
 		</tr>
 	</thead>
 	<tbody>
