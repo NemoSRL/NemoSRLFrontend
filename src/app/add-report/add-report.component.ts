@@ -1,8 +1,8 @@
 import { Component, inject, TemplateRef } from '@angular/core';
-import { ReportService } from '../report.service';
+import { ReportService } from '../services/report.service';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Report } from '../report.service';
-import { etichette, EtichetteService } from '../etichette.service';
+import { Report } from '../services/report.service';
+import { etichette, EtichetteService } from '../services/etichette.service';
 @Component({
   selector: 'app-add-report',
   templateUrl: './add-report.component.html',

@@ -1,10 +1,10 @@
 import { Component, inject, TemplateRef, Input } from '@angular/core';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {etichette, EtichetteService} from "../etichette.service";
+import {etichette, EtichetteService} from "../services/etichette.service";
 import {Data} from "@angular/router";
-import {ProdottiService, Prodotto} from "../prodotti.service";
-import { Cliente, ClienteService } from '../cliente.service';
-import { Posizione, PosizioneService } from '../posizione.service';
+import {ProdottiService, Prodotto} from "../services/prodotti.service";
+import { Cliente, ClienteService } from '../services/cliente.service';
+import { Posizione, PosizioneService } from '../services/posizione.service';
 
 @Component({
   selector: 'app-edit-label',

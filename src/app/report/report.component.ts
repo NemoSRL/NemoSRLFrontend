@@ -2,9 +2,9 @@
 import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
-import { Report } from '../report.service';
-import { ReportService } from '../report.service';
-import { EtichetteService, etichette } from '../etichette.service';
+import { Report } from '../services/report.service';
+import { ReportService } from '../services/report.service';
+import { EtichetteService, etichette } from '../services/etichette.service';
 
 export type SortColumn = keyof Report | '';
 export type SortDirection = 'asc' | 'desc' | '';

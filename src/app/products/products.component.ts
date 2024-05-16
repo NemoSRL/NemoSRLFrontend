@@ -1,5 +1,5 @@
-import { Prodotto } from '../prodotti.service';
-import { ProdottiService } from '../prodotti.service';
+import { Prodotto } from '../services/prodotti.service';
+import { ProdottiService } from '../services/prodotti.service';
 
 import { Component, Directive, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 

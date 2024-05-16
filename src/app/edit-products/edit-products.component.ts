@@ -5,9 +5,9 @@ import {
   NgbDatepickerModule,
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
-import { Prodotto } from '../prodotti.service';
+import { Prodotto } from '../services/prodotti.service';
 
-import { ProdottiService } from '../prodotti.service';
+import { ProdottiService } from '../services/prodotti.service';
 @Component({
   selector: 'app-edit-products',
   templateUrl: './edit-products.component.html',

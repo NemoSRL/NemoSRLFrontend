@@ -1,7 +1,7 @@
 import { Component, inject, TemplateRef } from '@angular/core';
-import { Prodotto } from '../prodotti.service';
+import { Prodotto } from '../services/prodotti.service';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProdottiService } from '../prodotti.service';
+import { ProdottiService } from '../services/prodotti.service';
 @Component({
   selector: 'app-add-products',
   templateUrl: './add-products.component.html',

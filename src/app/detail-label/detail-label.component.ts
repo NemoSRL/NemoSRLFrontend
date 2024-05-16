@@ -1,7 +1,7 @@
 
 import { Component, inject, TemplateRef, Input } from '@angular/core';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {etichette, EtichetteService} from "../etichette.service";
+import {etichette, EtichetteService} from "../services/etichette.service";
 
 @Component({
   selector: 'app-detail-label',
