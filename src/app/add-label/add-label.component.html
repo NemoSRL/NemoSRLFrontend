@@ -1,1 +1,139 @@
-<p>add-label works!</p>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Nuova Etichetta</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label for="dataArrivo">DataArrivo</label>
+        <div class="input-group">
+          <input
+            id="dataArrivo"
+            placeholder="DataArrivo"
+            name="DataArrivo"
+            [(ngModel)]="dataArrivo"
+          />
+        </div>
+        <label for="descrizione">Descrizione</label>
+        <div class="input-group">
+          <input
+            id="descrizione"
+            placeholder="Descrizione"
+            name="descriozione"
+            [(ngModel)]="descrizione"
+          />
+
+        </div>
+        <label for="abbattimento">Abbattimento</label>
+        <div class="input-group">
+          <input
+            id="abbattimento"
+            placeholder="Abbattimento"
+            name="abbattimento"
+            [(ngModel)]="abbattimento"
+          />
+        </div>
+        <label for="peso">Peso</label>
+        <div class="input-group">
+          <input
+            id="peso"
+            placeholder="Peso"
+            name="peso"
+            [(ngModel)]="peso"
+          />
+        </div>
+        <label for="prodotto">Prodotto</label>
+        <div class="input-group">
+          <input
+            id="prodotto"
+            placeholder="Prodotto"
+            name="prodotto"
+            [(ngModel)]="prodotto"
+          />
+        </div>
+        <label for="venditanp">Vendita Numero Progressivo</label>
+        <div class="input-group">
+          <input
+            id="venditanp"
+            placeholder="Vendita Numero Progressivo"
+            name="venditanp"
+            [(ngModel)]="venditanp"
+          />
+        </div>
+        <label for="venditadata">Vendita Data</label>
+        <div class="input-group">
+          <input
+            id="venditadata"
+            placeholder="Vendita Data"
+            name="vendidata"
+            [(ngModel)]="venditadata"
+          />
+        </div>
+        <label for="ordineuscita">Ordine Uscita</label>
+        <div class="input-group">
+          <input
+            id="ordineuscita"
+            placeholder="Ordine Uscita"
+            name="ordineuscita"
+            [(ngModel)]="ordineuscita"
+          />
+        </div>
+        <label for="cliente">Cliente</label>
+        <div class="input-group">
+          <input
+            id="cliente"
+            placeholder="Cliente"
+            name="cliente"
+            [(ngModel)]="cliente"
+          />
+        </div>
+        <label for="scontoextra">Sconto Extra</label>
+        <div class="input-group">
+          <input
+            id="scontoextra"
+            placeholder="Sconto Extra"
+            name="scontoextra"
+            [(ngModel)]="scontoextra"
+          />
+        </div>
+        <label for="posizioneid">Posizione Id</label>
+        <div class="input-group">
+          <input
+            id="posizioneid"
+            placeholder="Posizione Id"
+            name="posizioneid"
+            [(ngModel)]="posizioneid"
+          />
+        </div>
+        <label for="posizionenp">Posizione Np</label>
+        <div class="input-group">
+          <input
+            id="posizionenp"
+            placeholder="Posizione Np"
+            name="posizionenp"
+            [(ngModel)]="posizionenp"
+          />
+        </div>
+        <label for="prenotazione">Prenotazione</label>
+        <div class="input-group">
+          <input
+            id="prenotazione"
+            placeholder="Prenotazione"
+            name="prenotazione"
+            [(ngModel)]="prenotazione"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addEtichetta(); modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Aggiungi</button>
+
+<hr />
+
+<pre>{{ closeResult }}</pre>

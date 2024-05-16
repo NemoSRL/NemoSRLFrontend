@@ -44,7 +44,6 @@ export type Tipologia=string
     providedIn: 'root'
   })
 export class EtichetteService{
-
     constructor(
         @Inject('API_URL') private readonly apiUrl: string,
         private readonly httpClient: HttpClient
