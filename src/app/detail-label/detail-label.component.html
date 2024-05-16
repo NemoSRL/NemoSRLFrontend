@@ -1,0 +1,56 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Dettagli Etichetta</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <label for="dataarrivo">Data Arrivo</label>
+                <div class="input-group">
+                    <input id="dataarrivo" placeholder="Data Arrivo" name="dataarrivo" type="date"
+                        value="{{etichetta?.dataarrivo}}" readonly />
+                </div>
+                <label for="descrizione">Descrizione</label>
+                <div class="input-group">
+                    <input id="descrizione" placeholder="Descrizione" name="descrizione"
+                        value="{{etichetta?.descrizione}}" readonly />
+                </div>
+                <label for="abbattimento">Abbattimento</label>
+                <div class="input-group">
+                    <input id="abbattimento" placeholder="Abbattimento" type="checkbox" name="abbattimento"
+                        value="{{etichetta?.abbattimento}}" readonly />
+                </div>
+                <label for="peso">Peso</label>
+                <div class="input-group">
+                    <input id="peso" placeholder="Peso" name="peso" value="{{etichetta?.peso}}" readonly />
+                </div>
+                <label for="prodotto">Prodotto</label>
+                <div class="input-group">
+                    <input id="prodotto" value="{{etichetta?.prodotto}}" readonly>
+                </div>
+
+                <label for="scontoextra">Scontro Extra</label>
+                <div class="input-group">
+                    <input id="scontoextra" placeholder="Sconto Extra" name="scontoextra"
+                        value="{{etichetta?.scontoextra}}" readonly />
+                </div>
+                <label for="posizione">Posizione</label>
+                <div class="input-group">
+                    <input id="posizione" value="{{etichetta?.posizioneid}} - {{etichetta?.posizionenp}}" readonly>
+                </div>
+                <label for="prenotazione">Prenotazione</label>
+                <div class="input-group">
+                    <input id="prenotazione" value="{{etichetta?.prenotazione}}" readonly>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn-danger btn " (click)="modal.close('Close click')">Chiudi</button>
+    </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary button-as-text" (click)="open(content)">
+    {{etichetta?.id}}
+ </button>

@@ -4,6 +4,7 @@ import {etichette, EtichetteService} from "../etichette.service";
 import {Data} from "@angular/router";
 import {ProdottiService, Prodotto} from "../prodotti.service";
 import { Cliente, ClienteService } from '../cliente.service';
+import { Posizione, PosizioneService } from '../posizione.service';
 
 @Component({
   selector: 'app-edit-label',
@@ -26,7 +27,8 @@ export class EditLabelComponent {
   prenotazione?: string=""
 
   constructor(private etichetteService : EtichetteService, private productService : ProdottiService, private clientService : ClienteService, private positionService : PosizioneService){}
-  @Input() etichetta?: etichette
+  @Input() etichetta?: etichette  
+  @Input() etichettaId?: number=0
   private modalService = inject(NgbModal);
   closeResult = '';
 
@@ -52,7 +54,7 @@ export class EditLabelComponent {
     }
   }
   selectedPosition:string = "0 - 0";
-  addEtichetta(): void{
+  editEtichette(): void{
     const parsedPosition = this.selectedPosition?.split(' - ')
     this.posizioneid=parseInt(parsedPosition[0])
     this.posizionenp=parseInt(parsedPosition[1])
@@ -98,10 +100,13 @@ export class EditLabelComponent {
 
   positions : Posizione[] = []
   private getPositions() : void {
-    this.positionService.readAllPosizioni()
+    this.positionService.getAllPosizioni()
 			.subscribe(positions => this.positions = positions);
   }
 ngOnInit(): void {
+  if(this.etichetta === null){
+    this.etichetteService.readEtichettaById(this.etichettaId ?? 0).subscribe(etichette => this.etichetta = etichette)
+  }
 	this.getProducts();
   this.getClients();
   this.getPositions();

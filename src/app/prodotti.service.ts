@@ -7,7 +7,7 @@ const READ_BY= "ciao";
 const UPDATE_PRODOTTO_ENDPOINT="prodotti";
 const DELETE_PRODOTTO_ENDPOINT="prodotti";
 const GET_ATTRIBUTI_ENDPOINT="prodotti";
-
+const READ_BY_ID="prodotti";
 export interface Prodotto {
   readonly id? : number;
   readonly nome? : string;
@@ -39,6 +39,9 @@ export class ProdottiService {
     return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_BY}`, { params: {attributo,ricerca}})
   }
 
+  public readProdottiById(id: number): Observable<Prodotto> {
+    return this.httpClient.get<Prodotto>(`${this.apiUrl}/${READ_BY_ID}`, { params: {id}})
+  }
   public updateProdotto(prodotto: Prodotto) {
     return this.httpClient.put(`${this.apiUrl}/${UPDATE_PRODOTTO_ENDPOINT}`,prodotto)
   }

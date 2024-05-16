@@ -1,23 +1,19 @@
 
-
 import { Component, inject, TemplateRef, Input } from '@angular/core';
-import { Report } from '../report.service';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { etichette } from '../etichette.service';
-import { EtichetteService } from '../etichette.service';
+import {etichette, EtichetteService} from "../etichette.service";
+
 @Component({
-  selector: 'app-detail-etichetta',
-  templateUrl: './detail-etichetta.component.html',
-  styleUrl: './detail-etichetta.component.css'
+  selector: 'app-detail-label',
+  templateUrl: './detail-label.component.html',
+  styleUrl: './detail-label.component.css'
 })
-export class DetailEtichettaComponent {
+export class DetailLabelComponent {
 
 
-  
-  constructor(private EtichetteService : EtichetteService){}
-  @Input() idEtichetta?: number
-  @Input() etichetta?: etichette
-  tempProd?: etichette
+  constructor(private etichetteService : EtichetteService){}
+  etichetta?: etichette  
+  @Input() etichettaId?: number=0
   private modalService = inject(NgbModal);
   closeResult = '';
 
@@ -31,7 +27,7 @@ export class DetailEtichettaComponent {
       },
     );
   }
-  
+
   private getDismissReason(reason: any): string {
     switch (reason) {
       case ModalDismissReasons.ESC:
@@ -42,15 +38,14 @@ export class DetailEtichettaComponent {
         return `with: ${reason}`;
     }
   }
-  getEtichetta() : void {
-		
-    this.EtichetteService.readEtichettaById(this.idEtichetta ?? -1)
-      .subscribe(etichetta => this.etichetta = etichetta);
-    
-}
+
+
+
 
 ngOnInit(): void {
-  this.getEtichetta();
-}
-  
+  if(this.etichetta === null){
+    this.etichetteService.readEtichettaById(this.etichettaId ?? 0).subscribe(etichette => this.etichetta = etichette)
   }
+
+}
+}

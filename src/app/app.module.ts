@@ -25,7 +25,9 @@ import { EditReportComponent } from './edit-report/edit-report.component';
 import { AddReportComponent } from './add-report/add-report.component';
 import { ReportComponent } from './report/report.component';
 import { NgbdSortableHeader } from './products/products.component';
-import { DetailEtichettaComponent } from './detail-etichetta/detail-etichetta.component';
+
+import { DetailLabelComponent } from './detail-label/detail-label.component';
+import { DetailProductComponent } from './detail-product/detail-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,9 @@ import { DetailEtichettaComponent } from './detail-etichetta/detail-etichetta.co
     EditReportComponent,
     AddReportComponent,
     ReportComponent,
-    DetailEtichettaComponent
+
+    DetailLabelComponent,
+    DetailProductComponent
   ],
   imports: [ 
 

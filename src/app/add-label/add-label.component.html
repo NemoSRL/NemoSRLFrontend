@@ -73,7 +73,7 @@
         <div class="input-group">
           <select [(ngModel)]="selectedPosition">
             <option value="" disabled selected="selected"></option>
-            <option *ngFor="let position of positions" value="{{position.id}} - {{position.np}}">{{position.nome}}</option>
+            <option *ngFor="let position of positions" value="{{position.id}} - {{position.np}}">{{position.id}} - {{position.np}} - {{position.tipo}}</option>
           </select>
         </div>
         <label for="prenotazione">Prenotazione</label>
@@ -95,4 +95,3 @@
 
 <hr />
 
-<pre>{{ closeResult }}</pre>

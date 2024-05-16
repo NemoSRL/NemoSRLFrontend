@@ -1,0 +1,36 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Aggiorna Prodotto</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <label for="nome">Nome</label>
+                <div class="input-group">
+                    <input id="nome" placeholder="nome" name="nome" value="{{product?.nome}}" readonly />
+                </div>
+                <label for="qualita">Qualità</label>
+                <div class="input-group">
+                    <input name="qualita" id="qualita" value="{{product?.qualita}}" readonly>
+                </div>
+                <label for="qntMinima">Quantità Minima</label>
+                <div class="input-group">
+                    <input id="qntMinima" placeholder="Quantità Minima" name="qntMinima"
+                        value="{{product?.sogliaminima}}" readonly />
+                </div>
+                <label for="qnt">Quantità</label>
+                <div class="input-group">
+                    <input id="qnt" placeholder="Quantità" name="qnt" value="{{product?.quantita}}" readonly />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn-danger btn" (click)="modal.close('Close click')">Chiudi</button>
+    </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary button-as-text" (click)="open(content)">
+        {{product?.id}}
+     </button>

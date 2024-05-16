@@ -4,6 +4,7 @@ import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChild
 import { Observable, of } from 'rxjs';
 import { Report } from '../report.service';
 import { ReportService } from '../report.service';
+import { EtichetteService, etichette } from '../etichette.service';
 
 export type SortColumn = keyof Report | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -73,7 +74,7 @@ export class ReportComponent {
 			.subscribe(reports => this.reports = reports);
 		}
 	}
-  constructor(private reportService : ReportService){}
+  constructor(private reportService : ReportService, private labelService : EtichetteService){}
 
 	getReports() : void {
 		
@@ -87,6 +88,7 @@ export class ReportComponent {
 	}
 
 	reports : Report[] = [];
+	
 	
 	
 }

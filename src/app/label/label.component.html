@@ -3,13 +3,13 @@ ciao
 <br>
 <br>
 <br>
-<p>You can introduce custom directives for table headers to sort columns</p>
+
 <div class="main-container">
-  <h2>Reports</h2>
+  <h2>Etichette</h2>
 
-  <app-add-report></app-add-report>
+  <app-add-label></app-add-label>
 
-  <button class="btn btn-primary" (click)="getReportsBy()">Cerca</button>
+  <button class="btn btn-primary" (click)="getLabelsBy()">Cerca</button>
   <input [(ngModel)]="textSearch">
   <select name="attributeSearch" id="attributeSearch"  [(ngModel)]="attributeSearch">
     <option  [ngValue]="'Codice'" >Codice</option>
@@ -24,14 +24,19 @@ ciao
   <table class="table table-striped">
     <thead>
     <tr>
-      <th scope="col" >codice</th>
+      <th scope="col" >Id</th>
       <th scope="col" [width]="10">Dettagli/Modifica</th>
-      <th scope="col" >Etichetta</th>
-      <th scope="col" >Data</th>
-      <th scope="col" >Dettagli</th>
-      <th scope="col" >Personale</th>
+      <th scope="col" >Posizione</th>
+      <th scope="col" >Prodotto</th>
+      <th scope="col" >Peso</th>
+      <th scope="col" >Descrizione</th>
+      <th scope="col" >Data Arrivo</th>
+      <th scope="col" >Ordine</th>
+      <th scope="col" >Prenotazione</th>
+      <th scope="col" >Vendita</th>
+      <th scope="col" >Sconto Extra</th>
     </tr>
-    </thead>
+  </thead>
     <tbody>
       @for (label of labels; track label.id) {
 
@@ -42,20 +47,18 @@ ciao
 
           <td>
 
-            <app-detail-etichetta [idEtichetta]="label.id"></app-detail-etichetta>
+            <app-detail-label [etichettaId]="label.id"></app-detail-label>
           </td>
-          <td>{{ label.prenotazione}}</td>
-          <td>{{ label.posizionenp }}</td>
-          <td>{{ label.peso }}</td>
-          <td>{{ label.posizioneid }}</td>
-          <td>{{ label.posizionenp }}</td>
-          <td>{{ label.scontoextra }}</td>
+          
+          <td>{{ label.posizionenp }} - {{label.posizionenp}}</td>
           <td>{{ label.prodotto }}</td>
+          <td>{{ label.peso}}</td>
           <td>{{ label.descrizione }}</td>
           <td>{{ label.dataarrivo}}</td>
           <td>{{ label.ordineUscita}}</td>
-          <td>{{ label.venditadata }}</td>
-          <td>{{ label.venditanp}}</td>
+          <td>{{ label.prenotazione}}</td>
+          <td>{{ label.venditadata }} - {{ label.venditanp }}</td>
+          <td>{{ label.scontoextra }}</td>
         </tr>
 
       }

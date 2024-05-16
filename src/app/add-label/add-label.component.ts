@@ -3,6 +3,7 @@ import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstra
 import {EtichetteService} from "../etichette.service";
 import { ProdottiService, Prodotto } from '../prodotti.service';
 import { Cliente, ClienteService } from '../cliente.service';
+import { Posizione, PosizioneService } from '../posizione.service';
 
 @Component({
   selector: 'app-add-label',
@@ -26,7 +27,7 @@ export class AddLabelComponent {
   
   private modalService = inject(NgbModal);
   closeResult = '';
-  constructor(private etichetteService : EtichetteService, private productService : ProdottiService, private clientService : ClienteService){}
+  constructor(private etichetteService : EtichetteService, private productService : ProdottiService, private clientService : ClienteService, private positionService : PosizioneService){}
   open(content: TemplateRef<any>) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       (result) => {
@@ -72,9 +73,16 @@ private getClients() : void {
   this.clientService.readAllClienti()
     .subscribe(reservations => this.reservations = reservations);
 }
+
+positions : Posizione[] = []
+private getPositions() : void {
+  this.positionService.getAllPosizioni()
+    .subscribe(positions => this.positions = positions);
+}
 ngOnInit(): void {
 	this.getProducts();
-  this.getClients
+  this.getClients()
+  this.getPositions()
 }
 
 }

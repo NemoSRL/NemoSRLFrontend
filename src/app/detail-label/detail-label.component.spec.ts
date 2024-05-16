@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetailEtichettaComponent } from './detail-etichetta.component';
+import { DetailLabelComponent } from './detail-label.component';
 
-describe('DetailEtichettaComponent', () => {
-  let component: DetailEtichettaComponent;
-  let fixture: ComponentFixture<DetailEtichettaComponent>;
+describe('DetailLabelComponent', () => {
+  let component: DetailLabelComponent;
+  let fixture: ComponentFixture<DetailLabelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DetailEtichettaComponent]
+      declarations: [DetailLabelComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DetailEtichettaComponent);
+    fixture = TestBed.createComponent(DetailLabelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
