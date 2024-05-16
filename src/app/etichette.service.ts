@@ -23,7 +23,6 @@ export interface etichette{
     readonly venditanp?: number
     readonly venditadata?: Data
     readonly ordineUscita?: number
-    readonly cliente?: string
     readonly scontoextra?: number
     readonly posizioneid?: number
     readonly posizionenp?: number

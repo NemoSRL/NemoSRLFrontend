@@ -1,6 +1,7 @@
 import { Component, inject, TemplateRef } from '@angular/core';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {EtichetteService} from "../etichette.service";
+import { ProdottiService, Prodotto } from '../prodotti.service';
 
 @Component({
   selector: 'app-add-label',
@@ -14,17 +15,16 @@ export class AddLabelComponent {
   abbattimento: boolean=true;
   peso: number=0;
   prodotto: string="";
-  venditanp:number=0;
-  venditadata?: Date;
+  venditanp?:number=undefined;
+  venditadata?: Date=undefined;
   ordineuscita: number=0;
-  cliente:string="";
   scontoextra:number=0;
   posizioneid?: number;
   posizionenp?: number;
   prenotazione?: string;
   private modalService = inject(NgbModal);
   closeResult = '';
-  constructor(private EtichetteService : EtichetteService){}
+  constructor(private etichetteService : EtichetteService, private productService : ProdottiService, private clientService : ClienteService){}
   open(content: TemplateRef<any>) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       (result) => {
@@ -37,9 +37,9 @@ export class AddLabelComponent {
   }
 
   addEtichetta(): void{
-    this.EtichetteService.addEtichetta({id:undefined,dataarrivo:this.dataArrivo, descrizione:this.descrizione, abbattimento: this.abbattimento,
+    this.etichetteService.addEtichetta({id:undefined,dataarrivo:this.dataArrivo, descrizione:this.descrizione, abbattimento: this.abbattimento,
       peso: this.peso, prodotto : this.prodotto , venditanp: this.venditanp, venditadata: this.venditadata,
-      ordineUscita:this.ordineuscita, cliente:this.cliente,scontoextra:this.scontoextra,posizioneid:this.posizioneid,
+      ordineUscita:this.ordineuscita,scontoextra:this.scontoextra,posizioneid:this.posizioneid,
       posizionenp:this.posizionenp, prenotazione:this.prenotazione}).subscribe()
   }
   private getDismissReason(reason: any): string {
@@ -52,4 +52,22 @@ export class AddLabelComponent {
         return `with: ${reason}`;
     }
   }
+
+  products : Prodotto[] = []
+  private getProducts() : void {
+		
+		this.productService.readAllProdotti()
+			.subscribe(products => this.products = products);
+	  
+}
+reservations : Cliente[] = []
+private getClients() : void {
+  this.clientService.readAllClienti()
+    .subscribe(reservations => this.reservations = reservations);
+}
+ngOnInit(): void {
+	this.getProducts();
+  this.getClients
+}
+
 }

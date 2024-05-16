@@ -24,7 +24,7 @@ export class EditLabelComponent {
   posizionenp?: number=-1
   prenotazione?: string=""
 
-  constructor(private etichetteService : EtichetteService){}
+  constructor(private etichetteService : EtichetteService, private productService : ProdottiService, private clientService : ClienteService, private positionService : PosizioneService){}
   @Input() etichetta?: etichette
   private modalService = inject(NgbModal);
   closeResult = '';
@@ -62,7 +62,6 @@ export class EditLabelComponent {
       venditanp:this.venditanp,
       venditadata:this.venditadata,
       ordineUscita:this.ordineUscita,
-      cliente:this.cliente,
       scontoextra:this.scontoextra??0,
       posizioneid:this.posizioneid,
       posizionenp:this.posizionenp,
@@ -77,4 +76,27 @@ export class EditLabelComponent {
     this.etichetteService.deleteEtichette(this.etichetta?.id ?? -1).subscribe()
   }
 
+  products : Prodotto[] = []
+  private getProducts() : void {
+		
+		this.productService.readAllProdotti()
+			.subscribe(products => this.products = products);
+	  
+  }
+
+  reservations : Cliente[] = []
+  private getClients() : void {
+    this.clientService.readAllClienti()
+			.subscribe(reservations => this.reservations = reservations);
+  }
+
+  positions : Posizione[] = []
+  private getPositions() : void {
+    this.positionService.readAllPosizioni()
+			.subscribe(positions => this.positions = positions);
+  }
+ngOnInit(): void {
+	this.getProducts();
+  this.getClients()
+}
 }
