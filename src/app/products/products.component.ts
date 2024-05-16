@@ -7,13 +7,13 @@ import { Observable, of } from 'rxjs';
 
 
 
- type SortColumn = keyof Prodotto | '';
- type SortDirection = 'asc' | 'desc' | '';
+export type SortColumn = keyof Prodotto | '';
+export type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = { asc: 'desc', desc: '', '': 'asc' };
 
 const compare = (v1: string | number | undefined, v2: string | number | undefined) => ((v1 ?? 0) < (v2 ?? 0) ? -1 : (v1 ?? 0) > (v2 ?? 0) ? 1 : 0);
 
- interface SortEvent {
+export interface SortEvent {
 	column: SortColumn;
 	direction: SortDirection;
 }

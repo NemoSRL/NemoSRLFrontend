@@ -10,6 +10,7 @@ ciao
 
 <app-add-products></app-add-products>
 
+
 <button class="btn btn-primary" (click)="getProductsBy()">Cerca</button>
 <input [(ngModel)]="textSearch">
 <select name="attributeSearch" id="attributeSearch"  [(ngModel)]="attributeSearch">
@@ -20,6 +21,8 @@ ciao
 	<option [ngValue]="'Quantita'">Quantità</option>
 	<option [ngValue]="'reset'" selected></option>
   </select>
+
+  <hr />
 <table class="table table-striped">
 	<thead>
 		<tr>

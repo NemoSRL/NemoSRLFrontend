@@ -45,7 +45,7 @@ export class ReportComponent {
 	@ViewChildren(NgbdSortableHeader)
 	headers!: QueryList<NgbdSortableHeader>;
 
-	onSortReport({ column, direction }: SortEvent) {
+	onSort({ column, direction }: SortEvent) {
 		// resetting other headers
 		for (const header of this.headers) {
 			if (header.sortable !== column) {

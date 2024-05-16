@@ -10,7 +10,7 @@ const GET_ATTRIBUTI="report";
 const UPDATE_REPORT="report";
 const DELETE_REPORT="report";
 const ADD_REPORT="report";
-
+const READ_REPORT_BY_ID=""
 export interface Report{
     readonly id?:number
     readonly etichetta?:number
@@ -43,6 +43,10 @@ export class ReportService{
         return this.httpClient.get<Report[]>(`${this.apiUrl}/${READ_ALL_REPORT}`)
     }
 
+    public readReportById(id : number): Observable<Report>{
+        const url= `${this.apiUrl}/${READ_REPORT_BY_ID}/${id}`
+        return this.httpClient.get<Report>(url)
+    }
     public readReportBy(attributo: string ,ricerca :string): Observable<Report[]>{
         return this.httpClient.get<Report[]>(`${this.apiUrl}/${READ_BY_REPORT  }`,
             {params:{attributo, ricerca }}
@@ -58,6 +62,7 @@ export class ReportService{
     }
 
     public deleteReport(codice:Codice) :Observable<Report>{
-        return this.httpClient.delete<Report>(`${this.apiUrl}/${DELETE_REPORT}`,{body:{codice}})
+        const url= `${this.apiUrl}/${DELETE_REPORT}/${codice}`
+        return this.httpClient.delete<Report>(url,{body:{codice}})
     }
 }
