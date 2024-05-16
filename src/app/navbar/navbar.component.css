@@ -1,0 +1,69 @@
+body {
+    display: flex;
+    height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #343a40;
+    padding: 15px;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: -250px; /* Hide the sidebar by default */
+    transition: left 0.3s;
+    z-index: 1000; /* Ensure the sidebar is above other content */
+  }
+  
+  .sidebar.active {
+    left: 0; /* Show the sidebar when active */
+  }
+  
+  .sidebar .nav-link {
+    color: #ffffff;
+    position: relative;
+  }
+  
+  .sidebar .nav-link:hover {
+    color: #adb5bd;
+  }
+  
+  .sidebar .collapse {
+    display: none;
+  }
+  
+  .sidebar .collapse.show {
+    display: block;
+  }
+  
+  .sidebar .sub-menu .nav-link {
+    padding-left: 20px; /* Adjust this value to set the indent level */
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 15px;
+    margin-left: 250px; /* Space for the sidebar when open */
+    transition: margin-left 0.3s;
+  }
+  
+  .content.active {
+    margin-left: 0; /* Remove space when sidebar is hidden */
+  }
+  
+  .navbar-toggler {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 1050; /* Ensure the button is above other content, including the sidebar */
+  }
+  
+  .navbar-toggler-icon {
+    width: 30px;
+    height: 3px;
+    background-color: black;
+    display: block;
+    margin: 5px 0;
+  }
+  
