@@ -2,6 +2,7 @@ import { Component, inject, TemplateRef } from '@angular/core';
 import { ReportService } from '../report.service';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Report } from '../report.service';
+import { etichette, EtichetteService } from '../etichette.service';
 @Component({
   selector: 'app-add-report',
   templateUrl: './add-report.component.html',
@@ -14,9 +15,11 @@ export class AddReportComponent {
   dettagli?: string
   personale?: string
   
+  
+  labels : etichette[] = []
   private modalService = inject(NgbModal);
 	closeResult = '';
-  constructor(private reportService : ReportService){}
+  constructor(private reportService : ReportService, private labelService : EtichetteService){}
 	open(content: TemplateRef<any>) {
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
 			(result) => {
@@ -41,4 +44,14 @@ export class AddReportComponent {
 				return `with: ${reason}`;
 		}
 	}
+	private getLabels() : void {
+		
+		this.labelService.readAllEtichette()
+			.subscribe(labels => this.labels = labels);
+	  
+}
+
+ngOnInit(): void {
+	this.getLabels();
+}
 }

@@ -2,6 +2,7 @@ import { Component, inject, TemplateRef, Input } from '@angular/core';
 import { Report } from '../report.service';
 import { ReportService } from '../report.service';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EtichetteService, etichette } from '../etichette.service';
 @Component({
   selector: 'app-edit-report',
   templateUrl: './edit-report.component.html',
@@ -12,7 +13,7 @@ export class EditReportComponent {
   data?: Date
   dettagli?: string
   personale?: string
-  constructor(private reportService : ReportService){}
+  constructor(private reportService : ReportService, private labelService : EtichetteService){}
   @Input() report?: Report
 
   tempReport?: Report
@@ -51,4 +52,15 @@ export class EditReportComponent {
     this.modalService.dismissAll()
     this.reportService.deleteReport(this.report?.id ?? -1).subscribe()
   }
+  labels : etichette[] = []
+  private getLabels() : void {
+		
+		this.labelService.readAllEtichette()
+			.subscribe(labels => this.labels = labels);
+	  
+}
+
+ngOnInit(): void {
+	this.getLabels();
+}
 }

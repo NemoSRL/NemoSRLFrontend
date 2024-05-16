@@ -43,7 +43,7 @@ export class NgbdSortableHeader {
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
 	
 	@ViewChildren(NgbdSortableHeader)
 	headers!: QueryList<NgbdSortableHeader>;

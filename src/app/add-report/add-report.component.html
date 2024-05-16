@@ -8,12 +8,10 @@
 			<div class="mb-3">
 			  <label for="etichetta">etichetta</label>
 			  <div class="input-group">
-				<input
-				  id="etichetta"
-				  placeholder="etichetta"
-				  name="etichetta"
-				  [(ngModel)]="etichetta"
-				/>
+				<select [(ngModel)]="etichetta">
+					<option value="" disabled selected="selected"></option>
+					<option *ngFor="let label of labels" value="{{label.id}}">{{label.id}}</option>
+				</select>
 			  </div>
 			  <label for="data">Data</label>
 			  <div class="input-group">
