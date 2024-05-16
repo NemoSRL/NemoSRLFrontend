@@ -2,7 +2,7 @@ import { Component, inject, TemplateRef, Input } from '@angular/core';
 import { Report } from '../services/report.service';
 import { ReportService } from '../services/report.service';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EtichetteService, etichette } from '../services/etichette.service';
+import { EtichetteService, Etichetta } from '../services/etichette.service';
 @Component({
   selector: 'app-edit-report',
   templateUrl: './edit-report.component.html',
@@ -50,9 +50,9 @@ export class EditReportComponent {
   }
   deleteReport(): void{
     this.modalService.dismissAll()
-    this.reportService.deleteReport(this.report?.id ?? -1).subscribe()
+    this.reportService.deleteReport(this.report?.id ?? -1, this.report?.etichetta ?? -1).subscribe()
   }
-  labels : etichette[] = []
+  labels : Etichetta[] = []
   private getLabels() : void {
 		
 		this.labelService.readAllEtichette()

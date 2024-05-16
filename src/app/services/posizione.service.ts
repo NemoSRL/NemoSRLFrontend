@@ -1,7 +1,6 @@
 import {Injectable, inject, Inject} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {PosizioneId} from "./etichette.service";
 
 export interface Posizione{
   readonly id?: number,

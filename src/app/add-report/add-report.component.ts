@@ -2,7 +2,7 @@ import { Component, inject, TemplateRef } from '@angular/core';
 import { ReportService } from '../services/report.service';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Report } from '../services/report.service';
-import { etichette, EtichetteService } from '../services/etichette.service';
+import { Etichetta, EtichetteService } from '../services/etichette.service';
 @Component({
   selector: 'app-add-report',
   templateUrl: './add-report.component.html',
@@ -16,7 +16,7 @@ export class AddReportComponent {
   personale?: string
   
   
-  labels : etichette[] = []
+  labels : Etichetta[] = []
   private modalService = inject(NgbModal);
 	closeResult = '';
   constructor(private reportService : ReportService, private labelService : EtichetteService){}

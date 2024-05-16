@@ -4,13 +4,13 @@ import { inject } from '@angular/core/testing';
 import { read } from '@popperjs/core';
 import { Observable } from 'rxjs';
 
-const READ_ALL_REPORT="report";
-const READ_BY_REPORT="report";
+const GET_ALL_REPORTS="report";
+const GET_REPORTS_BY="report";
 const GET_ATTRIBUTI="report";
 const UPDATE_REPORT="report";
 const DELETE_REPORT="report";
 const ADD_REPORT="report";
-const READ_REPORT_BY_ID=""
+const GET_REPORT_BY_ID="report"
 export interface Report{
     readonly id?:number
     readonly etichetta?:number
@@ -19,11 +19,7 @@ export interface Report{
     readonly personale?: string
 }
 
-    export type Codice=number
-    export type Data=Date
-    export type Operaio=number
-    export type Peso=number
-    export type Tipologia=string
+ 
 
 @Injectable({
     providedIn: 'root'
@@ -39,16 +35,16 @@ export class ReportService{
       return this.httpClient.post<Report>(`${this.apiUrl}/${ADD_REPORT}`,
         report)
     }
-    public readAllReport(): Observable<Report[]>{
-        return this.httpClient.get<Report[]>(`${this.apiUrl}/${READ_ALL_REPORT}`)
+    public getAllReports(): Observable<Report[]>{
+        return this.httpClient.get<Report[]>(`${this.apiUrl}/${GET_ALL_REPORTS}`)
     }
 
-    public readReportById(id : number, etichetta : number): Observable<Report>{
-        const url= `${this.apiUrl}/${READ_REPORT_BY_ID}/${id}/${etichetta}`
+    public getReportById(id : number, etichetta : number): Observable<Report>{
+        const url= `${this.apiUrl}/${GET_REPORT_BY_ID}/${id}/${etichetta}`
         return this.httpClient.get<Report>(url)
     }
-    public readReportBy(attributo: string ,ricerca :string): Observable<Report[]>{
-        return this.httpClient.get<Report[]>(`${this.apiUrl}/${READ_BY_REPORT  }`,
+    public getReportsBy(attributo: string ,ricerca :string): Observable<Report[]>{
+        return this.httpClient.get<Report[]>(`${this.apiUrl}/${GET_REPORTS_BY  }`,
             {params:{attributo, ricerca }}
         )
     }
@@ -61,8 +57,8 @@ export class ReportService{
         return this.httpClient.put<Report>(`${this.apiUrl}/${UPDATE_REPORT}`,Report)
     }
 
-    public deleteReport(codice:Codice) :Observable<Report>{
+    public deleteReport(codice:number, etichetta:number) :Observable<Report>{
         const url= `${this.apiUrl}/${DELETE_REPORT}/${codice}`
-        return this.httpClient.delete<Report>(url,{body:{codice}})
+        return this.httpClient.delete<Report>(url,{body:{codice, etichetta}})
     }
 }

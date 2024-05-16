@@ -4,7 +4,7 @@ import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChild
 import { Observable, of } from 'rxjs';
 import { Report } from '../services/report.service';
 import { ReportService } from '../services/report.service';
-import { EtichetteService, etichette } from '../services/etichette.service';
+import { EtichetteService, Etichetta } from '../services/etichette.service';
 
 export type SortColumn = keyof Report | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -70,15 +70,15 @@ export class ReportComponent {
 		if(this.attributeSearch === "" && this.textSearch===""){
 			this.getReports()
 		} else {
-			this.reportService.readReportBy(this.attributeSearch, this.textSearch)
+			this.reportService.getReportsBy(this.attributeSearch, this.textSearch)
 			.subscribe(reports => this.reports = reports);
 		}
 	}
-  constructor(private reportService : ReportService, private labelService : EtichetteService){}
+  constructor(private reportService : ReportService){}
 
 	getReports() : void {
 		
-			this.reportService.readAllReport()
+			this.reportService.getAllReports()
 				.subscribe(reports => this.reports = reports);
 		  
 	}

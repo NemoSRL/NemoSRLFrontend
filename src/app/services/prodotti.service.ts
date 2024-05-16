@@ -2,12 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const READ_ALL_ENDPOINT= "prodotti";
-const READ_BY= "ciao";
-const UPDATE_PRODOTTO_ENDPOINT="prodotti";
-const DELETE_PRODOTTO_ENDPOINT="prodotti";
-const GET_ATTRIBUTI_ENDPOINT="prodotti";
-const READ_BY_ID="prodotti";
+const GET_ALL_PRODOTTI= "prodotti";
+const GET_PRODOTTI_BY= "ciao";
+const UPDATE_PRODOTTO="prodotti";
+const DELETE_PRODOTTO="prodotti";
+const GET_ATTRIBUTI="prodotti";
+const GET_PRODOTTO_BY_ID="prodotti";
 export interface Prodotto {
   readonly id? : number;
   readonly nome? : string;
@@ -32,27 +32,27 @@ export class ProdottiService {
   ) { }
 
   public readAllProdotti(): Observable<Prodotto[]> {
-    return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_ALL_ENDPOINT}`)
+    return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${GET_ALL_PRODOTTI}`)
   }
 
   public readProdottiBy(attributo: string ,ricerca :string): Observable<Prodotto[]> {
-    return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${READ_BY}`, { params: {attributo,ricerca}})
+    return this.httpClient.get<Prodotto[]>(`${this.apiUrl}/${GET_PRODOTTI_BY}`, { params: {attributo,ricerca}})
   }
 
   public readProdottiById(id: number): Observable<Prodotto> {
-    return this.httpClient.get<Prodotto>(`${this.apiUrl}/${READ_BY_ID}`, { params: {id}})
+    return this.httpClient.get<Prodotto>(`${this.apiUrl}/${GET_PRODOTTO_BY_ID}`, { params: {id}})
   }
   public updateProdotto(prodotto: Prodotto) {
-    return this.httpClient.put(`${this.apiUrl}/${UPDATE_PRODOTTO_ENDPOINT}`,prodotto)
+    return this.httpClient.put(`${this.apiUrl}/${UPDATE_PRODOTTO}`,prodotto)
   }
 
   public getAttributi(): Observable<string[]>{
-    const url1=`${this.apiUrl}/${GET_ATTRIBUTI_ENDPOINT}`
+    const url1=`${this.apiUrl}/${GET_ATTRIBUTI}`
     return this.httpClient.get<string[]>(url1)
   }
 
   public deleteProdotto(codice:Codice){
-    const url= `${this.apiUrl}/${DELETE_PRODOTTO_ENDPOINT}/${codice}`
+    const url= `${this.apiUrl}/${DELETE_PRODOTTO}/${codice}`
     return this.httpClient.delete(url, {body: {codice}})
   }
 

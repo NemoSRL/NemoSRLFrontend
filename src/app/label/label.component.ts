@@ -1,7 +1,7 @@
 import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
-import {etichette,EtichetteService} from "../services/etichette.service";
+import { Etichetta, EtichetteService } from '../services/etichette.service';
 
-export type SortColumn = keyof etichette | '';
+export type SortColumn = keyof Etichetta | '';
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = { asc: 'desc', desc: '', '': 'asc' };
 
@@ -81,6 +81,6 @@ export class LabelComponent{
     this.getLabels();
   }
 
-  labels : etichette[] = [];
+  labels : Etichetta[] = [];
 
 }

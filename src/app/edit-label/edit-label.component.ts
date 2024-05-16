@@ -94,7 +94,7 @@ export class EditLabelComponent {
 
   reservations : Cliente[] = []
   private getClients() : void {
-    this.clientService.readAllClienti()
+    this.clientService.getAllClienti()
 			.subscribe(reservations => this.reservations = reservations);
   }
 

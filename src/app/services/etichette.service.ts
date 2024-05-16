@@ -5,15 +5,15 @@ import { Data } from '@angular/router';
 import { Observable } from 'rxjs';
 
 
-const READ_ALL_ETICHETTE_ENDPOINT="etichette";
-const READ_BY_ETICHETTE_ENDPOINT="etichette";
-const UPDATE_ETICHETTE="etichette";
-const DELETE_ETICHETTE="etichette";
+const GET_ALL_ETICHETTE="etichette";
+const GET_ETICHETTE_BY="etichette";
+const UPDATE_ETICHETTA="etichette";
+const DELETE_ETICHETTA="etichette";
 const GET_ATTRIBUTI="etichette";
 const ADD_ETICHETTA="etichette";
-const READ_ETICHETTA_BY_ID_ENDPOINT="";
+const GET_ETICHETTA_BY_ID="";
 
-export interface etichette{
+export interface Etichetta{
     readonly id?: number
     readonly dataarrivo?: Date
     readonly descrizione?: string
@@ -30,13 +30,6 @@ export interface etichette{
 }
 
 
-export type Codice=number
-export type DataArrivo=Date
-export type Peso=number
-export type PosizioneId=number
-export type PosizioneNp=number
-export type DataUltimoControllo=Date
-export type Tipologia=string
 
 
 @Injectable({
@@ -48,26 +41,26 @@ export class EtichetteService{
         private readonly httpClient: HttpClient
     ) {  }
 
-  public addEtichetta(etichetta:etichette):Observable<etichette>{
-      return this.httpClient.post<etichette>(`${this.apiUrl}/${ADD_ETICHETTA}`,etichetta)
+  public addEtichetta(etichetta:Etichetta):Observable<Etichetta>{
+      return this.httpClient.post<Etichetta>(`${this.apiUrl}/${ADD_ETICHETTA}`,etichetta)
   }
 
 
-  public readAllEtichette():Observable<etichette[]>{
-        return this.httpClient.get<etichette[]>(`${this.apiUrl}/${READ_ALL_ETICHETTE_ENDPOINT}`)
+  public readAllEtichette():Observable<Etichetta[]>{
+        return this.httpClient.get<Etichetta[]>(`${this.apiUrl}/${GET_ALL_ETICHETTE}`)
   }
 
-  public readEtichetteBy(attributo:string ,valore:string):Observable<etichette[]>{
-        return this.httpClient.get<etichette[]>(`${this.apiUrl}/${READ_BY_ETICHETTE_ENDPOINT}`,
+  public readEtichetteBy(attributo:string ,valore:string):Observable<Etichetta[]>{
+        return this.httpClient.get<Etichetta[]>(`${this.apiUrl}/${GET_ETICHETTE_BY}`,
          {params:{attributo, valore}})
   }
 
-  public updateEtichetta(etichetta:etichette):Observable<etichette>{
-        return this.httpClient.put<etichette>(`${this.apiUrl}/${UPDATE_ETICHETTE}`,etichetta)
+  public updateEtichetta(etichetta:Etichetta):Observable<Etichetta>{
+        return this.httpClient.put<Etichetta>(`${this.apiUrl}/${UPDATE_ETICHETTA}`,etichetta)
   }
 
-  public deleteEtichette(codice:Codice) :Observable<etichette>{
-        return this.httpClient.delete<etichette>(`${this.apiUrl}/${DELETE_ETICHETTE}`,
+  public deleteEtichette(codice:number) :Observable<Etichetta>{
+        return this.httpClient.delete<Etichetta>(`${this.apiUrl}/${DELETE_ETICHETTA}`,
           {body:{codice}})
   }
 
@@ -75,7 +68,7 @@ export class EtichetteService{
         return this.httpClient.get<string[]>(`${this.apiUrl}/${GET_ATTRIBUTI}`)
   }
 
-  public readEtichettaById(codice:number): Observable<etichette>{
-        return this.httpClient.get<etichette>(`${this.apiUrl}/${READ_ETICHETTA_BY_ID_ENDPOINT}/${codice}`)
+  public readEtichettaById(codice:number): Observable<Etichetta>{
+        return this.httpClient.get<Etichetta>(`${this.apiUrl}/${GET_ETICHETTA_BY_ID}/${codice}`)
   }
 }

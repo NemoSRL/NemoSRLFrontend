@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const READ_ALL_ENDPOINT="ciao";
-const READ_CLIENTI_BY="ciao";
-const UPDATE_PRODOTTO="ciao";
-const READ_CLIENTE_BY_ID="ciao";
+const GET_ALL_CLIENTI="ciao";
+const GET_CLIENTI_BY="ciao";
+const UPDATE_CLIENTE="ciao";
+const GET_CLIENTE_BY_ID="ciao";
 const GET_ATTRIBUTI="ciao";
 const DELETE_CLIENTE="ciao";
 const ADD_CLIENTE="ciao";
@@ -36,19 +36,20 @@ export class ClienteService{
     return this.httpClient.post<Cliente>(`${this.apiUrl}/${ADD_CLIENTE}`,cliente)
   }
 
-  public readAllClienti(): Observable<Cliente[]>{
-    return this.httpClient.get<Cliente[]>(`${this.apiUrl}/${READ_ALL_ENDPOINT}`)
+  public getAllClienti(): Observable<Cliente[]>{
+    return this.httpClient.get<Cliente[]>(`${this.apiUrl}/${GET_ALL_CLIENTI}`)
   }
 
-  public readClienteBy(cliente:Cliente):Observable<Cliente[]>{
-    return this.httpClient.get<Cliente[]>(`${this.apiUrl}/${READ_CLIENTI_BY}`)
+  public getClienteBy(attributo:string ,valore:string):Observable<Cliente[]>{
+    return this.httpClient.get<Cliente[]>(`${this.apiUrl}/${GET_CLIENTI_BY}`,
+         {params:{attributo, valore}})
   }
 
-  public readClienteById(id:id):Observable<Cliente>{
-    return this.httpClient.get<Cliente>(`${this.apiUrl}/${READ_CLIENTE_BY_ID}/${id}`)
+  public getClienteById(id:id):Observable<Cliente>{
+    return this.httpClient.get<Cliente>(`${this.apiUrl}/${GET_CLIENTE_BY_ID}/${id}`)
   }
   public updateCliente(cliente:Cliente):Observable<Object>{
-    return this.httpClient.put(`${this.apiUrl}/${UPDATE_PRODOTTO}`,cliente)
+    return this.httpClient.put(`${this.apiUrl}/${UPDATE_CLIENTE}`,cliente)
   }
   public getAttributi():Observable<string>{
     return this.httpClient.get<string>(`${this.apiUrl}/${GET_ATTRIBUTI}`)
