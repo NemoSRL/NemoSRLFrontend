@@ -1,8 +1,8 @@
 import { Component, inject, TemplateRef, Input } from '@angular/core';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {etichette, EtichetteService} from "../etichette.service";
+import {etichette, EtichetteService} from "../service/etichette.service";
 import {Data} from "@angular/router";
-import {ProdottiService, Prodotto} from "../prodotti.service";
+import {ProdottiService, Prodotto} from "../service/prodotti.service";
 
 @Component({
   selector: 'app-edit-label',
@@ -55,7 +55,7 @@ export class EditLabelComponent {
     const parsedPosition = this.selectedPosition?.split(' - ')
     this.posizioneid=parseInt(parsedPosition[0])
     this.posizionenp=parseInt(parsedPosition[1])
-    
+
     const updatedEtichetta: etichette = {
       id: this.etichetta?.id ?? -1,
       dataarrivo:this.dataarrivo,
@@ -83,10 +83,10 @@ export class EditLabelComponent {
 
   products : Prodotto[] = []
   private getProducts() : void {
-		
+
 		this.productService.readAllProdotti()
 			.subscribe(products => this.products = products);
-	  
+
   }
 
   reservations : Cliente[] = []

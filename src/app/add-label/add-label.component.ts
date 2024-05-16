@@ -1,7 +1,7 @@
 import { Component, inject, TemplateRef } from '@angular/core';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {EtichetteService} from "../etichette.service";
-import { ProdottiService, Prodotto } from '../prodotti.service';
+import {EtichetteService} from "../service/etichette.service";
+import { ProdottiService, Prodotto } from '../service/prodotti.service';
 
 @Component({
   selector: 'app-add-label',
@@ -22,7 +22,7 @@ export class AddLabelComponent {
   posizioneid?: number;
   posizionenp?: number;
   prenotazione?: string;
-  
+
   private modalService = inject(NgbModal);
   closeResult = '';
   constructor(private etichetteService : EtichetteService, private productService : ProdottiService, private clientService : ClienteService){}
@@ -41,7 +41,7 @@ export class AddLabelComponent {
     const parsedPosition = this.selectedPosition?.split(' - ')
     this.posizioneid=parseInt(parsedPosition[0])
     this.posizionenp=parseInt(parsedPosition[1])
-    
+
     this.etichetteService.addEtichetta({id:undefined,dataarrivo:this.dataArrivo, descrizione:this.descrizione, abbattimento: this.abbattimento,
       peso: this.peso, prodotto : this.prodotto , venditanp: this.venditanp, venditadata: this.venditadata,
       ordineUscita:this.ordineuscita,scontoextra:this.scontoextra,posizioneid:this.posizioneid,
@@ -61,10 +61,10 @@ export class AddLabelComponent {
 
   products : Prodotto[] = []
   private getProducts() : void {
-		
+
 		this.productService.readAllProdotti()
 			.subscribe(products => this.products = products);
-	  
+
 }
 reservations : Cliente[] = []
 private getClients() : void {

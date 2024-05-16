@@ -1,10 +1,10 @@
 
 
 import { Component, inject, TemplateRef, Input } from '@angular/core';
-import { Report } from '../report.service';
+import { Report } from '../service/report.service';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { etichette } from '../etichette.service';
-import { EtichetteService } from '../etichette.service';
+import { etichette } from '../service/etichette.service';
+import { EtichetteService } from '../service/etichette.service';
 @Component({
   selector: 'app-detail-etichetta',
   templateUrl: './detail-etichetta.component.html',
@@ -13,7 +13,7 @@ import { EtichetteService } from '../etichette.service';
 export class DetailEtichettaComponent {
 
 
-  
+
   constructor(private EtichetteService : EtichetteService){}
   @Input() idEtichetta?: number
   @Input() etichetta?: etichette
@@ -31,7 +31,7 @@ export class DetailEtichettaComponent {
       },
     );
   }
-  
+
   private getDismissReason(reason: any): string {
     switch (reason) {
       case ModalDismissReasons.ESC:
@@ -43,14 +43,14 @@ export class DetailEtichettaComponent {
     }
   }
   getEtichetta() : void {
-		
+
     this.EtichetteService.readEtichettaById(this.idEtichetta ?? -1)
       .subscribe(etichetta => this.etichetta = etichetta);
-    
+
 }
 
 ngOnInit(): void {
   this.getEtichetta();
 }
-  
+
   }

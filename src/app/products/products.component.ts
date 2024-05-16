@@ -1,5 +1,5 @@
-import { Prodotto } from '../prodotti.service';
-import { ProdottiService } from '../prodotti.service';
+import { Prodotto } from '../service/prodotti.service';
+import { ProdottiService } from '../service/prodotti.service';
 
 import { Component, Directive, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 
@@ -44,7 +44,7 @@ export class NgbdSortableHeader {
   styleUrl: './products.component.css'
 })
 export class ProductsComponent {
-	
+
 	@ViewChildren(NgbdSortableHeader)
 	headers!: QueryList<NgbdSortableHeader>;
 
@@ -79,10 +79,10 @@ export class ProductsComponent {
 		}
 	}
 	getProducts() : void {
-		
+
 			this.productService.readAllProdotti()
 				.subscribe(products => this.products = products);
-		  
+
 	}
 
 	ngOnInit(): void {
@@ -90,6 +90,6 @@ export class ProductsComponent {
 	}
 
 	products : Prodotto[] = [];
-	
-	
+
+
 }

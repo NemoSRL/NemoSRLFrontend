@@ -1,6 +1,6 @@
 import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
-import {etichette,EtichetteService} from "../etichette.service";
-import {Report, ReportService} from "../report.service";
+import {etichette,EtichetteService} from "../service/etichette.service";
+import {Report, ReportService} from "../service/report.service";
 
 export type SortColumn = keyof etichette | '';
 export type SortDirection = 'asc' | 'desc' | '';

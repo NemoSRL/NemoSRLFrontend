@@ -1,9 +1,9 @@
 import { Component, inject, TemplateRef, Input } from '@angular/core';
 
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Prodotto } from '../prodotti.service';
+import { Prodotto } from '../service/prodotti.service';
 
-import { ProdottiService } from '../prodotti.service';
+import { ProdottiService } from '../service/prodotti.service';
 @Component({
   selector: 'app-edit-products',
   templateUrl: './edit-products.component.html',
@@ -31,7 +31,7 @@ export class EditProductsComponent {
       },
     );
   }
-  
+
   private getDismissReason(reason: any): string {
     switch (reason) {
       case ModalDismissReasons.ESC:
@@ -44,7 +44,7 @@ export class EditProductsComponent {
   }
   editProduct(): void{
     const updatedProduct: Prodotto = {
-      id: this.product?.id ?? -1, 
+      id: this.product?.id ?? -1,
       nome: this.nome,
       qualita: this.qualita,
       sogliaminima: this.qntMinima,
@@ -53,7 +53,7 @@ export class EditProductsComponent {
     console.log(updatedProduct)
     this.productService.updateProdotto(updatedProduct).subscribe()
     this.modalService.dismissAll()
-  
+
   }
   deleteProduct(): void{
     this.modalService.dismissAll()

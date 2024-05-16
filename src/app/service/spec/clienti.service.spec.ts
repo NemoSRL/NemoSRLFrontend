@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EtichetteService } from './etichette.service';
+import { EtichetteService} from "../etichette.service";
 
 describe('EtichetteService', () => {
   let service: EtichetteService;

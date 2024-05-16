@@ -2,8 +2,8 @@
 import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
-import { Report } from '../report.service';
-import { ReportService } from '../report.service';
+import { Report } from '../service/report.service';
+import { ReportService } from '../service/report.service';
 
 export type SortColumn = keyof Report | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -76,10 +76,10 @@ export class ReportComponent {
   constructor(private reportService : ReportService){}
 
 	getReports() : void {
-		
+
 			this.reportService.readAllReport()
 				.subscribe(reports => this.reports = reports);
-		  
+
 	}
 
 	ngOnInit(): void {
@@ -87,6 +87,6 @@ export class ReportComponent {
 	}
 
 	reports : Report[] = [];
-	
-	
+
+
 }

@@ -1,8 +1,8 @@
 import { Component, inject, TemplateRef, Input } from '@angular/core';
-import { Report } from '../report.service';
-import { ReportService } from '../report.service';
+import { Report } from '../service/report.service';
+import { ReportService } from '../service/report.service';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EtichetteService, etichette } from '../etichette.service';
+import { EtichetteService, etichette } from '../service/etichette.service';
 @Component({
   selector: 'app-edit-report',
   templateUrl: './edit-report.component.html',
@@ -30,7 +30,7 @@ export class EditReportComponent {
       },
     );
   }
-  
+
   private getDismissReason(reason: any): string {
     switch (reason) {
       case ModalDismissReasons.ESC:
@@ -43,10 +43,10 @@ export class EditReportComponent {
   }
   editReport(): void{
     this.modalService.dismissAll()
-    
-    
+
+
     this.reportService.updateReport({id: this.report?.id, data:this.data, dettagli: this.dettagli, etichetta : this.etichetta, personale : this.personale}).subscribe()
-  
+
   }
   deleteReport(): void{
     this.modalService.dismissAll()
@@ -54,10 +54,10 @@ export class EditReportComponent {
   }
   labels : etichette[] = []
   private getLabels() : void {
-		
+
 		this.labelService.readAllEtichette()
 			.subscribe(labels => this.labels = labels);
-	  
+
 }
 
 ngOnInit(): void {
