@@ -21,7 +21,7 @@ export interface etichette{
     readonly peso?: number
     readonly prodotto?: string
     readonly venditanp?: number
-    readonly venditadata?: Data
+    readonly venditadata?: Date
     readonly ordineUscita?: number
     readonly scontoextra?: number
     readonly posizioneid?: number
