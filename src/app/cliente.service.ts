@@ -7,7 +7,7 @@ const READ_CLIENTI_BY="ciao";
 const UPDATE_PRODOTTO="ciao";
 
 export interface Cliente{
-  readonly id?: string,
+  readonly cf?: string,
   readonly nome?:string,
   readonly cognome?:string,
   readonly email?:string,
@@ -20,7 +20,7 @@ export interface Cliente{
 @Injectable({
   providedIn: 'root'
 })
-export class ClientiService{
+export class ClienteService{
   constructor(
     @Inject('API_URL') private readonly apiUrl: string,
     private readonly httpClient: HttpClient

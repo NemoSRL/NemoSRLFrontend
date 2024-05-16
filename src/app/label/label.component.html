@@ -33,30 +33,29 @@ ciao
     </tr>
     </thead>
     <tbody>
-      @for (etichette of label; track etichette.id) {
+      @for (label of labels; track label.id) {
 
         <tr>
-          <th scope="row">{{ etichette.id| number}}</th>
-          <td><app-edit-report [etichette]="etichette"></app-edit-report></td>
+          <th scope="row">{{ label.id| number}}</th>
+          <td><app-edit-label [etichetta]="label"></app-edit-label></td>
 
 
           <td>
 
-            <app-detail-etichetta [idEtichetta]="etichette.id"></app-detail-etichetta>
+            <app-detail-etichetta [idEtichetta]="label.id"></app-detail-etichetta>
           </td>
-          <td>{{ etichette.prenotazione}}</td>
-          <td>{{ etichette.posizionenp }}</td>
-          <td>{{ etichette.cliente }}</td>
-          <td>{{ etichette.peso }}</td>
-          <td>{{ etichette.posizioneid }}</td>
-          <td>{{ etichette.posizionenp }}</td>
-          <td>{{ etichette.scontoextra }}</td>
-          <td>{{ etichette.prodotto }}</td>
-          <td>{{ etichette.descrizione }}</td>
-          <td>{{ etichette.dataarrivo}}</td>
-          <td>{{ etichette.ordineUscita}}</td>
-          <td>{{ etichette.venditadata }}</td>
-          <td>{{ etichette.venditanp}}</td>
+          <td>{{ label.prenotazione}}</td>
+          <td>{{ label.posizionenp }}</td>
+          <td>{{ label.peso }}</td>
+          <td>{{ label.posizioneid }}</td>
+          <td>{{ label.posizionenp }}</td>
+          <td>{{ label.scontoextra }}</td>
+          <td>{{ label.prodotto }}</td>
+          <td>{{ label.descrizione }}</td>
+          <td>{{ label.dataarrivo}}</td>
+          <td>{{ label.ordineUscita}}</td>
+          <td>{{ label.venditadata }}</td>
+          <td>{{ label.venditanp}}</td>
         </tr>
 
       }

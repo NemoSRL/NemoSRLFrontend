@@ -2,6 +2,7 @@ import { Component, inject, TemplateRef } from '@angular/core';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {EtichetteService} from "../etichette.service";
 import { ProdottiService, Prodotto } from '../prodotti.service';
+import { Cliente, ClienteService } from '../cliente.service';
 
 @Component({
   selector: 'app-add-label',

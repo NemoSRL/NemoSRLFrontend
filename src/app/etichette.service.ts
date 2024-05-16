@@ -57,12 +57,9 @@ export class EtichetteService{
         return this.httpClient.get<etichette[]>(`${this.apiUrl}/${READ_ALL_ETICHETTE_ENDPOINT}`)
   }
 
-  public readByEtichette(codice:Codice,dataArrivo:DataArrivo,
-        peso:Peso,posizioneId:PosizioneId,posizioneNp:PosizioneNp,
-        duc:DataUltimoControllo,tipologia:Tipologia):Observable<etichette[]>{
+  public readEtichetteBy(attributo:string ,valore:string):Observable<etichette[]>{
         return this.httpClient.get<etichette[]>(`${this.apiUrl}/${READ_BY_ETICHETTE_ENDPOINT}`,
-         {params:{codice,dataArrivo: dataArrivo.toISOString(), peso
-         ,posizioneId,posizioneNp,duc: duc.toISOString(),tipologia}})
+         {params:{attributo, valore}})
   }
 
   public updateEtichetta(etichetta:etichette):Observable<etichette>{

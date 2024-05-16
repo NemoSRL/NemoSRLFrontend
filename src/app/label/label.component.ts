@@ -1,6 +1,5 @@
 import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 import {etichette,EtichetteService} from "../etichette.service";
-import {Report, ReportService} from "../report.service";
 
 export type SortColumn = keyof etichette | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -51,9 +50,9 @@ export class LabelComponent{
 
     // sorting countries
     if (direction === '' || column === '') {
-      this.label = this.label;
+      this.labels = this.labels;
     } else {
-      this.label = [...this.label].sort((a, b) => {
+      this.labels = [...this.labels].sort((a, b) => {
         const res = compare(a[column], b[column]);
         return direction === 'asc' ? res : -res;
       });
@@ -61,27 +60,27 @@ export class LabelComponent{
   }
   textSearch: string = ""
   attributeSearch: string = ""
-  getReportsBy() : void {
+  getLabelsBy() : void {
     if(this.attributeSearch === "" && this.textSearch===""){
-      this.getReports()
+      this.getLabels()
     } else {
-      this.reportService.readReportBy(this.attributeSearch, this.textSearch)
-        .subscribe(reports => this.label = reports);
+      this.labelService.readEtichetteBy(this.attributeSearch, this.textSearch)
+        .subscribe(labels => this.labels = labels);
     }
   }
-  constructor(private reportService : ReportService){}
+  constructor(private labelService : EtichetteService){}
 
-  getReports() : void {
+  getLabels() : void {
 
-    this.reportService.readAllReport()
-      .subscribe(reports => this.label = reports);
+    this.labelService.readAllEtichette()
+      .subscribe(labels => this.labels = labels);
 
   }
 
   ngOnInit(): void {
-    this.getReports();
+    this.getLabels();
   }
 
-  label : etichette[] = [];
+  labels : etichette[] = [];
 
 }

@@ -3,6 +3,7 @@ import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstra
 import {etichette, EtichetteService} from "../etichette.service";
 import {Data} from "@angular/router";
 import {ProdottiService, Prodotto} from "../prodotti.service";
+import { Cliente, ClienteService } from '../cliente.service';
 
 @Component({
   selector: 'app-edit-label',
@@ -102,6 +103,7 @@ export class EditLabelComponent {
   }
 ngOnInit(): void {
 	this.getProducts();
-  this.getClients()
+  this.getClients();
+  this.getPositions();
 }
 }
