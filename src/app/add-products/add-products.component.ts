@@ -29,7 +29,8 @@ export class AddProductsComponent {
   addProduct(): void{
 	//console.log({id:-1, nome:this.nome, qualita: this.qualita, sogliaminima : this.qntMinima, quantita : this.qnt})
     this.productService.updateProdotto({id: undefined, nome:this.nome, qualita: this.qualita, sogliaminima : this.qntMinima, quantita : this.qnt}).subscribe()
-  }
+	this.modalService.dismissAll()
+}
 	private getDismissReason(reason: any): string {
 		switch (reason) {
 			case ModalDismissReasons.ESC:

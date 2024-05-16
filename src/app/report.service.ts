@@ -43,8 +43,8 @@ export class ReportService{
         return this.httpClient.get<Report[]>(`${this.apiUrl}/${READ_ALL_REPORT}`)
     }
 
-    public readReportById(id : number): Observable<Report>{
-        const url= `${this.apiUrl}/${READ_REPORT_BY_ID}/${id}`
+    public readReportById(id : number, etichetta : number): Observable<Report>{
+        const url= `${this.apiUrl}/${READ_REPORT_BY_ID}/${id}/${etichetta}`
         return this.httpClient.get<Report>(url)
     }
     public readReportBy(attributo: string ,ricerca :string): Observable<Report[]>{

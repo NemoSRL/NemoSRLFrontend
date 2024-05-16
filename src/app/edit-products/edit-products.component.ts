@@ -43,7 +43,6 @@ export class EditProductsComponent {
     }
   }
   editProduct(): void{
-    this.modalService.dismissAll()
     const updatedProduct: Prodotto = {
       id: this.product?.id ?? -1, 
       nome: this.nome,
@@ -53,6 +52,7 @@ export class EditProductsComponent {
     };
     console.log(updatedProduct)
     this.productService.updateProdotto(updatedProduct).subscribe()
+    this.modalService.dismissAll()
   
   }
   deleteProduct(): void{

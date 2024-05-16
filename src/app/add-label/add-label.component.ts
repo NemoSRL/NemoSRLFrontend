@@ -22,6 +22,7 @@ export class AddLabelComponent {
   posizioneid?: number;
   posizionenp?: number;
   prenotazione?: string;
+  
   private modalService = inject(NgbModal);
   closeResult = '';
   constructor(private etichetteService : EtichetteService, private productService : ProdottiService, private clientService : ClienteService){}
@@ -35,12 +36,17 @@ export class AddLabelComponent {
       },
     );
   }
-
+  selectedPosition:string = "0 - 0";
   addEtichetta(): void{
+    const parsedPosition = this.selectedPosition?.split(' - ')
+    this.posizioneid=parseInt(parsedPosition[0])
+    this.posizionenp=parseInt(parsedPosition[1])
+    
     this.etichetteService.addEtichetta({id:undefined,dataarrivo:this.dataArrivo, descrizione:this.descrizione, abbattimento: this.abbattimento,
       peso: this.peso, prodotto : this.prodotto , venditanp: this.venditanp, venditadata: this.venditadata,
       ordineUscita:this.ordineuscita,scontoextra:this.scontoextra,posizioneid:this.posizioneid,
       posizionenp:this.posizionenp, prenotazione:this.prenotazione}).subscribe()
+      this.modalService.dismissAll()
   }
   private getDismissReason(reason: any): string {
     switch (reason) {

@@ -33,7 +33,8 @@ export class AddReportComponent {
 
   addReport(): void{
     this.reportService.updateReport({id: undefined, data:this.data, dettagli: this.dettagli, etichetta : this.etichetta, personale : this.personale}).subscribe()
-  }
+	this.modalService.dismissAll()
+}
 	private getDismissReason(reason: any): string {
 		switch (reason) {
 			case ModalDismissReasons.ESC:

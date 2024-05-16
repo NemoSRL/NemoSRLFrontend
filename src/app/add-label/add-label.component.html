@@ -69,23 +69,12 @@
             [(ngModel)]="scontoextra"
           />
         </div>
-        <label for="posizioneid">Posizione Id</label>
+        <label for="posizione">Posizione</label>
         <div class="input-group">
-          <input
-            id="posizioneid"
-            placeholder="Posizione Id"
-            name="posizioneid"
-            [(ngModel)]="posizioneid"
-          />
-        </div>
-        <label for="posizionenp">Posizione Np</label>
-        <div class="input-group">
-          <input
-            id="posizionenp"
-            placeholder="Posizione Np"
-            name="posizionenp"
-            [(ngModel)]="posizionenp"
-          />
+          <select [(ngModel)]="selectedPosition">
+            <option value="" disabled selected="selected"></option>
+            <option *ngFor="let position of positions" value="{{position.id}} - {{position.np}}">{{position.nome}}</option>
+          </select>
         </div>
         <label for="prenotazione">Prenotazione</label>
         <div class="input-group">

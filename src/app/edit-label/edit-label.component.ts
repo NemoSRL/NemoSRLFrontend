@@ -50,8 +50,12 @@ export class EditLabelComponent {
         return `with: ${reason}`;
     }
   }
-  editEtichette(): void{
-    this.modalService.dismissAll()
+  selectedPosition:string = "0 - 0";
+  addEtichetta(): void{
+    const parsedPosition = this.selectedPosition?.split(' - ')
+    this.posizioneid=parseInt(parsedPosition[0])
+    this.posizionenp=parseInt(parsedPosition[1])
+    
     const updatedEtichetta: etichette = {
       id: this.etichetta?.id ?? -1,
       dataarrivo:this.dataarrivo,
@@ -69,11 +73,12 @@ export class EditLabelComponent {
     };
     console.log(updatedEtichetta)
     this.etichetteService.updateEtichetta(updatedEtichetta).subscribe()
+    this.modalService.dismissAll()
 
   }
   deleteEtichette(): void{
-    this.modalService.dismissAll()
     this.etichetteService.deleteEtichette(this.etichetta?.id ?? -1).subscribe()
+    this.modalService.dismissAll()
   }
 
   products : Prodotto[] = []
