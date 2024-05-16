@@ -1,1 +1,49 @@
-<p>add-report works!</p>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Nuova Etichetta</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label for="etichetta">etichetta</label>
+        <div class="input-group">
+          <input
+            id="etichetta"
+            placeholder="Etichetta"
+            name="etichetta"
+            [(ngModel)]="etichetta"
+          />
+        </div>
+        <label for="dettagli">dettagli</label>
+        <div class="input-group">
+          <input
+            id="dettagli"
+            placeholder="Dettagli"
+            name="dettagli"
+            [(ngModel)]="dettagli"
+          />
+
+        </div>
+        <label for="personale">personale</label>
+        <div class="input-group">
+          <input
+            id="personale"
+            placeholder="Personale"
+            name="personale"
+            [(ngModel)]="personale"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="addReport(); modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Aggiungi</button>
+
+<hr />
+
+<pre>{{ closeResult }}</pre>

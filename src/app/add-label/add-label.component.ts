@@ -8,7 +8,7 @@ import {EtichetteService} from "../etichette.service";
   styleUrl: './add-label.component.css'
 })
 export class AddLabelComponent {
-  id: number=0;
+  id?: number=0;
   dataArrivo? : Date ;
   descrizione: string="";
   abbattimento: boolean=true;
