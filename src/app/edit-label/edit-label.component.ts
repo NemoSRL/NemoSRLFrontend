@@ -32,7 +32,7 @@ export class EditLabelComponent {
   ordineUscita?: number = -1;
   cliente?: string = '';
   scontoextra?: number = -1;
-  posizioneid?: number = -1;
+  posizioneid?: string = '';
   posizionenp?: number = -1;
   prenotazione?: string = '';
 
@@ -81,7 +81,7 @@ export class EditLabelComponent {
       this.posizionenp = undefined;
     } else {
       const parsedPosition = this.selectedPosition?.split(' - ');
-      this.posizioneid = parseInt(parsedPosition[0]);
+      this.posizioneid = parsedPosition[0];
       this.posizionenp = parseInt(parsedPosition[1]);
     }
     if (this.selectedVendita === '') {

@@ -23,7 +23,7 @@ export interface Etichetta {
   readonly venditadata?: Date;
   readonly ordineUscita?: number;
   readonly scontoextra?: number;
-  readonly posizioneid?: number;
+  readonly posizioneid?: string;
   readonly posizionenp?: number;
   readonly prenotazione?: string;
 }

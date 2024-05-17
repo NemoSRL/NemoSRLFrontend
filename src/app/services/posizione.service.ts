@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Posizione {
-  readonly id?: number;
+  readonly id?: string;
   readonly np?: number;
   readonly tipo?: string;
   readonly sogliaMinima?: number;
