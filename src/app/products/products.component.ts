@@ -1,3 +1,4 @@
+import { MessageService } from '../services/message.service';
 import { Prodotto } from '../services/prodotti.service';
 import { ProdottiService } from '../services/prodotti.service';
 
@@ -80,7 +81,7 @@ export class ProductsComponent {
     }
   }
 
-  constructor(private productService: ProdottiService) {}
+  constructor(private productService: ProdottiService, private messageService : MessageService) {}
   textSearch: string = '';
   attributeSearch: string = '';
   getProductsBy(): void {
@@ -89,13 +90,15 @@ export class ProductsComponent {
     } else {
       this.productService
         .getProdottiBy(this.attributeSearch, this.textSearch)
-        .subscribe((products) => (this.products = products));
-    }
+        //.subscribe((products) => (this.products = products), errore => this.messageService.add("Errore caricamento prodotti."));
+        .subscribe((products) => (console.log("ciao")), errore => console.log("addio"));
+      }
   }
   getProducts(): void {
     this.productService
       .getAllProdotti()
-      .subscribe((products) => (this.products = products));
+      .subscribe((products) => (this.products = products), errore => this.messageService.add("Errore caricamento prodotti."));
+      
   }
 
   ngOnInit(): void {

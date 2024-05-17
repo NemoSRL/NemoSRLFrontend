@@ -29,6 +29,7 @@ import { NgbdSortableHeader } from './products/products.component';
 import { DetailLabelComponent } from './detail-label/detail-label.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
 import { HomeComponent } from './home/home.component';
+import { MessagesComponent } from './messages/messages.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import { HomeComponent } from './home/home.component';
 
     DetailLabelComponent,
     DetailProductComponent,
-    HomeComponent
+    HomeComponent,
+    MessagesComponent
   ],
   imports: [ 
 
