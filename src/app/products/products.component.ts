@@ -84,8 +84,8 @@ export class ProductsComponent {
   textSearch: string = '';
   attributeSearch: string = '';
   getProductsBy(): void {
-    if (this.attributeSearch === '' && this.textSearch === '') {
-      this.getProducts();
+    if (this.attributeSearch === '') {
+      return
     } else {
       this.productService
         .getProdottiBy(this.attributeSearch, this.textSearch)

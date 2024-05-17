@@ -12,14 +12,15 @@ ciao
   <button class="btn btn-primary" (click)="getLabelsBy()">Cerca</button>
   <input [(ngModel)]="textSearch">
   <select name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
+    <option value="" disabled selected="selected"></option>
     <option [ngValue]="'Codice'">Codice</option>
     <option [ngValue]="'Etichetta'">Etichetta</option>
     <option [ngValue]="'Data'">Data</option>
     <option [ngValue]="'Dettagli'">Dettagli</option>
     <option [ngValue]="'Personale'">Personale</option>
-    <option [ngValue]="'reset'" selected></option>
   </select>
-
+  <button class="btn btn-primary" (click)="getLabels()">Reset</button>
+  
   <hr />
   <table class="table table-striped">
     <thead>

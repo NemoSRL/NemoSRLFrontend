@@ -3,7 +3,6 @@ ciao
 <br>
 <br>
 <br>
-<p>You can introduce custom directives for table headers to sort columns</p>
 <div class="main-container">
 	<h2>Reports</h2>
 
@@ -19,6 +18,7 @@ ciao
 		<option [ngValue]="'Personale'">Personale</option>
 		<option [ngValue]="'reset'" selected></option>
 	</select>
+	<button class="btn btn-primary" (click)="getReports()">Reset</button>
 
 	<hr />
 	<table class="table table-striped">

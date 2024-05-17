@@ -76,8 +76,8 @@ export class LabelComponent {
   textSearch: string = '';
   attributeSearch: string = '';
   getLabelsBy(): void {
-    if (this.attributeSearch === '' && this.textSearch === '') {
-      this.getLabels();
+    if (this.attributeSearch === '') {
+      return
     } else {
       this.labelService
         .readEtichetteBy(this.attributeSearch, this.textSearch)

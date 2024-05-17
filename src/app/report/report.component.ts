@@ -81,8 +81,8 @@ export class ReportComponent {
   textSearch: string = '';
   attributeSearch: string = '';
   getReportsBy(): void {
-    if (this.attributeSearch === '' && this.textSearch === '') {
-      this.getReports();
+    if (this.attributeSearch === '') {
+      return
     } else {
       this.reportService
         .getReportsBy(this.attributeSearch, this.textSearch)
