@@ -8,7 +8,11 @@ import { EtichetteService } from '../services/etichette.service';
 import { ProdottiService, Prodotto } from '../services/prodotti.service';
 import { Cliente, ClienteService } from '../services/cliente.service';
 import { Posizione, PosizioneService } from '../services/posizione.service';
-
+import {
+  OrdineUscita,
+  OrdineUscitaService,
+} from '../services/ordine-uscita.service';
+import { Vendita, VenditaService } from '../services/vendita.service';
 @Component({
   selector: 'app-add-label',
   templateUrl: './add-label.component.html',
@@ -35,7 +39,9 @@ export class AddLabelComponent {
     private etichetteService: EtichetteService,
     private productService: ProdottiService,
     private clientService: ClienteService,
-    private positionService: PosizioneService
+    private positionService: PosizioneService,
+    private orderService: OrdineUscitaService,
+    private venditaService: VenditaService
   ) {}
   open(content: TemplateRef<any>) {
     this.modalService
@@ -49,11 +55,25 @@ export class AddLabelComponent {
         }
       );
   }
-  selectedPosition: string = '0 - 0';
+  selectedPosition: string = '';
+  selectedVendita: string = '';
   addEtichetta(): void {
-    const parsedPosition = this.selectedPosition?.split(' - ');
-    this.posizioneid = parseInt(parsedPosition[0]);
-    this.posizionenp = parseInt(parsedPosition[1]);
+    if (this.selectedPosition === '') {
+      this.posizioneid = undefined;
+      this.posizionenp = undefined;
+    } else {
+      const parsedPosition = this.selectedPosition?.split(' - ');
+      this.posizioneid = parseInt(parsedPosition[0]);
+      this.posizionenp = parseInt(parsedPosition[1]);
+    }
+    if(this.selectedVendita===''){
+      this.venditanp=undefined
+      this.venditadata=undefined
+    } else{
+      const parsedVendita = this.selectedVendita?.split(' - ');
+      this.venditanp = parseInt(parsedVendita[0])
+      this.venditadata = new Date(parsedVendita[1])
+    }
 
     this.etichetteService
       .addEtichetta({
@@ -104,9 +124,23 @@ export class AddLabelComponent {
       .getAllPosizioni()
       .subscribe((positions) => (this.positions = positions));
   }
+  orders: OrdineUscita[] = [];
+  private getOrders(): void {
+    this.orderService
+      .getAllOrdini()
+      .subscribe((orders) => (this.orders = orders));
+  }
+
+  vendite: Vendita[] = [];
+  private getVendite(): void {
+    this.venditaService.getAllVendita()
+    .subscribe(vendite=>(this.vendite=vendite))
+  }
   ngOnInit(): void {
     this.getProducts();
     this.getClients();
     this.getPositions();
+    this.getOrders();
+    this.getVendite();
   }
 }

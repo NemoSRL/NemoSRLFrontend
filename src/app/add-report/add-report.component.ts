@@ -7,6 +7,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { Report } from '../services/report.service';
 import { Etichetta, EtichetteService } from '../services/etichette.service';
+import { PersonaleService , Personale} from '../services/personale.service';
 @Component({
   selector: 'app-add-report',
   templateUrl: './add-report.component.html',
@@ -23,7 +24,8 @@ export class AddReportComponent {
   closeResult = '';
   constructor(
     private reportService: ReportService,
-    private labelService: EtichetteService
+    private labelService: EtichetteService,
+    private staffMemberService: PersonaleService
   ) {}
   open(content: TemplateRef<any>) {
     this.modalService
@@ -66,7 +68,13 @@ export class AddReportComponent {
       .subscribe((labels) => (this.labels = labels));
   }
 
+  staffMembers: Personale[] = []
+  private getStaffMembers(): void {
+    this.staffMemberService.getAllPersonale()
+    .subscribe(staffMembers => (this.staffMembers = staffMembers))
+  }
   ngOnInit(): void {
     this.getLabels();
+    this.getStaffMembers();
   }
 }

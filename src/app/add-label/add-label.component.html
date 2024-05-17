@@ -17,7 +17,7 @@
         </div>
         <label for="abbattimento">Abbattimento</label>
         <div class="input-group">
-          <input id="abbattimento" placeholder="Abbattimento" name="abbattimento" [(ngModel)]="abbattimento" />
+          <input id="abbattimento" type="checkbox" placeholder="Abbattimento" name="abbattimento" [(ngModel)]="abbattimento" />
         </div>
         <label for="peso">Peso</label>
         <div class="input-group">
@@ -33,7 +33,10 @@
         </div>
         <label for="ordineuscita">Ordine Uscita</label>
         <div class="input-group">
-          <input id="ordineuscita" placeholder="Ordine Uscita" name="ordineuscita" [(ngModel)]="ordineuscita" />
+          <select [(ngModel)]="ordineuscita">
+            <option value="" disabled selected="selected"></option>
+            <option *ngFor="let order of orders" value="{{order.id}}">{{order.id}}</option>
+          </select>
         </div>
 
         <label for="scontoextra">Sconto Extra</label>
@@ -54,6 +57,14 @@
             <option value="" disabled selected="selected"></option>
             <option *ngFor="let reservation of reservations" value="{{reservation.cf}}">{{reservation.nome}} -
               {{reservation.cognome}}</option>
+          </select>
+        </div>
+        <label for="vendita">Vendita</label>
+        <div class="input-group">
+          <select [(ngModel)]="selectedVendita">
+            <option value="" disabled selected="selected"></option>
+            <option *ngFor="let vendita of vendite" value="{{vendita.np}} - {{vendita.data}}">{{vendita.np}} -
+              {{vendita.data}}</option>
           </select>
         </div>
       </div>

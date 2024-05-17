@@ -13,7 +13,7 @@ export type id = number;
 
 const ADD_POSIZIONE = 'ciao';
 const GET_ALL_POSIZIONI = 'ciao';
-const GET_POSIZIONE_BY = 'ciao';
+const GET_POSIZIONI_BY = 'ciao';
 const GET_ATTRIBUTI = 'ciao';
 const UPDATE_POSIZIONE = 'ciao';
 const DELETE_POSIZIONE = 'ciao';
@@ -40,8 +40,11 @@ export class PosizioneService {
     );
   }
 
-  public getPosizioneBy(posizione: Posizione): Observable<Posizione> {
-    return this.httpClient.get<Posizione>(`${this.apiUrl}/${GET_POSIZIONE_BY}`);
+  public getPosizioniBy(attributo: string,
+    ricerca: string): Observable<Posizione[]> {
+      return this.httpClient.get<Posizione[]>(`${this.apiUrl}/${GET_POSIZIONI_BY}`, {
+        params: { attributo, ricerca },
+      });
   }
 
   public getAttributi(): Observable<string> {

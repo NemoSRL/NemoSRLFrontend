@@ -9,6 +9,11 @@ import { Data } from '@angular/router';
 import { ProdottiService, Prodotto } from '../services/prodotti.service';
 import { Cliente, ClienteService } from '../services/cliente.service';
 import { Posizione, PosizioneService } from '../services/posizione.service';
+import {
+  OrdineUscita,
+  OrdineUscitaService,
+} from '../services/ordine-uscita.service';
+import { Vendita, VenditaService } from '../services/vendita.service';
 
 @Component({
   selector: 'app-edit-label',
@@ -34,7 +39,9 @@ export class EditLabelComponent {
     private etichetteService: EtichetteService,
     private productService: ProdottiService,
     private clientService: ClienteService,
-    private positionService: PosizioneService
+    private positionService: PosizioneService,
+    private orderService: OrdineUscitaService,
+    private venditaService: VenditaService
   ) {}
   @Input() etichetta?: Etichetta;
   @Input() etichettaId?: number = 0;
@@ -64,11 +71,25 @@ export class EditLabelComponent {
         return `with: ${reason}`;
     }
   }
-  selectedPosition: string = '0 - 0';
+  selectedPosition: string = '';
+  selectedVendita: string = '';
   editEtichette(): void {
-    const parsedPosition = this.selectedPosition?.split(' - ');
-    this.posizioneid = parseInt(parsedPosition[0]);
-    this.posizionenp = parseInt(parsedPosition[1]);
+    if (this.selectedPosition === '') {
+      this.posizioneid = undefined;
+      this.posizionenp = undefined;
+    } else {
+      const parsedPosition = this.selectedPosition?.split(' - ');
+      this.posizioneid = parseInt(parsedPosition[0]);
+      this.posizionenp = parseInt(parsedPosition[1]);
+    }
+    if (this.selectedVendita === '') {
+      this.venditanp = undefined;
+      this.venditadata = undefined;
+    } else {
+      const parsedVendita = this.selectedVendita?.split(' - ');
+      this.venditanp = parseInt(parsedVendita[0]);
+      this.venditadata = new Date(parsedVendita[1]);
+    }
 
     const updatedEtichetta: Etichetta = {
       id: this.etichetta?.id ?? -1,
@@ -114,14 +135,24 @@ export class EditLabelComponent {
       .getAllPosizioni()
       .subscribe((positions) => (this.positions = positions));
   }
+  orders: OrdineUscita[] = [];
+  private getOrders(): void {
+    this.orderService
+      .getAllOrdini()
+      .subscribe((orders) => (this.orders = orders));
+  }
+
+  vendite: Vendita[] = [];
+  private getVendite(): void {
+    this.venditaService
+      .getAllVendita()
+      .subscribe((vendite) => (this.vendite = vendite));
+  }
   ngOnInit(): void {
-    if (this.etichetta === null) {
-      this.etichetteService
-        .readEtichettaById(this.etichettaId ?? 0)
-        .subscribe((etichette) => (this.etichetta = etichette));
-    }
     this.getProducts();
     this.getClients();
     this.getPositions();
+    this.getOrders();
+    this.getVendite();
   }
 }

@@ -12,12 +12,17 @@ ciao
   <button class="btn btn-primary" (click)="getLabelsBy()">Cerca</button>
   <input [(ngModel)]="textSearch">
   <select name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
-    <option value="" disabled selected="selected"></option>
-    <option [ngValue]="'Codice'">Codice</option>
-    <option [ngValue]="'Etichetta'">Etichetta</option>
-    <option [ngValue]="'Data'">Data</option>
-    <option [ngValue]="'Dettagli'">Dettagli</option>
-    <option [ngValue]="'Personale'">Personale</option>
+    <option value="" style="display: none;"  selected="selected">Attributo</option>
+    <option [ngValue]="'Id'">Id</option>
+    <option [ngValue]="'Prodotto'">Prodotto</option>
+    <option [ngValue]="'Peso'">Peso</option>
+    <option [ngValue]="'Descrizione'">Descrizione</option>
+    <option [ngValue]="'dataArrivo'">Data Arrivo</option>
+    <option [ngValue]="'ordineUscita'">Ordine</option>
+    <option [ngValue]="'Prenotazione'">Prenotazione</option>
+    <option [ngValue]="'Posizione'">Posizione</option>
+    <option [ngValue]="'Vendita'">Vendita</option>
+    
   </select>
   <button class="btn btn-primary" (click)="getLabels()">Reset</button>
   

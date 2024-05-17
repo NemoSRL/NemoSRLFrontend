@@ -9,7 +9,7 @@
 				<label for="etichetta">etichetta</label>
 				<div class="input-group">
 					<select [(ngModel)]="etichetta">
-						<option value="" disabled selected="selected"></option>
+						<option value="{{report?.etichetta}}" disabled selected="selected">{{report?.etichetta}}</option>
 						<option *ngFor="let label of labels" value="{{label.id}}">{{label.id}}</option>
 					</select>
 				</div>
@@ -26,8 +26,10 @@
 				</div>
 				<label for="personale">Personale</label>
 				<div class="input-group">
-					<input id="personale" placeholder="Personale" name="personale" value="{{report?.personale}}"
-						[(ngModel)]="personale" />
+					<select [(ngModel)]="etichetta">
+						<option value="{{report?.personale}}" disabled selected="selected">{{report?.personale}}</option>
+						<option *ngFor="let staffMember of staffMembers" value="{{staffMember.cf}}">{{staffMember.cf}}</option>
+					</select>
 				</div>
 			</div>
 		</form>

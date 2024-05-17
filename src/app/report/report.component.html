@@ -11,12 +11,13 @@ ciao
 	<button class="btn btn-primary" (click)="getReportsBy()">Cerca</button>
 	<input [(ngModel)]="textSearch">
 	<select name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
+		<option value="" style="display: none;"  selected="selected">Attributo</option>
 		<option [ngValue]="'Codice'">Codice</option>
 		<option [ngValue]="'Etichetta'">Etichetta</option>
 		<option [ngValue]="'Data'">Data</option>
 		<option [ngValue]="'Dettagli'">Dettagli</option>
 		<option [ngValue]="'Personale'">Personale</option>
-		<option [ngValue]="'reset'" selected></option>
+		
 	</select>
 	<button class="btn btn-primary" (click)="getReports()">Reset</button>
 

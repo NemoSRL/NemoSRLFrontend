@@ -7,6 +7,7 @@ import {
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
 import { EtichetteService, Etichetta } from '../services/etichette.service';
+import { Personale, PersonaleService } from '../services/personale.service';
 @Component({
   selector: 'app-edit-report',
   templateUrl: './edit-report.component.html',
@@ -19,7 +20,8 @@ export class EditReportComponent {
   personale?: string;
   constructor(
     private reportService: ReportService,
-    private labelService: EtichetteService
+    private labelService: EtichetteService,
+    private staffMemberService: PersonaleService
   ) {}
   @Input() report?: Report;
 
@@ -75,8 +77,13 @@ export class EditReportComponent {
       .readAllEtichette()
       .subscribe((labels) => (this.labels = labels));
   }
-
+  staffMembers: Personale[] = []
+  private getStaffMembers(): void {
+    this.staffMemberService.getAllPersonale()
+    .subscribe(staffMembers => (this.staffMembers = staffMembers))
+  }
   ngOnInit(): void {
     this.getLabels();
+    this.getStaffMembers();
   }
 }
