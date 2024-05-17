@@ -8,13 +8,14 @@ import {
 import { Prodotto } from '../services/prodotti.service';
 
 import { ProdottiService } from '../services/prodotti.service';
+import { MessageService } from '../services/message.service';
 @Component({
   selector: 'app-detail-product',
   templateUrl: './detail-product.component.html',
   styleUrl: './detail-product.component.css',
 })
 export class DetailProductComponent {
-  constructor(private productService: ProdottiService) {}
+  constructor(private productService: ProdottiService, private messageService : MessageService) {}
   @Input() productId: number = 0;
   product?: Prodotto;
 
@@ -47,6 +48,6 @@ export class DetailProductComponent {
   ngOnInit(): void {
     this.productService
       .getProdottoById(this.productId)
-      .subscribe((product) => (this.product = product));
+      .subscribe((product) => (this.product = product), errore => this.messageService.add("Errore caricamento prodotti."));
   }
 }

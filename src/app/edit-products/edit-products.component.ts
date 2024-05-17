@@ -8,6 +8,7 @@ import {
 import { Prodotto } from '../services/prodotti.service';
 
 import { ProdottiService } from '../services/prodotti.service';
+import { MessageService } from '../services/message.service';
 @Component({
   selector: 'app-edit-products',
   templateUrl: './edit-products.component.html',
@@ -18,7 +19,7 @@ export class EditProductsComponent {
   qualita: string = '';
   qntMinima: number = 0;
   qnt: number = 0;
-  constructor(private productService: ProdottiService) {}
+  constructor(private productService: ProdottiService, private messageService : MessageService) {}
   @Input() product?: Prodotto;
 
   tempProd?: Prodotto;
@@ -57,11 +58,11 @@ export class EditProductsComponent {
       quantita: this.qnt,
     };
     console.log(updatedProduct);
-    this.productService.updateProdotto(updatedProduct).subscribe();
+    this.productService.updateProdotto(updatedProduct).subscribe(successo => console.log("successo"),  errore => this.messageService.add("Errore modifica."));
     this.modalService.dismissAll();
   }
   deleteProduct(): void {
     this.modalService.dismissAll();
-    this.productService.deleteProdotto(this.product?.id ?? -1).subscribe();
+    this.productService.deleteProdotto(this.product?.id ?? -1).subscribe(successo => console.log("successo"),  errore => this.messageService.add("Errore eliminazione."));
   }
 }

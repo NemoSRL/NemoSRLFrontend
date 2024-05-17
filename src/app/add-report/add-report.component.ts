@@ -8,6 +8,7 @@ import {
 import { Report } from '../services/report.service';
 import { Etichetta, EtichetteService } from '../services/etichette.service';
 import { PersonaleService , Personale} from '../services/personale.service';
+import { MessageService } from '../services/message.service';
 @Component({
   selector: 'app-add-report',
   templateUrl: './add-report.component.html',
@@ -25,7 +26,8 @@ export class AddReportComponent {
   constructor(
     private reportService: ReportService,
     private labelService: EtichetteService,
-    private staffMemberService: PersonaleService
+    private staffMemberService: PersonaleService,
+    private messageService : MessageService
   ) {}
   open(content: TemplateRef<any>) {
     this.modalService
@@ -49,7 +51,7 @@ export class AddReportComponent {
         etichetta: this.etichetta,
         personale: this.personale,
       })
-      .subscribe();
+      .subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore inserimento."));
     this.modalService.dismissAll();
   }
   private getDismissReason(reason: any): string {
@@ -65,13 +67,13 @@ export class AddReportComponent {
   private getLabels(): void {
     this.labelService
       .readAllEtichette()
-      .subscribe((labels) => (this.labels = labels));
+      .subscribe((labels) => (this.labels = labels), errore => this.messageService.add("Errore caricamento etichette."));
   }
 
   staffMembers: Personale[] = []
   private getStaffMembers(): void {
     this.staffMemberService.getAllPersonale()
-    .subscribe(staffMembers => (this.staffMembers = staffMembers))
+    .subscribe(staffMembers => (this.staffMembers = staffMembers), errore => this.messageService.add("Errore caricamento personale."))
   }
   ngOnInit(): void {
     this.getLabels();

@@ -8,6 +8,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { EtichetteService, Etichetta } from '../services/etichette.service';
 import { Personale, PersonaleService } from '../services/personale.service';
+import { MessageService } from '../services/message.service';
 @Component({
   selector: 'app-edit-report',
   templateUrl: './edit-report.component.html',
@@ -21,7 +22,8 @@ export class EditReportComponent {
   constructor(
     private reportService: ReportService,
     private labelService: EtichetteService,
-    private staffMemberService: PersonaleService
+    private staffMemberService: PersonaleService,
+    private messageService : MessageService
   ) {}
   @Input() report?: Report;
 
@@ -63,24 +65,24 @@ export class EditReportComponent {
         etichetta: this.etichetta,
         personale: this.personale,
       })
-      .subscribe();
+      .subscribe(successo => console.log("ok"), errore => this.messageService.add("Errore modifica."));
   }
   deleteReport(): void {
     this.modalService.dismissAll();
     this.reportService
       .deleteReport(this.report?.id ?? -1, this.report?.etichetta ?? -1)
-      .subscribe();
+      .subscribe(successo => console.log("ok"), errore => this.messageService.add("Errore eliminazione."));
   }
   labels: Etichetta[] = [];
   private getLabels(): void {
     this.labelService
       .readAllEtichette()
-      .subscribe((labels) => (this.labels = labels));
+      .subscribe((labels) => (this.labels = labels), errore => this.messageService.add("Errore caricamento etichette."));
   }
   staffMembers: Personale[] = []
   private getStaffMembers(): void {
     this.staffMemberService.getAllPersonale()
-    .subscribe(staffMembers => (this.staffMembers = staffMembers))
+    .subscribe(staffMembers => (this.staffMembers = staffMembers), errore => this.messageService.add("Errore caricamento personale."))
   }
   ngOnInit(): void {
     this.getLabels();

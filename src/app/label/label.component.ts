@@ -8,6 +8,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { Etichetta, EtichetteService } from '../services/etichette.service';
+import { MessageService } from '../services/message.service';
 
 export type SortColumn = keyof Etichetta | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -81,15 +82,15 @@ export class LabelComponent {
     } else {
       this.labelService
         .readEtichetteBy(this.attributeSearch, this.textSearch)
-        .subscribe((labels) => (this.labels = labels));
+        .subscribe((labels) => (this.labels = labels), errore => this.messageService.add("Errore caricamento etichette."));
     }
   }
-  constructor(private labelService: EtichetteService) {}
+  constructor(private labelService: EtichetteService, private messageService : MessageService) {}
 
   getLabels(): void {
     this.labelService
       .readAllEtichette()
-      .subscribe((labels) => (this.labels = labels));
+      .subscribe((labels) => (this.labels = labels), errore => this.messageService.add("Errore caricamento etichette."));
   }
 
   ngOnInit(): void {

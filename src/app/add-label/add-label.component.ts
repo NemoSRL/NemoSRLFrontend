@@ -13,6 +13,7 @@ import {
   OrdineUscitaService,
 } from '../services/ordine-uscita.service';
 import { Vendita, VenditaService } from '../services/vendita.service';
+import { MessageService } from '../services/message.service';
 @Component({
   selector: 'app-add-label',
   templateUrl: './add-label.component.html',
@@ -41,7 +42,8 @@ export class AddLabelComponent {
     private clientService: ClienteService,
     private positionService: PosizioneService,
     private orderService: OrdineUscitaService,
-    private venditaService: VenditaService
+    private venditaService: VenditaService,
+    private messageService : MessageService
   ) {}
   open(content: TemplateRef<any>) {
     this.modalService
@@ -91,7 +93,7 @@ export class AddLabelComponent {
         posizionenp: this.posizionenp,
         prenotazione: this.prenotazione,
       })
-      .subscribe();
+      .subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore inserimento."));
     this.modalService.dismissAll();
   }
   private getDismissReason(reason: any): string {
@@ -109,32 +111,32 @@ export class AddLabelComponent {
   private getProducts(): void {
     this.productService
       .getAllProdotti()
-      .subscribe((products) => (this.products = products));
+      .subscribe((products) => (this.products = products), errore => this.messageService.add("Errore caricamento prodotti."));
   }
   reservations: Cliente[] = [];
   private getClients(): void {
     this.clientService
       .getAllClienti()
-      .subscribe((reservations) => (this.reservations = reservations));
+      .subscribe((reservations) => (this.reservations = reservations), errore => this.messageService.add("Errore caricamento personale."));
   }
 
   positions: Posizione[] = [];
   private getPositions(): void {
     this.positionService
       .getAllPosizioni()
-      .subscribe((positions) => (this.positions = positions));
+      .subscribe((positions) => (this.positions = positions), errore => this.messageService.add("Errore caricamento posizioni."));
   }
   orders: OrdineUscita[] = [];
   private getOrders(): void {
     this.orderService
       .getAllOrdini()
-      .subscribe((orders) => (this.orders = orders));
+      .subscribe((orders) => (this.orders = orders), errore => this.messageService.add("Errore caricamento ordini."));
   }
 
   vendite: Vendita[] = [];
   private getVendite(): void {
     this.venditaService.getAllVendita()
-    .subscribe(vendite=>(this.vendite=vendite))
+    .subscribe(vendite=>(this.vendite=vendite), errore => this.messageService.add("Errore caricamento vendite."))
   }
   ngOnInit(): void {
     this.getProducts();

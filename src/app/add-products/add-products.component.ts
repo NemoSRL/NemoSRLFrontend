@@ -6,6 +6,7 @@ import {
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
 import { ProdottiService } from '../services/prodotti.service';
+import { MessageService } from '../services/message.service';
 @Component({
   selector: 'app-add-products',
   templateUrl: './add-products.component.html',
@@ -18,7 +19,7 @@ export class AddProductsComponent {
   qnt: number = 0;
   private modalService = inject(NgbModal);
   closeResult = '';
-  constructor(private productService: ProdottiService) {}
+  constructor(private productService: ProdottiService, private messageService : MessageService) {}
   open(content: TemplateRef<any>) {
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
@@ -42,7 +43,7 @@ export class AddProductsComponent {
         sogliaminima: this.qntMinima,
         quantita: this.qnt,
       })
-      .subscribe();
+      .subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore inserimento."));
     this.modalService.dismissAll();
   }
   private getDismissReason(reason: any): string {

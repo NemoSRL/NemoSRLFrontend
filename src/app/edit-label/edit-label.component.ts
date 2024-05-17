@@ -14,6 +14,7 @@ import {
   OrdineUscitaService,
 } from '../services/ordine-uscita.service';
 import { Vendita, VenditaService } from '../services/vendita.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-edit-label',
@@ -41,7 +42,8 @@ export class EditLabelComponent {
     private clientService: ClienteService,
     private positionService: PosizioneService,
     private orderService: OrdineUscitaService,
-    private venditaService: VenditaService
+    private venditaService: VenditaService,
+    private messageService : MessageService
   ) {}
   @Input() etichetta?: Etichetta;
   @Input() etichettaId?: number = 0;
@@ -107,11 +109,11 @@ export class EditLabelComponent {
       prenotazione: this.prenotazione,
     };
     console.log(updatedEtichetta);
-    this.etichetteService.updateEtichetta(updatedEtichetta).subscribe();
+    this.etichetteService.updateEtichetta(updatedEtichetta).subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore modifica."));
     this.modalService.dismissAll();
   }
   deleteEtichette(): void {
-    this.etichetteService.deleteEtichette(this.etichetta?.id ?? -1).subscribe();
+    this.etichetteService.deleteEtichette(this.etichetta?.id ?? -1).subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore eliminazione."));
     this.modalService.dismissAll();
   }
 
@@ -119,27 +121,27 @@ export class EditLabelComponent {
   private getProducts(): void {
     this.productService
       .getAllProdotti()
-      .subscribe((products) => (this.products = products));
+      .subscribe((products) => (this.products = products), errore => this.messageService.add("Errore caricamento prodotti."));
   }
 
   reservations: Cliente[] = [];
   private getClients(): void {
     this.clientService
       .getAllClienti()
-      .subscribe((reservations) => (this.reservations = reservations));
+      .subscribe((reservations) => (this.reservations = reservations), errore => this.messageService.add("Errore caricamento personale."));
   }
 
   positions: Posizione[] = [];
   private getPositions(): void {
     this.positionService
       .getAllPosizioni()
-      .subscribe((positions) => (this.positions = positions));
+      .subscribe((positions) => (this.positions = positions), errore => this.messageService.add("Errore caricamento posizioni."));
   }
   orders: OrdineUscita[] = [];
   private getOrders(): void {
     this.orderService
       .getAllOrdini()
-      .subscribe((orders) => (this.orders = orders));
+      .subscribe((orders) => (this.orders = orders), errore => this.messageService.add("Errore caricamento ordini."));
   }
 
   vendite: Vendita[] = [];
