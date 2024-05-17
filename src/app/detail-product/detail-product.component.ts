@@ -11,14 +11,13 @@ import { ProdottiService } from '../services/prodotti.service';
 @Component({
   selector: 'app-detail-product',
   templateUrl: './detail-product.component.html',
-  styleUrl: './detail-product.component.css'
+  styleUrl: './detail-product.component.css',
 })
 export class DetailProductComponent {
   constructor(private productService: ProdottiService) {}
   @Input() productId: number = 0;
   product?: Prodotto;
 
-  
   private modalService = inject(NgbModal);
   closeResult = '';
 
@@ -46,6 +45,8 @@ export class DetailProductComponent {
     }
   }
   ngOnInit(): void {
-    this.productService.readProdottiById(this.productId).subscribe(product => this.product=product)
+    this.productService
+      .getProdottoById(this.productId)
+      .subscribe((product) => (this.product = product));
   }
 }

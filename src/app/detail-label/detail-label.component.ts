@@ -1,31 +1,34 @@
-
 import { Component, inject, TemplateRef, Input } from '@angular/core';
-import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {etichette, EtichetteService} from "../services/etichette.service";
+import {
+  ModalDismissReasons,
+  NgbDatepickerModule,
+  NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
+import { Etichetta, EtichetteService } from '../services/etichette.service';
 
 @Component({
   selector: 'app-detail-label',
   templateUrl: './detail-label.component.html',
-  styleUrl: './detail-label.component.css'
+  styleUrl: './detail-label.component.css',
 })
 export class DetailLabelComponent {
-
-
-  constructor(private etichetteService : EtichetteService){}
-  etichetta?: etichette  
-  @Input() etichettaId?: number=0
+  constructor(private etichetteService: EtichetteService) {}
+  etichetta?: Etichetta;
+  @Input() etichettaId?: number = 0;
   private modalService = inject(NgbModal);
   closeResult = '';
 
   open(content: TemplateRef<any>) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-      (result) => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      },
-    );
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
@@ -39,13 +42,11 @@ export class DetailLabelComponent {
     }
   }
 
-
-
-
-ngOnInit(): void {
-  if(this.etichetta === null){
-    this.etichetteService.readEtichettaById(this.etichettaId ?? 0).subscribe(etichette => this.etichetta = etichette)
+  ngOnInit(): void {
+    if (this.etichetta === null) {
+      this.etichetteService
+        .readEtichettaById(this.etichettaId ?? 0)
+        .subscribe((etichette) => (this.etichetta = etichette));
+    }
   }
-
-}
 }

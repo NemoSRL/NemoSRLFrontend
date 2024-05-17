@@ -6,51 +6,35 @@
 	<div class="modal-body">
 		<form>
 			<div class="mb-3">
-			  <label for="etichetta">etichetta</label>
-			  <div class="input-group">
-				<select [(ngModel)]="etichetta">
-					<option value="" disabled selected="selected"></option>
-					<option *ngFor="let label of labels" value="{{label.id}}">{{label.id}}</option>
-				</select>
-			  </div>
-			  <label for="data">Data</label>
-			  <div class="input-group">
-				<input
-				  id="data"
-				  type="date"
-				  placeholder="data"
-				  name="data"
-				  [(ngModel)]="data"
-				/>
-                
-			  </div>
-			  <label for="dettagli">Dettagli</label>
-			  <div class="input-group">
-				<input
-				  id="dettagli"
-				  placeholder="dettagli"
-				  name="dettagli"
-				  [(ngModel)]="dettagli"
-				/>
-			  </div>
-			  <label for="personale">Personale</label>
-			  <div class="input-group">
-				<input
-				  id="personale"
-				  placeholder="Personale"
-				  name="personale"
-				  [(ngModel)]="personale"
-				/>
-			  </div>
+				<label for="etichetta">etichetta</label>
+				<div class="input-group">
+					<select [(ngModel)]="etichetta">
+						<option value="" disabled selected="selected"></option>
+						<option *ngFor="let label of labels" value="{{label.id}}">{{label.id}}</option>
+					</select>
+				</div>
+				<label for="data">Data</label>
+				<div class="input-group">
+					<input id="data" type="date" placeholder="data" name="data" [(ngModel)]="data" />
+
+				</div>
+				<label for="dettagli">Dettagli</label>
+				<div class="input-group">
+					<input id="dettagli" placeholder="dettagli" name="dettagli" [(ngModel)]="dettagli" />
+				</div>
+				<label for="personale">Personale</label>
+				<div class="input-group">
+					<input id="personale" placeholder="Personale" name="personale" [(ngModel)]="personale" />
+				</div>
 			</div>
-		  </form>
+		</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-dark" (click)="addReport(); modal.close('Save click')">Save</button>
+		<button type="button" class="btn btn-outline-dark"
+			(click)="addReport(); modal.close('Save click')">Save</button>
 	</div>
 </ng-template>
 
 <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Aggiungi</button>
 
 <hr />
-

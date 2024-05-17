@@ -11,8 +11,8 @@ ciao
 
   <button class="btn btn-primary" (click)="getLabelsBy()">Cerca</button>
   <input [(ngModel)]="textSearch">
-  <select name="attributeSearch" id="attributeSearch"  [(ngModel)]="attributeSearch">
-    <option  [ngValue]="'Codice'" >Codice</option>
+  <select name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
+    <option [ngValue]="'Codice'">Codice</option>
     <option [ngValue]="'Etichetta'">Etichetta</option>
     <option [ngValue]="'Data'">Data</option>
     <option [ngValue]="'Dettagli'">Dettagli</option>
@@ -23,43 +23,43 @@ ciao
   <hr />
   <table class="table table-striped">
     <thead>
-    <tr>
-      <th scope="col" >Id</th>
-      <th scope="col" [width]="10">Dettagli/Modifica</th>
-      <th scope="col" >Posizione</th>
-      <th scope="col" >Prodotto</th>
-      <th scope="col" >Peso</th>
-      <th scope="col" >Descrizione</th>
-      <th scope="col" >Data Arrivo</th>
-      <th scope="col" >Ordine</th>
-      <th scope="col" >Prenotazione</th>
-      <th scope="col" >Vendita</th>
-      <th scope="col" >Sconto Extra</th>
-    </tr>
-  </thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col" [width]="10">Dettagli/Modifica</th>
+        <th scope="col">Posizione</th>
+        <th scope="col">Prodotto</th>
+        <th scope="col">Peso</th>
+        <th scope="col">Descrizione</th>
+        <th scope="col">Data Arrivo</th>
+        <th scope="col">Ordine</th>
+        <th scope="col">Prenotazione</th>
+        <th scope="col">Vendita</th>
+        <th scope="col">Sconto Extra</th>
+      </tr>
+    </thead>
     <tbody>
       @for (label of labels; track label.id) {
 
-        <tr>
-          <th scope="row">{{ label.id| number}}</th>
-          <td><app-edit-label [etichetta]="label"></app-edit-label></td>
+      <tr>
+        <th scope="row">{{ label.id| number}}</th>
+        <td><app-edit-label [etichetta]="label"></app-edit-label></td>
 
 
-          <td>
+        <td>
 
-            <app-detail-label [etichettaId]="label.id"></app-detail-label>
-          </td>
-          
-          <td>{{ label.posizionenp }} - {{label.posizionenp}}</td>
-          <td>{{ label.prodotto }}</td>
-          <td>{{ label.peso}}</td>
-          <td>{{ label.descrizione }}</td>
-          <td>{{ label.dataarrivo}}</td>
-          <td>{{ label.ordineUscita}}</td>
-          <td>{{ label.prenotazione}}</td>
-          <td>{{ label.venditadata }} - {{ label.venditanp }}</td>
-          <td>{{ label.scontoextra }}</td>
-        </tr>
+          <app-detail-label [etichettaId]="label.id"></app-detail-label>
+        </td>
+
+        <td>{{ label.posizionenp }} - {{label.posizionenp}}</td>
+        <td>{{ label.prodotto }}</td>
+        <td>{{ label.peso}}</td>
+        <td>{{ label.descrizione }}</td>
+        <td>{{ label.dataarrivo}}</td>
+        <td>{{ label.ordineUscita}}</td>
+        <td>{{ label.prenotazione}}</td>
+        <td>{{ label.venditadata }} - {{ label.venditanp }}</td>
+        <td>{{ label.scontoextra }}</td>
+      </tr>
 
       }
     </tbody>

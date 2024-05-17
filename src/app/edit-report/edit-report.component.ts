@@ -1,36 +1,45 @@
 import { Component, inject, TemplateRef, Input } from '@angular/core';
 import { Report } from '../services/report.service';
 import { ReportService } from '../services/report.service';
-import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  ModalDismissReasons,
+  NgbDatepickerModule,
+  NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
 import { EtichetteService, Etichetta } from '../services/etichette.service';
 @Component({
   selector: 'app-edit-report',
   templateUrl: './edit-report.component.html',
-  styleUrl: './edit-report.component.css'
+  styleUrl: './edit-report.component.css',
 })
 export class EditReportComponent {
-  etichetta?:number
-  data?: Date
-  dettagli?: string
-  personale?: string
-  constructor(private reportService : ReportService, private labelService : EtichetteService){}
-  @Input() report?: Report
+  etichetta?: number;
+  data?: Date;
+  dettagli?: string;
+  personale?: string;
+  constructor(
+    private reportService: ReportService,
+    private labelService: EtichetteService
+  ) {}
+  @Input() report?: Report;
 
-  tempReport?: Report
+  tempReport?: Report;
   private modalService = inject(NgbModal);
   closeResult = '';
 
   open(content: TemplateRef<any>) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-      (result) => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      },
-    );
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
-  
+
   private getDismissReason(reason: any): string {
     switch (reason) {
       case ModalDismissReasons.ESC:
@@ -41,26 +50,33 @@ export class EditReportComponent {
         return `with: ${reason}`;
     }
   }
-  editReport(): void{
-    this.modalService.dismissAll()
-    
-    
-    this.reportService.updateReport({id: this.report?.id, data:this.data, dettagli: this.dettagli, etichetta : this.etichetta, personale : this.personale}).subscribe()
-  
-  }
-  deleteReport(): void{
-    this.modalService.dismissAll()
-    this.reportService.deleteReport(this.report?.id ?? -1, this.report?.etichetta ?? -1).subscribe()
-  }
-  labels : Etichetta[] = []
-  private getLabels() : void {
-		
-		this.labelService.readAllEtichette()
-			.subscribe(labels => this.labels = labels);
-	  
-}
+  editReport(): void {
+    this.modalService.dismissAll();
 
-ngOnInit(): void {
-	this.getLabels();
-}
+    this.reportService
+      .updateReport({
+        id: this.report?.id,
+        data: this.data,
+        dettagli: this.dettagli,
+        etichetta: this.etichetta,
+        personale: this.personale,
+      })
+      .subscribe();
+  }
+  deleteReport(): void {
+    this.modalService.dismissAll();
+    this.reportService
+      .deleteReport(this.report?.id ?? -1, this.report?.etichetta ?? -1)
+      .subscribe();
+  }
+  labels: Etichetta[] = [];
+  private getLabels(): void {
+    this.labelService
+      .readAllEtichette()
+      .subscribe((labels) => (this.labels = labels));
+  }
+
+  ngOnInit(): void {
+    this.getLabels();
+  }
 }

@@ -8,79 +8,52 @@
       <div class="mb-3">
         <label for="dataArrivo">DataArrivo</label>
         <div class="input-group">
-          <input
-            id="dataArrivo"
-            placeholder="DataArrivo"
-            name="DataArrivo"
-            [(ngModel)]="dataArrivo"
-          />
+          <input id="dataArrivo" placeholder="DataArrivo" name="DataArrivo" [(ngModel)]="dataArrivo" />
         </div>
         <label for="descrizione">Descrizione</label>
         <div class="input-group">
-          <input
-            id="descrizione"
-            placeholder="Descrizione"
-            name="descriozione"
-            [(ngModel)]="descrizione"
-          />
+          <input id="descrizione" placeholder="Descrizione" name="descriozione" [(ngModel)]="descrizione" />
 
         </div>
         <label for="abbattimento">Abbattimento</label>
         <div class="input-group">
-          <input
-            id="abbattimento"
-            placeholder="Abbattimento"
-            name="abbattimento"
-            [(ngModel)]="abbattimento"
-          />
+          <input id="abbattimento" placeholder="Abbattimento" name="abbattimento" [(ngModel)]="abbattimento" />
         </div>
         <label for="peso">Peso</label>
         <div class="input-group">
-          <input
-            id="peso"
-            placeholder="Peso"
-            name="peso"
-            [(ngModel)]="peso"
-          />
+          <input id="peso" placeholder="Peso" name="peso" [(ngModel)]="peso" />
         </div>
         <label for="prodotto">Prodotto</label>
         <div class="input-group">
           <select [(ngModel)]="prodotto">
             <option value="" disabled selected="selected"></option>
-            <option *ngFor="let product of products" value="{{product.id}}">{{product.nome}} - {{product.qualita}}</option>
+            <option *ngFor="let product of products" value="{{product.id}}">{{product.nome}} - {{product.qualita}}
+            </option>
           </select>
         </div>
         <label for="ordineuscita">Ordine Uscita</label>
         <div class="input-group">
-          <input
-            id="ordineuscita"
-            placeholder="Ordine Uscita"
-            name="ordineuscita"
-            [(ngModel)]="ordineuscita"
-          />
+          <input id="ordineuscita" placeholder="Ordine Uscita" name="ordineuscita" [(ngModel)]="ordineuscita" />
         </div>
 
         <label for="scontoextra">Sconto Extra</label>
         <div class="input-group">
-          <input
-            id="scontoextra"
-            placeholder="Sconto Extra"
-            name="scontoextra"
-            [(ngModel)]="scontoextra"
-          />
+          <input id="scontoextra" placeholder="Sconto Extra" name="scontoextra" [(ngModel)]="scontoextra" />
         </div>
         <label for="posizione">Posizione</label>
         <div class="input-group">
           <select [(ngModel)]="selectedPosition">
             <option value="" disabled selected="selected"></option>
-            <option *ngFor="let position of positions" value="{{position.id}} - {{position.np}}">{{position.id}} - {{position.np}} - {{position.tipo}}</option>
+            <option *ngFor="let position of positions" value="{{position.id}} - {{position.np}}">{{position.id}} -
+              {{position.np}} - {{position.tipo}}</option>
           </select>
         </div>
         <label for="prenotazione">Prenotazione</label>
         <div class="input-group">
           <select [(ngModel)]="prenotazione">
             <option value="" disabled selected="selected"></option>
-            <option *ngFor="let reservation of reservations" value="{{reservation.cf}}">{{reservation.nome}} - {{reservation.cognome}}</option>
+            <option *ngFor="let reservation of reservations" value="{{reservation.cf}}">{{reservation.nome}} -
+              {{reservation.cognome}}</option>
           </select>
         </div>
       </div>
@@ -94,4 +67,3 @@
 <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Aggiungi</button>
 
 <hr />
-

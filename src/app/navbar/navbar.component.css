@@ -24,8 +24,8 @@ body {
     color: #ffffff;
     position: relative;
   }
-  
-  .sidebar .nav-link:hover {
+
+  .sidebar .funzionante:hover {
     color: #adb5bd;
   }
   
@@ -38,7 +38,7 @@ body {
   }
   
   .sidebar .sub-menu .nav-link {
-    padding-left: 20px; /* Adjust this value to set the indent level */
+    padding-left: 30px; /* Adjust this value to set the indent level */
   }
   
   .content {

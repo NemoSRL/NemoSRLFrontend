@@ -1,11 +1,26 @@
-import { Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  Directive,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { Etichetta, EtichetteService } from '../services/etichette.service';
 
 export type SortColumn = keyof Etichetta | '';
 export type SortDirection = 'asc' | 'desc' | '';
-const rotate: { [key: string]: SortDirection } = { asc: 'desc', desc: '', '': 'asc' };
+const rotate: { [key: string]: SortDirection } = {
+  asc: 'desc',
+  desc: '',
+  '': 'asc',
+};
 
-const compare = (v1: string | number | Date | boolean | undefined , v2: string | number | Date | boolean | undefined) => ((v1 ?? 0) < (v2 ?? 0) ? -1 : (v1 ?? 0) > (v2 ?? 0) ? 1 : 0);
+const compare = (
+  v1: string | number | Date | boolean | undefined,
+  v2: string | number | Date | boolean | undefined
+) => ((v1 ?? 0) < (v2 ?? 0) ? -1 : (v1 ?? 0) > (v2 ?? 0) ? 1 : 0);
 
 export interface SortEvent {
   column: SortColumn;
@@ -35,9 +50,9 @@ export class NgbdSortableHeader {
 @Component({
   selector: 'app-label',
   templateUrl: './label.component.html',
-  styleUrl: './label.component.css'
+  styleUrl: './label.component.css',
 })
-export class LabelComponent{
+export class LabelComponent {
   @ViewChildren(NgbdSortableHeader)
   headers!: QueryList<NgbdSortableHeader>;
   onSort({ column, direction }: SortEvent) {
@@ -58,29 +73,28 @@ export class LabelComponent{
       });
     }
   }
-  textSearch: string = ""
-  attributeSearch: string = ""
-  getLabelsBy() : void {
-    if(this.attributeSearch === "" && this.textSearch===""){
-      this.getLabels()
+  textSearch: string = '';
+  attributeSearch: string = '';
+  getLabelsBy(): void {
+    if (this.attributeSearch === '' && this.textSearch === '') {
+      this.getLabels();
     } else {
-      this.labelService.readEtichetteBy(this.attributeSearch, this.textSearch)
-        .subscribe(labels => this.labels = labels);
+      this.labelService
+        .readEtichetteBy(this.attributeSearch, this.textSearch)
+        .subscribe((labels) => (this.labels = labels));
     }
   }
-  constructor(private labelService : EtichetteService){}
+  constructor(private labelService: EtichetteService) {}
 
-  getLabels() : void {
-
-    this.labelService.readAllEtichette()
-      .subscribe(labels => this.labels = labels);
-
+  getLabels(): void {
+    this.labelService
+      .readAllEtichette()
+      .subscribe((labels) => (this.labels = labels));
   }
 
   ngOnInit(): void {
     this.getLabels();
   }
 
-  labels : Etichetta[] = [];
-
+  labels: Etichetta[] = [];
 }

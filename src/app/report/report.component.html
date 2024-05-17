@@ -5,52 +5,52 @@ ciao
 <br>
 <p>You can introduce custom directives for table headers to sort columns</p>
 <div class="main-container">
-<h2>Reports</h2>
+	<h2>Reports</h2>
 
-<app-add-report></app-add-report>
+	<app-add-report></app-add-report>
 
-<button class="btn btn-primary" (click)="getReportsBy()">Cerca</button>
-<input [(ngModel)]="textSearch">
-<select name="attributeSearch" id="attributeSearch"  [(ngModel)]="attributeSearch">
-	<option  [ngValue]="'Codice'" >Codice</option>
-	<option [ngValue]="'Etichetta'">Etichetta</option>
-	<option [ngValue]="'Data'">Data</option>
-	<option [ngValue]="'Dettagli'">Dettagli</option>
-	<option [ngValue]="'Personale'">Personale</option>
-	<option [ngValue]="'reset'" selected></option>
-  </select>
-  
-<hr />
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th scope="col" >codice</th>
-			<th scope="col" [width]="10">Dettagli/Modifica</th>
-			<th scope="col" >Etichetta</th>
-			<th scope="col" >Data</th>
-			<th scope="col" >Dettagli</th>
-			<th scope="col" >Personale</th>
-		</tr>
-	</thead>
-	<tbody>
-		@for (report of reports; track report.id) {
-           
+	<button class="btn btn-primary" (click)="getReportsBy()">Cerca</button>
+	<input [(ngModel)]="textSearch">
+	<select name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
+		<option [ngValue]="'Codice'">Codice</option>
+		<option [ngValue]="'Etichetta'">Etichetta</option>
+		<option [ngValue]="'Data'">Data</option>
+		<option [ngValue]="'Dettagli'">Dettagli</option>
+		<option [ngValue]="'Personale'">Personale</option>
+		<option [ngValue]="'reset'" selected></option>
+	</select>
+
+	<hr />
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">codice</th>
+				<th scope="col" [width]="10">Dettagli/Modifica</th>
+				<th scope="col">Etichetta</th>
+				<th scope="col">Data</th>
+				<th scope="col">Dettagli</th>
+				<th scope="col">Personale</th>
+			</tr>
+		</thead>
+		<tbody>
+			@for (report of reports; track report.id) {
+
 			<tr>
 				<th scope="row">{{ report.id| number}}</th>
 				<td><app-edit-report [report]="report"></app-edit-report></td>
 
-                
+
 				<td>
-					
+
 					<app-detail-label [etichettaId]="report.etichetta"></app-detail-label>
 				</td>
 				<td>{{ report.data}}</td>
-				<td>{{ report.dettagli  }}</td>
+				<td>{{ report.dettagli }}</td>
 				<td>{{ report.personale }}</td>
 			</tr>
-            
-		}
-	</tbody>
-</table>
+
+			}
+		</tbody>
+	</table>
 
 </div>
