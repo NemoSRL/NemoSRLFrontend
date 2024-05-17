@@ -1,0 +1,18 @@
+.button-as-text {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    
+  }
+
+  .cliccabile {
+    cursor: pointer;
+}
+
+.marR2 {
+    margin-right: 2px;
+}

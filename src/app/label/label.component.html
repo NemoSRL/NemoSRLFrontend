@@ -1,31 +1,26 @@
-ciao
-<br>
-<br>
-<br>
-<br>
-
 <div class="main-container">
   <h2>Etichette</h2>
 
   <app-add-label></app-add-label>
+  <div class="input-group">
+    <button class="btn btn-primary marR2" (click)="getLabelsBy()">Cerca</button>
+    <input [(ngModel)]="textSearch" class="marR2">
+    <select class="marR2" name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
+      <option value="" style="display: none;" selected="selected">Attributo</option>
+      <option [ngValue]="'Id'">Id</option>
+      <option [ngValue]="'Prodotto'">Prodotto</option>
+      <option [ngValue]="'Peso'">Peso</option>
+      <option [ngValue]="'Descrizione'">Descrizione</option>
+      <option [ngValue]="'dataArrivo'">Data Arrivo</option>
+      <option [ngValue]="'ordineUscita'">Ordine</option>
+      <option [ngValue]="'Prenotazione'">Prenotazione</option>
+      <option [ngValue]="'Posizione'">Posizione</option>
+      <option [ngValue]="'Vendita'">Vendita</option>
 
-  <button class="btn btn-primary" (click)="getLabelsBy()">Cerca</button>
-  <input [(ngModel)]="textSearch">
-  <select name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
-    <option value="" style="display: none;"  selected="selected">Attributo</option>
-    <option [ngValue]="'Id'">Id</option>
-    <option [ngValue]="'Prodotto'">Prodotto</option>
-    <option [ngValue]="'Peso'">Peso</option>
-    <option [ngValue]="'Descrizione'">Descrizione</option>
-    <option [ngValue]="'dataArrivo'">Data Arrivo</option>
-    <option [ngValue]="'ordineUscita'">Ordine</option>
-    <option [ngValue]="'Prenotazione'">Prenotazione</option>
-    <option [ngValue]="'Posizione'">Posizione</option>
-    <option [ngValue]="'Vendita'">Vendita</option>
-    
-  </select>
-  <button class="btn btn-primary" (click)="getLabels()">Reset</button>
-  
+    </select>
+    <button class="btn btn-primary marR2" (click)="getLabels()">Reset</button>
+  </div>
+
   <hr />
   <table class="table table-striped">
     <thead>

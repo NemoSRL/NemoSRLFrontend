@@ -67,3 +67,11 @@ body {
     margin: 5px 0;
   }
   
+  .nav-container{
+    background-color: #343a40;
+    width: 100%;
+    padding: 8px;
+    height: 54px;
+  }
+
+  

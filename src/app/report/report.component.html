@@ -1,26 +1,21 @@
-ciao
-<br>
-<br>
-<br>
-<br>
 <div class="main-container">
 	<h2>Reports</h2>
 
 	<app-add-report></app-add-report>
+	<div class="input-group">
+		<button class="btn btn-primary marR2" (click)="getReportsBy()">Cerca</button>
+		<input [(ngModel)]="textSearch" class="marR2">
+		<select class="marR2" name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
+			<option value="" style="display: none;" selected="selected">Attributo</option>
+			<option [ngValue]="'Codice'">Codice</option>
+			<option [ngValue]="'Etichetta'">Etichetta</option>
+			<option [ngValue]="'Data'">Data</option>
+			<option [ngValue]="'Dettagli'">Dettagli</option>
+			<option [ngValue]="'Personale'">Personale</option>
 
-	<button class="btn btn-primary" (click)="getReportsBy()">Cerca</button>
-	<input [(ngModel)]="textSearch">
-	<select name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
-		<option value="" style="display: none;"  selected="selected">Attributo</option>
-		<option [ngValue]="'Codice'">Codice</option>
-		<option [ngValue]="'Etichetta'">Etichetta</option>
-		<option [ngValue]="'Data'">Data</option>
-		<option [ngValue]="'Dettagli'">Dettagli</option>
-		<option [ngValue]="'Personale'">Personale</option>
-		
-	</select>
-	<button class="btn btn-primary" (click)="getReports()">Reset</button>
-
+		</select>
+		<button class="btn btn-primary marR2" (click)="getReports()">Reset</button>
+	</div>
 	<hr />
 	<table class="table table-striped">
 		<thead>
