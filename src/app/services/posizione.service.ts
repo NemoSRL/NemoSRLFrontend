@@ -11,12 +11,12 @@ export interface Posizione {
 
 export type id = number;
 
-const ADD_POSIZIONE = 'ciao';
-const GET_ALL_POSIZIONI = 'ciao';
-const GET_POSIZIONI_BY = 'ciao';
-const GET_ATTRIBUTI = 'ciao';
-const UPDATE_POSIZIONE = 'ciao';
-const DELETE_POSIZIONE = 'ciao';
+const ADD_POSIZIONE = 'posizioni';
+const GET_ALL_POSIZIONI = 'posizioni';
+const GET_POSIZIONI_BY = 'posizioni';
+const GET_ATTRIBUTI = 'posizioni';
+const UPDATE_POSIZIONE = 'posizioni';
+const DELETE_POSIZIONE = 'posizioni';
 
 @Injectable({
   providedIn: 'root',

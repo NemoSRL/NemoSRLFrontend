@@ -32,6 +32,7 @@ export class EditReportComponent {
   closeResult = '';
 
   open(content: TemplateRef<any>) {
+    this.initInput()
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -56,10 +57,16 @@ export class EditReportComponent {
   }
   editReport(): void {
     this.modalService.dismissAll();
-
+    console.log({
+        np: this.report?.np,
+        data: this.data,
+        dettagli: this.dettagli,
+        etichetta: this.etichetta,
+        personale: this.personale,
+      })
     this.reportService
       .updateReport({
-        id: this.report?.id,
+        np: this.report?.np,
         data: this.data,
         dettagli: this.dettagli,
         etichetta: this.etichetta,
@@ -70,7 +77,7 @@ export class EditReportComponent {
   deleteReport(): void {
     this.modalService.dismissAll();
     this.reportService
-      .deleteReport(this.report?.id ?? -1, this.report?.etichetta ?? -1)
+      .deleteReport(this.report?.np ?? -1, this.report?.etichetta ?? -1)
       .subscribe(successo => console.log("ok"), errore => this.messageService.add("Errore eliminazione."));
   }
   labels: Etichetta[] = [];
@@ -87,5 +94,11 @@ export class EditReportComponent {
   ngOnInit(): void {
     this.getLabels();
     this.getStaffMembers();
+  }
+  initInput(): void {
+    this.etichetta = this.report?.etichetta;
+    this.data = this.report?.data;
+    this.dettagli= this.report?.dettagli;
+    this.personale = this.report?.personale;
   }
 }

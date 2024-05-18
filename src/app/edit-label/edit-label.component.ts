@@ -10,7 +10,7 @@ import { ProdottiService, Prodotto } from '../services/prodotti.service';
 import { Cliente, ClienteService } from '../services/cliente.service';
 import { Posizione, PosizioneService } from '../services/posizione.service';
 import {
-  OrdineUscita,
+  OrdineInUscita,
   OrdineUscitaService,
 } from '../services/ordine-uscita.service';
 import { Vendita, VenditaService } from '../services/vendita.service';
@@ -26,11 +26,10 @@ export class EditLabelComponent {
   descrizione?: string = '';
   abbattimento?: boolean = false;
   peso?: number = -1;
-  prodotto?: string = '';
+  prodotto?: number ;
   venditanp?: number = -1;
   venditadata?: Date = new Date('2000-00-00');
   ordineUscita?: number = -1;
-  cliente?: string = '';
   scontoextra?: number = -1;
   posizioneid?: string = '';
   posizionenp?: number = -1;
@@ -51,6 +50,7 @@ export class EditLabelComponent {
   closeResult = '';
 
   open(content: TemplateRef<any>) {
+    this.initInput()
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -137,7 +137,7 @@ export class EditLabelComponent {
       .getAllPosizioni()
       .subscribe((positions) => (this.positions = positions), errore => this.messageService.add("Errore caricamento posizioni."));
   }
-  orders: OrdineUscita[] = [];
+  orders: OrdineInUscita[] = [];
   private getOrders(): void {
     this.orderService
       .getAllOrdini()
@@ -156,5 +156,20 @@ export class EditLabelComponent {
     this.getPositions();
     this.getOrders();
     this.getVendite();
+  }
+
+  initInput() : void {
+    this.dataarrivo= this.etichetta?.dataarrivo;
+    this.descrizione= this.etichetta?.descrizione;
+    this.abbattimento= this.etichetta?.abbattimento;
+    this.peso= this.etichetta?.peso;
+    this.prodotto= this.etichetta?.prodotto;
+    this.venditanp= this.etichetta?.venditanp;
+    this.venditadata= this.etichetta?.venditadata;
+    this.ordineUscita=this.etichetta?.ordineUscita;
+    this.scontoextra=this.etichetta?.scontoextra;
+    this.posizioneid=this.etichetta?.posizioneid;
+    this.posizionenp=this.etichetta?.posizionenp;
+    this.prenotazione=this.etichetta?.prenotazione;
   }
 }

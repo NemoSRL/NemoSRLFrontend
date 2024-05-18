@@ -90,8 +90,8 @@ export class ProductsComponent {
     } else {
       this.productService
         .getProdottiBy(this.attributeSearch, this.textSearch)
-        //.subscribe((products) => (this.products = products), errore => this.messageService.add("Errore caricamento prodotti."));
-        .subscribe((products) => (console.log("ciao")), errore => console.log("addio"));
+        .subscribe((products) => (this.products = products), errore => this.messageService.add("Errore caricamento prodotti."));
+        
       }
   }
   getProducts(): void {

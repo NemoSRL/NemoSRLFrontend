@@ -9,11 +9,11 @@ const DELETE_PRODOTTO = 'prodotti';
 const GET_ATTRIBUTI = 'prodotti';
 const GET_PRODOTTO_BY_ID = 'prodotti';
 export interface Prodotto {
-  readonly id?: number;
-  readonly nome?: string;
-  readonly quantita?: number;
-  readonly sogliaminima?: number;
-  readonly qualita?: string;
+  id?: number;
+  nome?: string;
+  quantita?: number;
+  sogliaminima?: number;
+  qualita?: string;
 }
 
 export type Codice = number;
@@ -50,7 +50,7 @@ export class ProdottiService {
       { params: { id } }
     );
   }
-  public updateProdotto(prodotto: Prodotto) {
+  public updateProdotto(prodotto?: Prodotto) {
     return this.httpClient.put(`${this.apiUrl}/${UPDATE_PRODOTTO}`, prodotto);
   }
 

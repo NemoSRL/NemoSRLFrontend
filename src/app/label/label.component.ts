@@ -90,7 +90,7 @@ export class LabelComponent {
   getLabels(): void {
     this.labelService
       .readAllEtichette()
-      .subscribe((labels) => (this.labels = labels), errore => this.messageService.add("Errore caricamento etichette."));
+      .subscribe((labels) => {this.labels = labels; console.log(this.labels)}, errore => this.messageService.add("Errore caricamento etichette."));
   }
 
   ngOnInit(): void {

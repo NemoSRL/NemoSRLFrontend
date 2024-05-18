@@ -12,7 +12,7 @@ const DELETE_REPORT = 'report';
 const ADD_REPORT = 'report';
 const GET_REPORT_BY_ID = 'report';
 export interface Report {
-  readonly id?: number;
+  readonly np?: number;
   readonly etichetta?: number;
   readonly data?: Date;
   readonly dettagli?: string;
@@ -52,11 +52,8 @@ export class ReportService {
     return this.httpClient.get<string[]>(`${this.apiUrl}/${GET_ATTRIBUTI}`);
   }
 
-  public updateReport(Report: Report): Observable<Report> {
-    return this.httpClient.put<Report>(
-      `${this.apiUrl}/${UPDATE_REPORT}`,
-      Report
-    );
+  public updateReport(report?: Report) {
+    return this.httpClient.put(`${this.apiUrl}/${UPDATE_REPORT}`, report);
   }
 
   public deleteReport(codice: number, etichetta: number): Observable<Report> {

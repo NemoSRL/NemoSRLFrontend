@@ -50,4 +50,5 @@ export class DetailLabelComponent {
         .subscribe((etichette) => (this.etichetta = etichette), errore => this.messageService.add("Errore caricamento etichette."));
     }
   }
+
 }

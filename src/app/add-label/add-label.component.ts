@@ -9,7 +9,7 @@ import { ProdottiService, Prodotto } from '../services/prodotti.service';
 import { Cliente, ClienteService } from '../services/cliente.service';
 import { Posizione, PosizioneService } from '../services/posizione.service';
 import {
-  OrdineUscita,
+  OrdineInUscita,
   OrdineUscitaService,
 } from '../services/ordine-uscita.service';
 import { Vendita, VenditaService } from '../services/vendita.service';
@@ -25,7 +25,7 @@ export class AddLabelComponent {
   descrizione: string = '';
   abbattimento: boolean = true;
   peso: number = 0;
-  prodotto: string = '';
+  prodotto?: number ;
   venditanp?: number = undefined;
   venditadata?: Date = undefined;
   ordineuscita: number = 0;
@@ -79,7 +79,7 @@ export class AddLabelComponent {
 
     this.etichetteService
       .addEtichetta({
-        id: undefined,
+        id: -1,
         dataarrivo: this.dataArrivo,
         descrizione: this.descrizione,
         abbattimento: this.abbattimento,
@@ -94,6 +94,19 @@ export class AddLabelComponent {
         prenotazione: this.prenotazione,
       })
       .subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore inserimento."));
+      console.log({id: undefined,
+        dataarrivo: this.dataArrivo,
+        descrizione: this.descrizione,
+        abbattimento: this.abbattimento,
+        peso: this.peso,
+        prodotto: this.prodotto,
+        venditanp: this.venditanp,
+        venditadata: this.venditadata,
+        ordineUscita: this.ordineuscita,
+        scontoextra: this.scontoextra,
+        posizioneid: this.posizioneid,
+        posizionenp: this.posizionenp,
+        prenotazione: this.prenotazione,})
     this.modalService.dismissAll();
   }
   private getDismissReason(reason: any): string {
@@ -126,7 +139,7 @@ export class AddLabelComponent {
       .getAllPosizioni()
       .subscribe((positions) => (this.positions = positions), errore => this.messageService.add("Errore caricamento posizioni."));
   }
-  orders: OrdineUscita[] = [];
+  orders: OrdineInUscita[] = [];
   private getOrders(): void {
     this.orderService
       .getAllOrdini()

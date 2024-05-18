@@ -2,22 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const GET_ALL_CLIENTI="ciao";
-const GET_CLIENTI_BY="ciao";
-const UPDATE_CLIENTE="ciao";
-const GET_CLIENTE_BY_ID="ciao";
-const GET_ATTRIBUTI="ciao";
-const DELETE_CLIENTE="ciao";
-const ADD_CLIENTE="ciao";
+const GET_ALL_CLIENTI="clienti";
+const GET_CLIENTI_BY="clienti";
+const UPDATE_CLIENTE="clienti";
+const GET_CLIENTE_BY_ID="clienti";
+const GET_ATTRIBUTI="clienti";
+const DELETE_CLIENTE="clienti";
+const ADD_CLIENTE="clienti";
 
 export interface Cliente{
   readonly cf?: string,
   readonly nome?:string,
   readonly cognome?:string,
+  readonly telefono?:string,
   readonly email?:string,
   readonly eta?:number,
   readonly sesso?:string,
-  readonly telefono?:string,
 
 }
 

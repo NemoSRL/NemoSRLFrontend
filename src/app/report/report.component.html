@@ -29,15 +29,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			@for (report of reports; track report.id) {
+			@for (report of reports; track report.np) {
 
 			<tr>
-				<th scope="row">{{ report.id| number}}</th>
+				<th scope="row">{{ report.np| number}}</th>
 				<td><app-edit-report [report]="report"></app-edit-report></td>
-
-
 				<td>
-
 					<app-detail-label [etichettaId]="report.etichetta"></app-detail-label>
 				</td>
 				<td>{{ report.data}}</td>

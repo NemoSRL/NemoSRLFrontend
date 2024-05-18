@@ -12,7 +12,7 @@ import { Observable, of } from 'rxjs';
 import { Report } from '../services/report.service';
 import { ReportService } from '../services/report.service';
 import { EtichetteService, Etichetta } from '../services/etichette.service';
-
+import { MessageService } from '../services/message.service';
 export type SortColumn = keyof Report | '';
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = {
@@ -86,15 +86,15 @@ export class ReportComponent {
     } else {
       this.reportService
         .getReportsBy(this.attributeSearch, this.textSearch)
-        .subscribe((reports) => (this.reports = reports));
+        .subscribe((reports) => (this.reports = reports), errore => this.messageService.add("Errore caricamento reports."));
     }
   }
-  constructor(private reportService: ReportService) {}
+  constructor(private reportService: ReportService, private messageService : MessageService) {}
 
   getReports(): void {
     this.reportService
       .getAllReports()
-      .subscribe((reports) => (this.reports = reports));
+      .subscribe((reports) => (this.reports = reports), errore => this.messageService.add("Errore caricamento reports."));
   }
 
   ngOnInit(): void {

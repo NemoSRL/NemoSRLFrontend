@@ -44,8 +44,8 @@ export class AddReportComponent {
 
   addReport(): void {
     this.reportService
-      .updateReport({
-        id: undefined,
+      .addReport({
+        np: -1,
         data: this.data,
         dettagli: this.dettagli,
         etichetta: this.etichetta,

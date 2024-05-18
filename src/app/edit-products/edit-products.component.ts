@@ -15,10 +15,10 @@ import { MessageService } from '../services/message.service';
   styleUrl: './edit-products.component.css',
 })
 export class EditProductsComponent {
-  nome: string = '';
-  qualita: string = '';
-  qntMinima: number = 0;
-  qnt: number = 0;
+  nome: string = "";
+  qualita: string = "";
+  qntMinima: number = -3;
+  qnt: number = -3;
   constructor(private productService: ProdottiService, private messageService : MessageService) {}
   @Input() product?: Prodotto;
 
@@ -27,6 +27,7 @@ export class EditProductsComponent {
   closeResult = '';
 
   open(content: TemplateRef<any>) {
+    this.initInputs()
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -64,5 +65,14 @@ export class EditProductsComponent {
   deleteProduct(): void {
     this.modalService.dismissAll();
     this.productService.deleteProdotto(this.product?.id ?? -1).subscribe(successo => console.log("successo"),  errore => this.messageService.add("Errore eliminazione."));
+  }
+
+  initInputs() : void {
+    console.log(this.product?.sogliaminima)
+    console.log(this.product)
+    this.nome = this.product?.nome || "";
+    this.qualita = this.product?.qualita || "";
+    this.qntMinima = this.product?.sogliaminima || 0;
+    this.qnt = this.product?.quantita || 0;
   }
 }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const GET_ALL_VENDITA = 'vendita';
+const GET_ALL_VENDITA = 'vendite';
 
 export interface Vendita {
   np: number,

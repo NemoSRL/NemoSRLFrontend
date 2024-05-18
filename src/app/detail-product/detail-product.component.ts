@@ -16,7 +16,7 @@ import { MessageService } from '../services/message.service';
 })
 export class DetailProductComponent {
   constructor(private productService: ProdottiService, private messageService : MessageService) {}
-  @Input() productId: number = 0;
+  @Input() productId?: number;
   product?: Prodotto;
 
   private modalService = inject(NgbModal);
@@ -47,7 +47,7 @@ export class DetailProductComponent {
   }
   ngOnInit(): void {
     this.productService
-      .getProdottoById(this.productId)
-      .subscribe((product) => (this.product = product), errore => this.messageService.add("Errore caricamento prodotti."));
+      .getProdottoById(this.productId ?? 0)
+      .subscribe((product) => {this.product = product; console.log(product)}, errore => this.messageService.add("Errore caricamento prodotti."));
   }
 }

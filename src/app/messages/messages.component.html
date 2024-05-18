@@ -1,8 +1,7 @@
 <button type="button" class="btn" style="border-radius: 15pt;"
-            (click)="messageService.clear()"><div class="light-red-background" *ngIf="messageService.messages.length || 1===1">
+            (click)="messageService.clear()"><div class="light-red-background" *ngIf="messageService.messages.length">
 
     <h4>Error(s)</h4>
-    >> Clear messages
     <div *ngFor='let message of messageService.messages'>>> {{message}} </div>
   
   </div></button>

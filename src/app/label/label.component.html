@@ -27,11 +27,12 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col" [width]="10">Dettagli/Modifica</th>
-        <th scope="col">Posizione</th>
         <th scope="col">Prodotto</th>
+        <th scope="col">Posizione</th>
         <th scope="col">Peso</th>
         <th scope="col">Descrizione</th>
         <th scope="col">Data Arrivo</th>
+        <th scope="col">Abbattimento</th>
         <th scope="col">Ordine</th>
         <th scope="col">Prenotazione</th>
         <th scope="col">Vendita</th>
@@ -48,14 +49,15 @@
 
         <td>
 
-          <app-detail-label [etichettaId]="label.id"></app-detail-label>
+          <app-detail-product [productId]="label.prodotto"></app-detail-product>
         </td>
 
         <td>{{ label.posizionenp }} - {{label.posizionenp}}</td>
-        <td>{{ label.prodotto }}</td>
+        
         <td>{{ label.peso}}</td>
         <td>{{ label.descrizione }}</td>
         <td>{{ label.dataarrivo}}</td>
+        <td>{{label.abbattimento }}</td>
         <td>{{ label.ordineUscita}}</td>
         <td>{{ label.prenotazione}}</td>
         <td>{{ label.venditadata }} - {{ label.venditanp }}</td>

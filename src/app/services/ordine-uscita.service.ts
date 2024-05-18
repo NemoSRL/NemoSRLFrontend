@@ -2,7 +2,7 @@ import { Injectable, inject, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface OrdineUscita {
+export interface OrdineInUscita {
   readonly id: number;
   readonly data: Date;
   readonly datainvio: Date;
@@ -14,12 +14,12 @@ export interface OrdineUscita {
   readonly referenteazienda: string;
 }
 
-const ADD_ORDINE = 'ciao';
-const GET_ALL_ORDINI = 'ciao';
-const GET_ORDINI_BY = 'ciao';
-const GET_ATTRIBUTI = 'ciao';
-const UPDATE_ORDINE = 'ciao';
-const DELETE_ORDINE = 'ciao';
+const ADD_ORDINE = 'ordini';
+const GET_ALL_ORDINI = 'ordini';
+const GET_ORDINI_BY = 'ordini';
+const GET_ATTRIBUTI = 'ordini';
+const UPDATE_ORDINE = 'ordini';
+const DELETE_ORDINE = 'ordini';
 
 @Injectable({
   providedIn: 'root',
@@ -30,22 +30,22 @@ export class OrdineUscitaService {
     private readonly httpClient: HttpClient
   ) {}
 
-  public addOrdineUscita(posizione: OrdineUscita): Observable<OrdineUscita> {
-    return this.httpClient.post<OrdineUscita>(
+  public addOrdineInUscita(posizione: OrdineInUscita): Observable<OrdineInUscita> {
+    return this.httpClient.post<OrdineInUscita>(
       `${this.apiUrl}/${ADD_ORDINE}`,
       posizione
     );
   }
 
-  public getAllOrdini(): Observable<OrdineUscita[]> {
-    return this.httpClient.get<OrdineUscita[]>(
+  public getAllOrdini(): Observable<OrdineInUscita[]> {
+    return this.httpClient.get<OrdineInUscita[]>(
       `${this.apiUrl}/${GET_ALL_ORDINI}`
     );
   }
 
   public getOrdiniBy(attributo: string,
-    ricerca: string): Observable<OrdineUscita[]> {
-      return this.httpClient.get<OrdineUscita[]>(`${this.apiUrl}/${GET_ORDINI_BY}`, {
+    ricerca: string): Observable<OrdineInUscita[]> {
+      return this.httpClient.get<OrdineInUscita[]>(`${this.apiUrl}/${GET_ORDINI_BY}`, {
         params: { attributo, ricerca },
       });
   }
@@ -54,15 +54,15 @@ export class OrdineUscitaService {
     return this.httpClient.get<string>(`${this.apiUrl}/${GET_ATTRIBUTI}`);
   }
 
-  public updateOrdineUscita(posizione: OrdineUscita): Observable<Object> {
+  public updateOrdineInUscita(posizione: OrdineInUscita): Observable<Object> {
     return this.httpClient.put<object>(
       `${this.apiUrl}/${UPDATE_ORDINE}`,
       posizione
     );
   }
 
-  public deleteOrdineUscita(id: number): Observable<OrdineUscita> {
-    return this.httpClient.delete<OrdineUscita>(
+  public deleteOrdineInUscita(id: number): Observable<OrdineInUscita> {
+    return this.httpClient.delete<OrdineInUscita>(
       `${this.apiUrl}/${DELETE_ORDINE}/${id}`
     );
   }

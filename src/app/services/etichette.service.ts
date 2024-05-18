@@ -18,7 +18,7 @@ export interface Etichetta {
   readonly descrizione?: string;
   readonly abbattimento?: boolean;
   readonly peso?: number;
-  readonly prodotto?: string;
+  readonly prodotto?: number;
   readonly venditanp?: number;
   readonly venditadata?: Date;
   readonly ordineUscita?: number;
