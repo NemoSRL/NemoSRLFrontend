@@ -107,6 +107,7 @@ export class EditLabelComponent {
       posizioneid: this.posizioneid,
       posizionenp: this.posizionenp,
       prenotazione: this.prenotazione,
+      posizionetipo: ""
     };
     console.log(updatedEtichetta);
     this.etichetteService.updateEtichetta(updatedEtichetta).subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore modifica."));

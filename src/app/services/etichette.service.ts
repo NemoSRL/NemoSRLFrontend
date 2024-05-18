@@ -26,6 +26,7 @@ export interface Etichetta {
   readonly posizioneid?: string;
   readonly posizionenp?: number;
   readonly prenotazione?: string;
+  readonly posizionetipo: string;
 }
 
 @Injectable({

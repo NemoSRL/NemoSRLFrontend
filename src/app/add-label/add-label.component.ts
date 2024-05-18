@@ -92,6 +92,7 @@ export class AddLabelComponent {
         posizioneid: this.posizioneid,
         posizionenp: this.posizionenp,
         prenotazione: this.prenotazione,
+        posizionetipo: ""
       })
       .subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore inserimento."));
       console.log({id: undefined,
