@@ -44,11 +44,11 @@ export class DetailLabelComponent {
   }
 
   ngOnInit(): void {
-    if (this.etichetta === null) {
+    
       this.etichetteService
         .readEtichettaById(this.etichettaId ?? 0)
         .subscribe((etichette) => (this.etichetta = etichette), errore => this.messageService.add("Errore caricamento etichette."));
-    }
+    
   }
 
 }

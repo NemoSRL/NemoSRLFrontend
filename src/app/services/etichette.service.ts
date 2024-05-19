@@ -5,12 +5,12 @@ import { Data } from '@angular/router';
 import { Observable } from 'rxjs';
 
 const GET_ALL_ETICHETTE = 'etichette';
-const GET_ETICHETTE_BY = 'etichette';
+const GET_ETICHETTE_BY = 'etichette/ricerca';
 const UPDATE_ETICHETTA = 'etichette';
 const DELETE_ETICHETTA = 'etichette';
 const GET_ATTRIBUTI = 'etichette';
 const ADD_ETICHETTA = 'etichette';
-const GET_ETICHETTA_BY_ID = '';
+const GET_ETICHETTA_BY_ID = 'etichette';
 
 export interface Etichetta {
   readonly id?: number;

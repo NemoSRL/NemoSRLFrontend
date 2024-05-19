@@ -5,7 +5,7 @@ import { read } from '@popperjs/core';
 import { Observable } from 'rxjs';
 
 const GET_ALL_REPORTS = 'report';
-const GET_REPORTS_BY = 'report';
+const GET_REPORTS_BY = 'report/ricerca';
 const GET_ATTRIBUTI = 'report';
 const UPDATE_REPORT = 'report';
 const DELETE_REPORT = 'report';
@@ -44,7 +44,7 @@ export class ReportService {
     ricerca: string
   ): Observable<Report[]> {
     return this.httpClient.get<Report[]>(`${this.apiUrl}/${GET_REPORTS_BY}`, {
-      params: { attributo, ricerca },
+      params: { [attributo] : ricerca },
     });
   }
 

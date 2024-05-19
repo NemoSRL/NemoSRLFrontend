@@ -7,15 +7,15 @@
     <input [(ngModel)]="textSearch" class="marR2">
     <select class="marR2" name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
       <option value="" style="display: none;" selected="selected">Attributo</option>
-      <option [ngValue]="'Id'">Id</option>
-      <option [ngValue]="'Prodotto'">Prodotto</option>
-      <option [ngValue]="'Peso'">Peso</option>
-      <option [ngValue]="'Descrizione'">Descrizione</option>
-      <option [ngValue]="'dataArrivo'">Data Arrivo</option>
-      <option [ngValue]="'ordineUscita'">Ordine</option>
-      <option [ngValue]="'Prenotazione'">Prenotazione</option>
-      <option [ngValue]="'Posizione'">Posizione</option>
-      <option [ngValue]="'Vendita'">Vendita</option>
+      <option [ngValue]="'id'">Id</option>
+      <option [ngValue]="'prod_id'">Prodotto</option>
+      <option [ngValue]="'peso'">Peso</option>
+      <option [ngValue]="'descrizione'">Descrizione</option>
+      <option [ngValue]="'data_arrivo'">Data Arrivo</option>
+      <option [ngValue]="'ordine'">Ordine</option>
+      <option [ngValue]="'prenotazione'">Prenotazione</option>
+      <option [ngValue]="'posizione'">Posizione</option>
+      <option [ngValue]="'vendita'">Vendita</option>
 
     </select>
     <button class="btn btn-primary marR2" (click)="getLabels()">Reset</button>

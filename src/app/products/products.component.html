@@ -10,11 +10,11 @@
 		<input class="marR2" [(ngModel)]="textSearch">
 		<select class="marR2" name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
 			<option value="" style="display: none;" selected="selected">Attributo</option>
-			<option [ngValue]="'Codice'">Codice</option>
-			<option [ngValue]="'Nome'">Nome</option>
-			<option [ngValue]="'Qualita'">Qualita</option>
-			<option [ngValue]="'SogliaMinima'">Soglia Minima</option>
-			<option [ngValue]="'Quantita'">Quantità</option>
+			<option [ngValue]="'id'">Codice</option>
+			<option [ngValue]="'nome'">Nome</option>
+			<option [ngValue]="'qualita'">Qualita</option>
+			<option [ngValue]="'sogliaMinima'">Soglia Minima</option>
+			<option [ngValue]="'quantita'">Quantità</option>
 		</select>
 		<button class="btn btn-primary marR2" (click)="getProducts()">Reset</button>
 

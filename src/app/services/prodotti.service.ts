@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 const GET_ALL_PRODOTTI = 'prodotti';
-const GET_PRODOTTI_BY = 'ciao';
+const GET_PRODOTTI_BY = 'prodotti/ricerca';
 const UPDATE_PRODOTTO = 'prodotti';
 const DELETE_PRODOTTO = 'prodotti';
 const GET_ATTRIBUTI = 'prodotti';
@@ -40,13 +40,13 @@ export class ProdottiService {
   ): Observable<Prodotto[]> {
     return this.httpClient.get<Prodotto[]>(
       `${this.apiUrl}/${GET_PRODOTTI_BY}`,
-      { params: { attributo, ricerca } }
+      { params: { [attributo] : ricerca } }
     );
   }
 
   public getProdottoById(id: number): Observable<Prodotto> {
     return this.httpClient.get<Prodotto>(
-      `${this.apiUrl}/${GET_PRODOTTO_BY_ID}`,
+      `${this.apiUrl}/${GET_PRODOTTO_BY_ID}/${id}`,
       { params: { id } }
     );
   }

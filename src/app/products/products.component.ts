@@ -84,14 +84,17 @@ export class ProductsComponent {
   constructor(private productService: ProdottiService, private messageService : MessageService) {}
   textSearch: string = '';
   attributeSearch: string = '';
+  
   getProductsBy(): void {
+    console.log(`text: ${this.textSearch} attribute: ${this.attributeSearch}`)
     if (this.attributeSearch === '') {
+      console.log("vuoto")
       return
     } else {
       this.productService
         .getProdottiBy(this.attributeSearch, this.textSearch)
         .subscribe((products) => (this.products = products), errore => this.messageService.add("Errore caricamento prodotti."));
-        
+        console.log("ies")
       }
   }
   getProducts(): void {
