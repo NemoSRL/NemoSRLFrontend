@@ -28,16 +28,16 @@
         </div>
         <label for="prodotto">Prodotto</label>
         <div class="input-group">
-          <select [(ngModel)]="prodotto">
-            <option value="{{etichetta?.prodotto}}" disabled selected="selected">{{etichetta?.prodotto}}</option>
+          <select [(ngModel)]="prodotto" name="prodotto">
+            <option value="{{etichetta?.prodotto}}" disabled selected="selected" style="display: none;">{{etichetta?.prodotto}}</option>
             <option *ngFor="let product of products" value="{{product.id}}">{{product.id}} - {{product.nome}} - {{product.qualita}}
             </option>
           </select>
         </div>
         <label for="ordineuscita">Ordine Uscita</label>
         <div class="input-group">
-          <select [(ngModel)]="ordineUscita">
-            <option value="{{etichetta?.ordineUscita}}" disabled selected="selected">{{etichetta?.ordineUscita}}</option>
+          <select [(ngModel)]="ordineUscita" name="ordineUscita">
+            <option value="{{etichetta?.ordineUscita}}" disabled selected="selected" style="display: none;">{{etichetta?.ordineUscita}}</option>
             <option *ngFor="let order of orders" value="{{order.id}}">{{order.id}}</option>
           </select>
         </div>
@@ -48,24 +48,24 @@
         </div>
         <label for="posizione">Posizione</label>
         <div class="input-group">
-          <select [(ngModel)]="selectedPosition">
-            <option value="{{etichetta?.posizioneid}} - {{etichetta?.posizionenp}}" disabled selected="selected">{{etichetta?.posizioneid}} - {{etichetta?.posizionenp}}</option>
+          <select [(ngModel)]="selectedPosition" name="selectedPosition">
+            <option value="{{etichetta?.posizioneid}} - {{etichetta?.posizionenp}}" disabled selected="selected" style="display: none;">{{etichetta?.posizioneid}} - {{etichetta?.posizionenp}}</option>
             <option *ngFor="let position of positions" value="{{position.id}} - {{position.np}}">{{position.id}} -
               {{position.np}} - {{position.tipo}}</option>
           </select>
         </div>
         <label for="prenotazione">Prenotazione</label>
         <div class="input-group">
-          <select [(ngModel)]="prenotazione">
-            <option value="{{etichetta?.prenotazione}}" disabled selected="selected">{{etichetta?.prenotazione}}</option>
+          <select [(ngModel)]="prenotazione" name="prenotazione">
+            <option value="{{etichetta?.prenotazione}}" disabled selected="selected" style="display: none;">{{etichetta?.prenotazione}}</option>
             <option *ngFor="let reservation of reservations" value="{{reservation.cf}}">{{reservation.nome}} -
               {{reservation.cognome}}</option>
           </select>
         </div>
         <label for="vendita">Vendita</label>
         <div class="input-group">
-          <select [(ngModel)]="selectedVendita">
-            <option value="" disabled selected="selected"></option>
+          <select [(ngModel)]="selectedVendita" name="selectedVendita">
+            <option value="" disabled selected="selected" style="display: none;"></option>
             <option *ngFor="let vendita of vendite" value="{{vendita.np}} - {{vendita.data}}">{{vendita.np}} -
               {{vendita.data}}</option>
           </select>

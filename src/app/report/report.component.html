@@ -4,8 +4,8 @@
 	<app-add-report></app-add-report>
 	<div class="input-group">
 		<button class="btn btn-primary marR2" (click)="getReportsBy()">Cerca</button>
-		<input [(ngModel)]="textSearch" class="marR2">
-		<select class="marR2" name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
+		<input #inputValore [(ngModel)]="textSearch" class="marR2">
+		<select #selectAttributo class="marR2" name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
 			<option value="" style="display: none;" selected="selected">Attributo</option>
 			<option [ngValue]="'id'">Codice</option>
 			<option [ngValue]="'etichetta'">Etichetta</option>
@@ -14,7 +14,7 @@
 			<option [ngValue]="'cf_personale'">Personale</option>
 
 		</select>
-		<button class="btn btn-primary marR2" (click)="getReports()">Reset</button>
+		<button class="btn btn-primary marR2" (click)="resetButton()">Reset</button>
 	</div>
 	<hr />
 	<table class="table table-striped">

@@ -17,6 +17,7 @@ export interface Report {
   readonly data?: Date;
   readonly dettagli?: string;
   readonly personale?: string;
+  readonly oldEtichetta?: number
 }
 
 @Injectable({
@@ -43,9 +44,13 @@ export class ReportService {
     attributo: string,
     ricerca: string
   ): Observable<Report[]> {
-    return this.httpClient.get<Report[]>(`${this.apiUrl}/${GET_REPORTS_BY}`, {
-      params: { [attributo] : ricerca },
-    });
+    if(attributo==="data"){
+      return this.httpClient.get<Report[]>(`${this.apiUrl}/${GET_ALL_REPORTS}/ricercaPer/${ricerca}`);
+    }else{
+      return this.httpClient.get<Report[]>(`${this.apiUrl}/${GET_REPORTS_BY}`, {
+        params: { [attributo] : ricerca },
+      });
+    }
   }
 
   public getAttributi(): Observable<string[]> {

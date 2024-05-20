@@ -25,7 +25,7 @@
         </div>
         <label for="prodotto">Prodotto</label>
         <div class="input-group">
-          <select [(ngModel)]="prodotto">
+          <select [(ngModel)]="prodotto" name="prodotto">
             <option value="" disabled selected="selected"></option>
             <option *ngFor="let product of products" value="{{product.id}}">{{product.nome}} - {{product.qualita}}
             </option>
@@ -33,7 +33,7 @@
         </div>
         <label for="ordineuscita">Ordine Uscita</label>
         <div class="input-group">
-          <select [(ngModel)]="ordineuscita">
+          <select [(ngModel)]="ordineuscita" name="ordineuscita">
             <option value="" disabled selected="selected"></option>
             <option *ngFor="let order of orders" value="{{order.id}}">{{order.id}}</option>
           </select>
@@ -45,7 +45,7 @@
         </div>
         <label for="posizione">Posizione</label>
         <div class="input-group">
-          <select [(ngModel)]="selectedPosition">
+          <select [(ngModel)]="selectedPosition" name="selectedPosition">
             <option value="" disabled selected="selected"></option>
             <option *ngFor="let position of positions" value="{{position.id}} - {{position.np}}">{{position.id}} -
               {{position.np}} - {{position.tipo}}</option>
@@ -53,7 +53,7 @@
         </div>
         <label for="prenotazione">Prenotazione</label>
         <div class="input-group">
-          <select [(ngModel)]="prenotazione">
+          <select [(ngModel)]="prenotazione" name="prenotazione">
             <option value="" disabled selected="selected"></option>
             <option *ngFor="let reservation of reservations" value="{{reservation.cf}}">{{reservation.nome}} -
               {{reservation.cognome}}</option>
@@ -61,7 +61,7 @@
         </div>
         <label for="vendita">Vendita</label>
         <div class="input-group">
-          <select [(ngModel)]="selectedVendita">
+          <select [(ngModel)]="selectedVendita" name="selectedVendita">
             <option value="" disabled selected="selected"></option>
             <option *ngFor="let vendita of vendite" value="{{vendita.np}} - {{vendita.data}}">{{vendita.np}} -
               {{vendita.data}}</option>

@@ -5,11 +5,13 @@ import { ProdottiService } from '../services/prodotti.service';
 import {
   Component,
   Directive,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
   QueryList,
+  ViewChild,
   ViewChildren,
 } from '@angular/core';
 
@@ -59,6 +61,8 @@ export class NgbdSortableHeader {
   styleUrl: './products.component.css',
 })
 export class ProductsComponent {
+  @ViewChild('selectAttributo', { static: false }) selectAttributo!: ElementRef;
+  @ViewChild('inputValore', { static: false }) inputValore!: ElementRef;
   @ViewChildren(NgbdSortableHeader)
   headers!: QueryList<NgbdSortableHeader>;
 
@@ -107,6 +111,10 @@ export class ProductsComponent {
   ngOnInit(): void {
     this.getProducts();
   }
-
+  resetButton() : void {
+    this.getProducts();
+    this.inputValore.nativeElement.value="";
+    this.selectAttributo.nativeElement.selectedIndex=0;
+  }
   products: Prodotto[] = [];
 }

@@ -44,7 +44,7 @@ export class DetailLabelComponent {
   }
 
   ngOnInit(): void {
-    
+      
       this.etichetteService
         .readEtichettaById(this.etichettaId ?? 0)
         .subscribe((etichette) => (this.etichetta = etichette), errore => this.messageService.add("Errore caricamento etichette."));

@@ -1,10 +1,12 @@
 import {
   Component,
   Directive,
+  ElementRef,
   EventEmitter,
   Input,
   Output,
   QueryList,
+  ViewChild,
   ViewChildren,
 } from '@angular/core';
 
@@ -100,6 +102,12 @@ export class ReportComponent {
   ngOnInit(): void {
     this.getReports();
   }
-
+  @ViewChild('selectAttributo', { static: false }) selectAttributo!: ElementRef;
+  @ViewChild('inputValore', { static: false }) inputValore!: ElementRef;
+  resetButton() : void {
+    this.getReports();
+    this.inputValore.nativeElement.value="";
+    this.selectAttributo.nativeElement.selectedIndex=0;
+  }
   reports: Report[] = [];
 }

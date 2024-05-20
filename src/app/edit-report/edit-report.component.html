@@ -8,14 +8,14 @@
 			<div class="mb-3">
 				<label for="etichetta">etichetta</label>
 				<div class="input-group">
-					<select [(ngModel)]="etichetta">
-						<option value="{{report?.etichetta}}" disabled selected="selected">{{report?.etichetta}}</option>
+					<select [(ngModel)]="etichetta" name="etichetta">
+						<option value="{{report?.etichetta}}" disabled selected="selected" style="display: none;">{{report?.etichetta}}</option>
 						<option *ngFor="let label of labels" value="{{label.id}}">{{label.id}}</option>
 					</select>
 				</div>
 				<label for="data">Data</label>
 				<div class="input-group">
-					<input id="data" type="date" placeholder="data" name="data" value="report.data"
+					<input id="data" type="date" placeholder="data" name="data" value="{{report?.data}}"
 						[(ngModel)]="data" />
 
 				</div>
@@ -26,8 +26,8 @@
 				</div>
 				<label for="personale">Personale</label>
 				<div class="input-group">
-					<select [(ngModel)]="etichetta">
-						<option value="{{report?.personale}}" disabled selected="selected">{{report?.personale}}</option>
+					<select [(ngModel)]="personale" name="personale">
+						<option value="{{report?.personale}}" disabled selected="selected" style="display: none;">{{report?.personale}}</option>
 						<option *ngFor="let staffMember of staffMembers" value="{{staffMember.cf}}">{{staffMember.cf}}</option>
 					</select>
 				</div>
@@ -48,3 +48,4 @@
 			d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z">
 		</path>
 	</svg> </button>
+

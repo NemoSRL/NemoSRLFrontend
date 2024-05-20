@@ -8,7 +8,7 @@
 			<div class="mb-3">
 				<label for="etichetta">etichetta</label>
 				<div class="input-group">
-					<select [(ngModel)]="etichetta">
+					<select [(ngModel)]="etichetta" name="etichetta">
 						<option value="" style="display: none;" disabled selected="selected"></option>
 						<option *ngFor="let label of labels" value="{{label.id}}">{{label.id}}</option>
 					</select>
@@ -24,7 +24,7 @@
 				</div>
 				<label for="personale">Personale</label>
 				<div class="input-group">
-					<select [(ngModel)]="personale">
+					<select [(ngModel)]="personale" name="personale">
 						<option value="" style="display: none;" disabled selected="selected"></option>
 						<option *ngFor="let staffMember of staffMembers" value="{{staffMember.cf}}">{{staffMember.cf}}</option>
 					</select>

@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, Input } from '@angular/core';
+import { Component, inject, TemplateRef, Input, Output, EventEmitter } from '@angular/core';
 import { Report } from '../services/report.service';
 import { ReportService } from '../services/report.service';
 import {
@@ -71,8 +71,9 @@ export class EditReportComponent {
         dettagli: this.dettagli,
         etichetta: this.etichetta,
         personale: this.personale,
+        oldEtichetta: this.report?.etichetta
       })
-      .subscribe(successo => console.log("ok"), errore => this.messageService.add("Errore modifica."));
+      .subscribe(successo => {console.log("ok");}, errore => this.messageService.add("Errore modifica."));
   }
   deleteReport(): void {
     this.modalService.dismissAll();

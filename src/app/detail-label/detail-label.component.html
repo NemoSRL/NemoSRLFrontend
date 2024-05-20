@@ -9,39 +9,42 @@
                 <label for="dataarrivo">Data Arrivo</label>
                 <div class="input-group">
                     <input id="dataarrivo" placeholder="Data Arrivo" name="dataarrivo" type="date"
-                        value="{{etichetta?.dataarrivo}}" readonly />
+                        value="{{etichetta?.dataarrivo}}" readonly disabled />
                 </div>
                 <label for="descrizione">Descrizione</label>
                 <div class="input-group">
                     <input id="descrizione" placeholder="Descrizione" name="descrizione"
-                        value="{{etichetta?.descrizione}}" readonly />
+                        value="{{etichetta?.descrizione}}" readonly disabled />
                 </div>
                 <label for="abbattimento">Abbattimento</label>
                 <div class="input-group">
-                    <input id="abbattimento" placeholder="Abbattimento" type="checkbox" name="abbattimento"
-                        value="{{etichetta?.abbattimento}}" readonly />
+                    
+                    <input  [checked]="etichetta?.abbattimento" id="abbattimento" placeholder="Abbattimento" type="checkbox" name="abbattimento" disabled
+                          />
+                         
+
                 </div>
                 <label for="peso">Peso</label>
                 <div class="input-group">
-                    <input id="peso" placeholder="Peso" name="peso" value="{{etichetta?.peso}}" readonly />
+                    <input id="peso" placeholder="Peso" name="peso" value="{{etichetta?.peso}}" readonly disabled />
                 </div>
                 <label for="prodotto">Prodotto</label>
                 <div class="input-group">
-                    <input id="prodotto" value="{{etichetta?.prodotto}}" readonly>
+                    <input id="prodotto" value="{{etichetta?.prodotto}}" readonly disabled>
                 </div>
 
                 <label for="scontoextra">Scontro Extra</label>
                 <div class="input-group">
                     <input id="scontoextra" placeholder="Sconto Extra" name="scontoextra"
-                        value="{{etichetta?.scontoextra}}" readonly />
+                        value="{{etichetta?.scontoextra}}" readonly disabled />
                 </div>
                 <label for="posizione">Posizione</label>
                 <div class="input-group">
-                    <input id="posizione" value="{{etichetta?.posizioneid}} - {{etichetta?.posizionenp}}" readonly>
+                    <input id="posizione" value="{{etichetta?.posizioneid}} - {{etichetta?.posizionenp}}" readonly disabled>
                 </div>
                 <label for="prenotazione">Prenotazione</label>
                 <div class="input-group">
-                    <input id="prenotazione" value="{{etichetta?.prenotazione}}" readonly>
+                    <input id="prenotazione" value="{{etichetta?.prenotazione}}" readonly disabled>
                 </div>
             </div>
         </form>

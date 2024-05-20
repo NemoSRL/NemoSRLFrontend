@@ -1,10 +1,12 @@
 import {
   Component,
   Directive,
+  ElementRef,
   EventEmitter,
   Input,
   Output,
   QueryList,
+  ViewChild,
   ViewChildren,
 } from '@angular/core';
 import { Etichetta, EtichetteService } from '../services/etichette.service';
@@ -95,6 +97,14 @@ export class LabelComponent {
 
   ngOnInit(): void {
     this.getLabels();
+    console.log(this.labels)
+  }
+  @ViewChild('selectAttributo', { static: false }) selectAttributo!: ElementRef;
+  @ViewChild('inputValore', { static: false }) inputValore!: ElementRef;
+  resetButton() : void {
+    this.getLabels();
+    this.inputValore.nativeElement.value="";
+    this.selectAttributo.nativeElement.selectedIndex=0;
   }
 
   labels: Etichetta[] = [];

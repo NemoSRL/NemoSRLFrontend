@@ -26,7 +26,7 @@ export interface Etichetta {
   readonly posizioneid?: string;
   readonly posizionenp?: number;
   readonly prenotazione?: string;
-  readonly posizionetipo: string;
+  readonly posizionetipo?: string;
 }
 
 @Injectable({
@@ -55,10 +55,17 @@ export class EtichetteService {
     attributo: string,
     valore: string
   ): Observable<Etichetta[]> {
-    return this.httpClient.get<Etichetta[]>(
-      `${this.apiUrl}/${GET_ETICHETTE_BY}`,
-      { params: { attributo, valore } }
-    );
+    if (attributo==="data"){
+      return this.httpClient.get<Etichetta[]>(
+        `${this.apiUrl}/${GET_ALL_ETICHETTE}/ricercaPerData/${valore}`,
+      );
+    } else{
+      return this.httpClient.get<Etichetta[]>(
+        `${this.apiUrl}/${GET_ETICHETTE_BY}`,
+        { params: { attributo, valore } }
+      );
+
+    }
   }
 
   public updateEtichetta(etichetta: Etichetta): Observable<Etichetta> {

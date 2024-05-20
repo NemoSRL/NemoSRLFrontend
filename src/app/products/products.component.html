@@ -7,8 +7,8 @@
 	<div class="input-group">
 
 		<button class="btn btn-primary marR2" (click)="getProductsBy()">Cerca</button>
-		<input class="marR2" [(ngModel)]="textSearch">
-		<select class="marR2" name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
+		<input #inputValore class="marR2" [(ngModel)]="textSearch">
+		<select #selectAttributo class="marR2" name="attributeSearch" id="attributeSearch" [(ngModel)]="attributeSearch">
 			<option value="" style="display: none;" selected="selected">Attributo</option>
 			<option [ngValue]="'id'">Codice</option>
 			<option [ngValue]="'nome'">Nome</option>
@@ -16,7 +16,7 @@
 			<option [ngValue]="'sogliaMinima'">Soglia Minima</option>
 			<option [ngValue]="'quantita'">Quantità</option>
 		</select>
-		<button class="btn btn-primary marR2" (click)="getProducts()">Reset</button>
+		<button class="btn btn-primary marR2" (click)="resetButton()">Reset</button>
 
 	</div>
 	<hr />
