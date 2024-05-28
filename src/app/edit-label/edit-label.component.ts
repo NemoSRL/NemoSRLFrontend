@@ -15,6 +15,7 @@ import {
 } from '../services/ordine-uscita.service';
 import { Vendita, VenditaService } from '../services/vendita.service';
 import { MessageService } from '../services/message.service';
+import { Slot, SlotService } from '../services/slot.service';
 
 @Component({
   selector: 'app-edit-label',
@@ -42,7 +43,8 @@ export class EditLabelComponent {
     private positionService: PosizioneService,
     private orderService: OrdineUscitaService,
     private venditaService: VenditaService,
-    private messageService : MessageService
+    private messageService : MessageService,
+    private slotService : SlotService
   ) {}
   @Input() etichetta?: Etichetta;
   @Input() etichettaId?: number = 0;
@@ -50,7 +52,7 @@ export class EditLabelComponent {
   closeResult = '';
 
   open(content: TemplateRef<any>) {
-    this.initInput()
+    
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -73,17 +75,10 @@ export class EditLabelComponent {
         return `with: ${reason}`;
     }
   }
-  selectedPosition: string = '';
+  selectedPosition = this.etichetta?.posizioneid;
+
   selectedVendita: string = '';
   editEtichette(): void {
-    if (this.selectedPosition === '') {
-      this.posizioneid = undefined;
-      this.posizionenp = undefined;
-    } else {
-      const parsedPosition = this.selectedPosition?.split(' - ');
-      this.posizioneid = parsedPosition[0];
-      this.posizionenp = parseInt(parsedPosition[1]);
-    }
     if (this.selectedVendita === '') {
       this.venditanp = undefined;
       this.venditadata = undefined;
@@ -104,10 +99,11 @@ export class EditLabelComponent {
       venditadata: this.venditadata,
       ordineUscita: this.ordineUscita,
       scontoextra: this.scontoextra ?? 0,
-      posizioneid: this.posizioneid,
-      posizionenp: this.posizionenp,
+      posizioneid: this.selectedPosition,
+      posizionenp: this.selectedSlot,
       prenotazione: this.prenotazione,
-      posizionetipo: ""
+      oldPosId: this.etichetta?.posizioneid,
+      oldPosNp: this.etichetta?.posizionenp
     };
     console.log(updatedEtichetta);
     this.etichetteService.updateEtichetta(updatedEtichetta).subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore modifica."));
@@ -157,6 +153,9 @@ export class EditLabelComponent {
     this.getPositions();
     this.getOrders();
     this.getVendite();
+    this.onPositionChange(this.etichetta?.posizioneid || "")
+    this.initInput()
+    
   }
 
   initInput() : void {
@@ -169,11 +168,21 @@ export class EditLabelComponent {
     this.venditadata= this.etichetta?.venditadata;
     this.ordineUscita=this.etichetta?.ordineUscita;
     this.scontoextra=this.etichetta?.scontoextra;
-    this.posizioneid=this.etichetta?.posizioneid;
-    this.posizionenp=this.etichetta?.posizionenp;
     this.prenotazione=this.etichetta?.prenotazione;
+    this.selectedPosition=this.etichetta?.posizioneid;
+    this.selectedSlot=this.etichetta?.posizionenp || -1;
+
   }
   closeAllModal(){
     this.modalService.dismissAll()
+  }
+  slots : Slot[] = []
+  selectedSlot = this.etichetta?.posizionenp
+  onPositionChange(positionId: string) {
+    // Filter the subPositions based on the selected positionId
+    this.slotService.getSlots(positionId, false).subscribe(
+      slots=>this.slots=slots, errore => this.messageService.add("Errore caricamento slots.")
+    )
+    
   }
 }

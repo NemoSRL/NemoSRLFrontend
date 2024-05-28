@@ -48,11 +48,14 @@
         </div>
         <label for="posizione">Posizione</label>
         <div class="input-group">
-          <select [(ngModel)]="selectedPosition" name="selectedPosition">
-            <option value="{{etichetta?.posizioneid}} - {{etichetta?.posizionenp}}" disabled selected="selected" style="display: none;">{{etichetta?.posizioneid}} - {{etichetta?.posizionenp}}</option>
-            <option *ngFor="let position of positions" value="{{position.id}} - {{position.np}}">{{position.id}} -
-              {{position.np}} - {{position.tipo}}</option>
+          <select [(ngModel)]="selectedPosition" name="selectedPosition" (ngModelChange)="onPositionChange($event)">
+            <option value="{{etichetta?.posizioneid}}" disabled selected="selected" style="display: none;">{{etichetta?.posizioneid}}</option>
+            <option *ngFor="let position of positions" value="{{position.id}}">{{position.id}}</option>
           </select>
+          <select [(ngModel)]="selectedSlot" name="selectedSlot">
+            <option value="{{etichetta?.posizionenp}}" disabled selected="selected" style="display: none;">{{etichetta?.posizionenp}}</option>
+            <option *ngFor="let slot of slots" [value]="slot.np">{{slot.np}}</option> 
+           </select> 
         </div>
         <label for="prenotazione">Prenotazione</label>
         <div class="input-group">

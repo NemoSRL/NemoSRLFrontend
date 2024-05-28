@@ -13,20 +13,21 @@ const ADD_ETICHETTA = 'etichette';
 const GET_ETICHETTA_BY_ID = 'etichette';
 
 export interface Etichetta {
-  readonly id?: number;
-  readonly dataarrivo?: Date;
-  readonly descrizione?: string;
-  readonly abbattimento?: boolean;
-  readonly peso?: number;
-  readonly prodotto?: number;
-  readonly venditanp?: number;
-  readonly venditadata?: Date;
-  readonly ordineUscita?: number;
-  readonly scontoextra?: number;
-  readonly posizioneid?: string;
-  readonly posizionenp?: number;
-  readonly prenotazione?: string;
-  readonly posizionetipo?: string;
+  id?: number;
+  dataarrivo?: Date;
+  descrizione?: string;
+  abbattimento?: boolean;
+  peso?: number;
+  prodotto?: number;
+  venditanp?: number;
+  venditadata?: Date;
+  ordineUscita?: number;
+  scontoextra?: number;
+  posizioneid?: string;
+  posizionenp?: number;
+  prenotazione?: string;
+  oldPosId?: string;
+  oldPosNp?: number;
 }
 
 @Injectable({

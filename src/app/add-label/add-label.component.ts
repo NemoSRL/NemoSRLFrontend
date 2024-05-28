@@ -14,6 +14,7 @@ import {
 } from '../services/ordine-uscita.service';
 import { Vendita, VenditaService } from '../services/vendita.service';
 import { MessageService } from '../services/message.service';
+import { Slot, SlotService } from '../services/slot.service';
 @Component({
   selector: 'app-add-label',
   templateUrl: './add-label.component.html',
@@ -31,7 +32,6 @@ export class AddLabelComponent {
   ordineuscita: number = 0;
   scontoextra: number = 0;
   posizioneid?: string='';
-  posizionenp?: number;
   prenotazione?: string;
 
   private modalService = inject(NgbModal);
@@ -43,7 +43,8 @@ export class AddLabelComponent {
     private positionService: PosizioneService,
     private orderService: OrdineUscitaService,
     private venditaService: VenditaService,
-    private messageService : MessageService
+    private messageService : MessageService,
+    private slotService : SlotService
   ) {}
   open(content: TemplateRef<any>) {
     this.modalService
@@ -60,14 +61,6 @@ export class AddLabelComponent {
   selectedPosition: string = '';
   selectedVendita: string = '';
   addEtichetta(): void {
-    if (this.selectedPosition === '') {
-      this.posizioneid = undefined;
-      this.posizionenp = undefined;
-    } else {
-      const parsedPosition = this.selectedPosition?.split(' - ');
-      this.posizioneid = parsedPosition[0];
-      this.posizionenp = parseInt(parsedPosition[1]);
-    }
     if(this.selectedVendita===''){
       this.venditanp=undefined
       this.venditadata=undefined
@@ -79,7 +72,7 @@ export class AddLabelComponent {
 
     this.etichetteService
       .addEtichetta({
-        id: -1,
+        id: undefined,
         dataarrivo: this.dataArrivo,
         descrizione: this.descrizione,
         abbattimento: this.abbattimento,
@@ -89,10 +82,9 @@ export class AddLabelComponent {
         venditadata: this.venditadata,
         ordineUscita: this.ordineuscita,
         scontoextra: this.scontoextra,
-        posizioneid: this.posizioneid,
-        posizionenp: this.posizionenp,
+        posizioneid: this.selectedPosition,
+        posizionenp: parseInt(this.selectedSlot),
         prenotazione: this.prenotazione,
-        posizionetipo: ""
       })
       .subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore inserimento."));
       console.log({id: undefined,
@@ -105,8 +97,8 @@ export class AddLabelComponent {
         venditadata: this.venditadata,
         ordineUscita: this.ordineuscita,
         scontoextra: this.scontoextra,
-        posizioneid: this.posizioneid,
-        posizionenp: this.posizionenp,
+        posizioneid: this.selectedPosition,
+        posizionenp: this.selectedSlot,
         prenotazione: this.prenotazione,})
     this.modalService.dismissAll();
   }
@@ -161,5 +153,15 @@ export class AddLabelComponent {
   }
   closeAllModal(){
     this.modalService.dismissAll()
+  }
+  slots : Slot[] = []
+  selectedSlot = '';
+  onPositionChange(positionId: string) {
+    // Filter the subPositions based on the selected positionId
+    this.slotService.getSlots(positionId, false).subscribe(
+      slots=>this.slots=slots, errore => this.messageService.add("Errore caricamento slots.")
+    )
+    // Reset the selectedSubPosition when the main position changes
+    this.selectedSlot = '';
   }
 }

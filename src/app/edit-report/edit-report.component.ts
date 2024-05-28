@@ -32,7 +32,6 @@ export class EditReportComponent {
   closeResult = '';
 
   open(content: TemplateRef<any>) {
-    this.initInput()
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -95,6 +94,7 @@ export class EditReportComponent {
   ngOnInit(): void {
     this.getLabels();
     this.getStaffMembers();
+    this.initInput()
   }
   initInput(): void {
     this.etichetta = this.report?.etichetta;
