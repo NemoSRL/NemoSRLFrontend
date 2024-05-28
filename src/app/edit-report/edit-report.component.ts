@@ -102,4 +102,7 @@ export class EditReportComponent {
     this.dettagli= this.report?.dettagli;
     this.personale = this.report?.personale;
   }
+  closeAllModal(){
+    this.modalService.dismissAll()
+  }
 }

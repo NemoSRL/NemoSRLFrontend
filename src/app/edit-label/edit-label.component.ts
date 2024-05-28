@@ -173,4 +173,7 @@ export class EditLabelComponent {
     this.posizionenp=this.etichetta?.posizionenp;
     this.prenotazione=this.etichetta?.prenotazione;
   }
+  closeAllModal(){
+    this.modalService.dismissAll()
+  }
 }

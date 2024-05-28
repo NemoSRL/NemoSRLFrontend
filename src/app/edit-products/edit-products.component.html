@@ -34,9 +34,37 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn-danger btn"
-			(click)="deleteProduct();modal.close('Delete click')">Elimina</button>
+			(click)="open(confermaDelete)">Elimina</button>
 		<button type="button" class="btn btn-primary"
-			(click)="editProduct(); modal.close('Save click')">Modifica</button>
+			(click)="open(confermaEdit)">Modifica</button>
+	</div>
+</ng-template>
+
+<ng-template #confermaEdit let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Sicuro/a</h4>
+	</div>
+	<div class="modal-body">
+		<div class="modal-body" style="float: right;">
+			<button type="button " class="btn btn-primary"
+				(click)="editProduct(); closeAllModal();">Conferma Modifica</button>
+				<button type="button " class="btn btn-danger"
+				(click)="modal.close()">Non confermare</button>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template #confermaDelete let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Sicuro/a</h4>
+	</div>
+	<div class="modal-body">
+		<div class="modal-body" style="float: right;">
+			<button type="button " class="btn btn-primary"
+				(click)="deleteProduct();closeAllModal();">Conferma Eliminazione</button>
+				<button type="button " class="btn btn-danger"
+				(click)="modal.close()">Non confermare</button>
+		</div>
 	</div>
 </ng-template>
 

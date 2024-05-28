@@ -75,4 +75,8 @@ export class EditProductsComponent {
     this.qntMinima = this.product?.sogliaminima || 0;
     this.qnt = this.product?.quantita || 0;
   }
+
+  closeAllModal(){
+    this.modalService.dismissAll()
+  }
 }

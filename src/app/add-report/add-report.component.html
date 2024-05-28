@@ -34,7 +34,21 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-primary"
-			(click)="addReport(); modal.close('Save click')">Aggiungi</button>
+			(click)="open(conferma)">Aggiungi</button>
+	</div>
+</ng-template>
+
+<ng-template #conferma let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Sicuro/a</h4>
+	</div>
+	<div class="modal-body">
+		<div class="modal-body" style="float: right;">
+			<button type="button " class="btn btn-primary"
+				(click)="addReport();closeAllModals();">Conferma Aggiunta</button>
+				<button type="button " class="btn btn-danger"
+				(click)="modal.close()">Non confermare</button>
+		</div>
 	</div>
 </ng-template>
 

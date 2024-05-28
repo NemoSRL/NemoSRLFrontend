@@ -32,6 +32,9 @@ export class AddProductsComponent {
         }
       );
   }
+  closeAllModals(){
+    this.modalService.dismissAll()
+  }
 
   addProduct(): void {
     //console.log({id:-1, nome:this.nome, qualita: this.qualita, sogliaminima : this.qntMinima, quantita : this.qnt})

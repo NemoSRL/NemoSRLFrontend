@@ -79,4 +79,8 @@ export class AddReportComponent {
     this.getLabels();
     this.getStaffMembers();
   }
+
+  closeAllModals(){
+    this.modalService.dismissAll()
+  }
 }

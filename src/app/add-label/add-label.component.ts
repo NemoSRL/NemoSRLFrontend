@@ -159,4 +159,7 @@ export class AddLabelComponent {
     this.getOrders();
     this.getVendite();
   }
+  closeAllModal(){
+    this.modalService.dismissAll()
+  }
 }
