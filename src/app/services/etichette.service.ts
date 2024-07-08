@@ -19,15 +19,13 @@ export interface Etichetta {
   abbattimento?: boolean;
   peso?: number;
   prodotto?: number;
-  venditanp?: number;
-  venditadata?: Date;
-  ordineUscita?: number;
   scontoextra?: number;
   posizioneid?: string;
   posizionenp?: number;
-  prenotazione?: string;
-  oldPosId?: string;
-  oldPosNp?: number;
+  posizionetipo?:string;
+  posizioneluogo?:string;
+  oldPosizioneId?: string;
+  oldPosizioneNp?: number;
 }
 
 @Injectable({

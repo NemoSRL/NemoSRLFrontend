@@ -12,10 +12,7 @@
       <option [ngValue]="'peso'">Peso</option>
       <option [ngValue]="'descrizione'">Descrizione</option>
       <option [ngValue]="'data'">Data Arrivo</option>
-      <option [ngValue]="'ordine'">Ordine</option>
-      <option [ngValue]="'prenotazione'">Prenotazione</option>
       <option [ngValue]="'posizione'">Posizione</option>
-      <option [ngValue]="'vendita'">Vendita</option>
 
     </select>
     <button class="btn btn-primary marR2" (click)="resetButton()">Reset</button>
@@ -33,9 +30,6 @@
         <th scope="col">Descrizione</th>
         <th scope="col">Data Arrivo</th>
         <th scope="col">Abbattimento</th>
-        <th scope="col">Ordine</th>
-        <th scope="col">Prenotazione</th>
-        <th scope="col">Vendita</th>
         <th scope="col">Sconto Extra</th>
       </tr>
     </thead>
@@ -52,15 +46,12 @@
           <app-detail-product [productId]="label.prodotto"></app-detail-product>
         </td>
 
-        <td>{{ label.posizioneid }} - {{label.posizionenp}}</td>
+        <td>{{ label.posizioneid }} - {{label.posizionenp}} - {{label.posizionetipo}} - {{label.posizioneluogo}}</td>
         
         <td>{{ label.peso}}</td>
         <td>{{ label.descrizione }}</td>
         <td>{{ label.dataarrivo }}</td>
         <td>{{label.abbattimento }}</td>
-        <td>{{ label.ordineUscita}}</td>
-        <td>{{ label.prenotazione}}</td>
-        <td>{{ label.venditadata }} - {{ label.venditanp }}</td>
         <td>{{ label.scontoextra }}</td>
       </tr>
 

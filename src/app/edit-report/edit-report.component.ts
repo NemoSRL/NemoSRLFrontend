@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, inject, TemplateRef, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { Report } from '../services/report.service';
 import { ReportService } from '../services/report.service';
 import {
@@ -15,6 +15,8 @@ import { MessageService } from '../services/message.service';
   styleUrl: './edit-report.component.css',
 })
 export class EditReportComponent {
+  
+  
   etichetta?: number;
   data?: Date;
   dettagli?: string;
@@ -54,15 +56,13 @@ export class EditReportComponent {
         return `with: ${reason}`;
     }
   }
+  spostamento?: string;
+  spostato?: boolean;
   editReport(): void {
     this.modalService.dismissAll();
-    console.log({
-        np: this.report?.np,
-        data: this.data,
-        dettagli: this.dettagli,
-        etichetta: this.etichetta,
-        personale: this.personale,
-      })
+    if(this.spostamento === ""){
+      this.spostato = undefined;
+    } 
     this.reportService
       .updateReport({
         np: this.report?.np,
@@ -70,7 +70,9 @@ export class EditReportComponent {
         dettagli: this.dettagli,
         etichetta: this.etichetta,
         personale: this.personale,
-        oldEtichetta: this.report?.etichetta
+        oldEtichetta: this.report?.etichetta,
+        tipo:this.spostamento,
+        spostato:this.spostato,
       })
       .subscribe(successo => {console.log("ok");}, errore => this.messageService.add("Errore modifica."));
   }
@@ -101,8 +103,18 @@ export class EditReportComponent {
     this.data = this.report?.data;
     this.dettagli= this.report?.dettagli;
     this.personale = this.report?.personale;
+    this.onSpostamentoChange(this.report?.tipo)
   }
   closeAllModal(){
     this.modalService.dismissAll()
+  }
+  spostatoDiv?: boolean
+  onSpostamentoChange(spostamento?: string) {
+    if(spostamento==="" || spostamento===null){
+      this.spostatoDiv=false;
+      this.spostato=false;
+    } else{
+      this.spostatoDiv=true
+    }
   }
 }

@@ -23,14 +23,12 @@ import { Slot, SlotService } from '../services/slot.service';
   styleUrl: './edit-label.component.css',
 })
 export class EditLabelComponent {
+  spostamento?: string;
   dataarrivo?: Date = new Date('2000-00-00');
   descrizione?: string = '';
   abbattimento?: boolean = false;
   peso?: number = -1;
   prodotto?: number ;
-  venditanp?: number = -1;
-  venditadata?: Date = new Date('2000-00-00');
-  ordineUscita?: number = -1;
   scontoextra?: number = -1;
   posizioneid?: string = '';
   posizionenp?: number = -1;
@@ -39,10 +37,9 @@ export class EditLabelComponent {
   constructor(
     private etichetteService: EtichetteService,
     private productService: ProdottiService,
-    private clientService: ClienteService,
+    
     private positionService: PosizioneService,
-    private orderService: OrdineUscitaService,
-    private venditaService: VenditaService,
+    
     private messageService : MessageService,
     private slotService : SlotService
   ) {}
@@ -79,14 +76,7 @@ export class EditLabelComponent {
 
   selectedVendita: string = '';
   editEtichette(): void {
-    if (this.selectedVendita === '') {
-      this.venditanp = undefined;
-      this.venditadata = undefined;
-    } else {
-      const parsedVendita = this.selectedVendita?.split(' - ');
-      this.venditanp = parseInt(parsedVendita[0]);
-      this.venditadata = new Date(parsedVendita[1]);
-    }
+   
 
     const updatedEtichetta: Etichetta = {
       id: this.etichetta?.id ?? -1,
@@ -95,15 +85,11 @@ export class EditLabelComponent {
       abbattimento: this.abbattimento,
       peso: this.peso,
       prodotto: this.prodotto,
-      venditanp: this.venditanp,
-      venditadata: this.venditadata,
-      ordineUscita: this.ordineUscita,
       scontoextra: this.scontoextra ?? 0,
       posizioneid: this.selectedPosition,
       posizionenp: this.selectedSlot,
-      prenotazione: this.prenotazione,
-      oldPosId: this.etichetta?.posizioneid,
-      oldPosNp: this.etichetta?.posizionenp
+      oldPosizioneId: this.etichetta?.posizioneid,
+      oldPosizioneNp: this.etichetta?.posizionenp
     };
     console.log(updatedEtichetta);
     this.etichetteService.updateEtichetta(updatedEtichetta).subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore modifica."));
@@ -121,12 +107,7 @@ export class EditLabelComponent {
       .subscribe((products) => (this.products = products), errore => this.messageService.add("Errore caricamento prodotti."));
   }
 
-  reservations: Cliente[] = [];
-  private getClients(): void {
-    this.clientService
-      .getAllClienti()
-      .subscribe((reservations) => (this.reservations = reservations), errore => this.messageService.add("Errore caricamento personale."));
-  }
+
 
   positions: Posizione[] = [];
   private getPositions(): void {
@@ -134,25 +115,12 @@ export class EditLabelComponent {
       .getAllPosizioni()
       .subscribe((positions) => (this.positions = positions), errore => this.messageService.add("Errore caricamento posizioni."));
   }
-  orders: OrdineInUscita[] = [];
-  private getOrders(): void {
-    this.orderService
-      .getAllOrdini()
-      .subscribe((orders) => (this.orders = orders), errore => this.messageService.add("Errore caricamento ordini."));
-  }
+ 
 
-  vendite: Vendita[] = [];
-  private getVendite(): void {
-    this.venditaService
-      .getAllVendita()
-      .subscribe((vendite) => (this.vendite = vendite));
-  }
+
   ngOnInit(): void {
     this.getProducts();
-    this.getClients();
     this.getPositions();
-    this.getOrders();
-    this.getVendite();
     this.onPositionChange(this.etichetta?.posizioneid || "")
     this.initInput()
     
@@ -164,11 +132,7 @@ export class EditLabelComponent {
     this.abbattimento= this.etichetta?.abbattimento;
     this.peso= this.etichetta?.peso;
     this.prodotto= this.etichetta?.prodotto;
-    this.venditanp= this.etichetta?.venditanp;
-    this.venditadata= this.etichetta?.venditadata;
-    this.ordineUscita=this.etichetta?.ordineUscita;
     this.scontoextra=this.etichetta?.scontoextra;
-    this.prenotazione=this.etichetta?.prenotazione;
     this.selectedPosition=this.etichetta?.posizioneid;
     this.selectedSlot=this.etichetta?.posizionenp || -1;
 

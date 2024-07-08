@@ -24,8 +24,8 @@ const rotate: { [key: string]: SortDirection } = {
 };
 
 const compare = (
-  v1: string | number | Date | undefined,
-  v2: string | number | Date | undefined
+  v1: string | number | Date | undefined | boolean,
+  v2: string | number | Date | undefined | boolean
 ) => ((v1 ?? 0) < (v2 ?? 0) ? -1 : (v1 ?? 0) > (v2 ?? 0) ? 1 : 0);
 
 export interface SortEvent {

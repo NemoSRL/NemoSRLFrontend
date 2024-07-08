@@ -39,10 +39,10 @@ export class AddLabelComponent {
   constructor(
     private etichetteService: EtichetteService,
     private productService: ProdottiService,
-    private clientService: ClienteService,
+    
     private positionService: PosizioneService,
-    private orderService: OrdineUscitaService,
-    private venditaService: VenditaService,
+    
+    
     private messageService : MessageService,
     private slotService : SlotService
   ) {}
@@ -59,16 +59,8 @@ export class AddLabelComponent {
       );
   }
   selectedPosition: string = '';
-  selectedVendita: string = '';
   addEtichetta(): void {
-    if(this.selectedVendita===''){
-      this.venditanp=undefined
-      this.venditadata=undefined
-    } else{
-      const parsedVendita = this.selectedVendita?.split(' - ');
-      this.venditanp = parseInt(parsedVendita[0])
-      this.venditadata = new Date(parsedVendita[1])
-    }
+    
 
     this.etichetteService
       .addEtichetta({
@@ -78,28 +70,15 @@ export class AddLabelComponent {
         abbattimento: this.abbattimento,
         peso: this.peso,
         prodotto: this.prodotto,
-        venditanp: this.venditanp,
-        venditadata: this.venditadata,
-        ordineUscita: this.ordineuscita,
         scontoextra: this.scontoextra,
         posizioneid: this.selectedPosition,
         posizionenp: parseInt(this.selectedSlot),
-        prenotazione: this.prenotazione,
+        oldPosizioneId: this.selectedPosition,
+        oldPosizioneNp: parseInt(this.selectedSlot)
+        
       })
       .subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore inserimento."));
-      console.log({id: undefined,
-        dataarrivo: this.dataArrivo,
-        descrizione: this.descrizione,
-        abbattimento: this.abbattimento,
-        peso: this.peso,
-        prodotto: this.prodotto,
-        venditanp: this.venditanp,
-        venditadata: this.venditadata,
-        ordineUscita: this.ordineuscita,
-        scontoextra: this.scontoextra,
-        posizioneid: this.selectedPosition,
-        posizionenp: this.selectedSlot,
-        prenotazione: this.prenotazione,})
+      
     this.modalService.dismissAll();
   }
   private getDismissReason(reason: any): string {
@@ -119,12 +98,8 @@ export class AddLabelComponent {
       .getAllProdotti()
       .subscribe((products) => (this.products = products), errore => this.messageService.add("Errore caricamento prodotti."));
   }
-  reservations: Cliente[] = [];
-  private getClients(): void {
-    this.clientService
-      .getAllClienti()
-      .subscribe((reservations) => (this.reservations = reservations), errore => this.messageService.add("Errore caricamento personale."));
-  }
+  
+  
 
   positions: Posizione[] = [];
   private getPositions(): void {
@@ -132,24 +107,14 @@ export class AddLabelComponent {
       .getAllPosizioni()
       .subscribe((positions) => (this.positions = positions), errore => this.messageService.add("Errore caricamento posizioni."));
   }
-  orders: OrdineInUscita[] = [];
-  private getOrders(): void {
-    this.orderService
-      .getAllOrdini()
-      .subscribe((orders) => (this.orders = orders), errore => this.messageService.add("Errore caricamento ordini."));
-  }
+  
 
-  vendite: Vendita[] = [];
-  private getVendite(): void {
-    this.venditaService.getAllVendita()
-    .subscribe(vendite=>(this.vendite=vendite), errore => this.messageService.add("Errore caricamento vendite."))
-  }
+  
   ngOnInit(): void {
     this.getProducts();
-    this.getClients();
+    
     this.getPositions();
-    this.getOrders();
-    this.getVendite();
+    
   }
   closeAllModal(){
     this.modalService.dismissAll()

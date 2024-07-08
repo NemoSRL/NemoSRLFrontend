@@ -19,7 +19,8 @@ export class AddReportComponent {
   data?: Date;
   dettagli?: string;
   personale?: string;
-
+  spostamento?: string;
+  spostato?: boolean;
   labels: Etichetta[] = [];
   private modalService = inject(NgbModal);
   closeResult = '';
@@ -43,6 +44,12 @@ export class AddReportComponent {
   }
 
   addReport(): void {
+    
+    if(this.spostamento === "" || this.spostamento === null || this.spostamento === undefined){
+      this.spostato = undefined;
+    } else{
+      this.spostato = false;
+    }
     this.reportService
       .addReport({
         np: -1,
@@ -50,6 +57,8 @@ export class AddReportComponent {
         dettagli: this.dettagli,
         etichetta: this.etichetta,
         personale: this.personale,
+        tipo: this.spostamento,
+        spostato: this.spostato
       })
       .subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore inserimento."));
     this.modalService.dismissAll();
@@ -83,4 +92,6 @@ export class AddReportComponent {
   closeAllModals(){
     this.modalService.dismissAll()
   }
+
+
 }

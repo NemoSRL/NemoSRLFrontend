@@ -34,13 +34,7 @@
             </option>
           </select>
         </div>
-        <label for="ordineuscita">Ordine Uscita</label>
-        <div class="input-group">
-          <select [(ngModel)]="ordineUscita" name="ordineUscita">
-            <option value="{{etichetta?.ordineUscita}}" disabled selected="selected" style="display: none;">{{etichetta?.ordineUscita}}</option>
-            <option *ngFor="let order of orders" value="{{order.id}}">{{order.id}}</option>
-          </select>
-        </div>
+        
         <label for="scontoextra">Scontro Extra</label>
         <div class="input-group">
           <input id="scontoextra" placeholder="Sconto Extra" name="scontoextra" value="{{etichetta?.scontoextra}}"
@@ -57,22 +51,8 @@
             <option *ngFor="let slot of slots" [value]="slot.np">{{slot.np}}</option> 
            </select> 
         </div>
-        <label for="prenotazione">Prenotazione</label>
-        <div class="input-group">
-          <select [(ngModel)]="prenotazione" name="prenotazione">
-            <option value="{{etichetta?.prenotazione}}" disabled selected="selected" style="display: none;">{{etichetta?.prenotazione}}</option>
-            <option *ngFor="let reservation of reservations" value="{{reservation.cf}}">{{reservation.nome}} -
-              {{reservation.cognome}}</option>
-          </select>
-        </div>
-        <label for="vendita">Vendita</label>
-        <div class="input-group">
-          <select [(ngModel)]="selectedVendita" name="selectedVendita">
-            <option value="" disabled selected="selected" style="display: none;"></option>
-            <option *ngFor="let vendita of vendite" value="{{vendita.np}} - {{vendita.data}}">{{vendita.np}} -
-              {{vendita.data}}</option>
-          </select>
-        </div>
+        
+        
       </div>
     </form>
   </div>

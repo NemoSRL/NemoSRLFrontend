@@ -31,6 +31,23 @@
 						<option *ngFor="let staffMember of staffMembers" value="{{staffMember.cf}}">{{staffMember.cf}}</option>
 					</select>
 				</div>
+				<label for="spostamento">Spostamento</label>
+				<div class="input-group">
+					<select [(ngModel)]="spostamento" name="spostamento" (ngModelChange)="onSpostamentoChange($event)">
+						<option value=""   selected="selected"></option>
+						<option  value="Banco congelato">Banco congelato</option>
+						<option value="Banco refrigerato">Banco refrigerato</option>
+						<option value="Cella negativo">Cella negativo</option>
+						<option value="Cella frigo">Cella frigo</option>
+					</select>
+				</div>
+				 <div #spostatoDiv *ngIf="spostatoDiv">
+					<label for="spostato">Spostato</label>
+					<div class="input-group">
+						<input name="spostato" type="checkbox" placeholder="spostato" name="spostato" [(ngModel)]="spostato" />
+					</div>
+				 </div>
+				 
 			</div>
 		</form>
 	</div>
