@@ -63,6 +63,7 @@ export class EditReportComponent {
     if(this.spostamento === ""){
       this.spostato = undefined;
     } 
+    if(this.spostamento === "") this.spostamento = undefined
     this.reportService
       .updateReport({
         np: this.report?.np,
@@ -103,6 +104,7 @@ export class EditReportComponent {
     this.data = this.report?.data;
     this.dettagli= this.report?.dettagli;
     this.personale = this.report?.personale;
+    this.spostamento = this.report?.tipo
     this.onSpostamentoChange(this.report?.tipo)
   }
   closeAllModal(){

@@ -27,6 +27,7 @@ body {
 
   .sidebar .funzionante:hover {
     color: #adb5bd;
+    cursor: pointer;
   }
   
   .sidebar .collapse {

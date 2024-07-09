@@ -3,7 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
   isApriNavVis = true;
@@ -12,31 +12,23 @@ export class NavbarComponent {
   @ViewChild('apriNav', { static: false }) apriNav!: ElementRef;
 
   toggleNav(visibile : boolean) : void {
-    if(visibile)
+    if (visibile)
       this.apriNav.nativeElement.style.display = 'none';
     else
       this.apriNav.nativeElement.style.display = 'block';
   }
 
-
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
-    this.toggleNav(this.isApriNavVis)
+    this.toggleNav(this.isApriNavVis);
     this.isApriNavVis = !this.isApriNavVis;
-    console.log("ciao")
   }
 
-  showSubMenu(menuItem: string) {
-    this.activeSubMenu = menuItem;
-  }
-
-  hideSubMenu(menuItem: string) {
+  toggleSubMenu(menuItem: string) {
     if (this.activeSubMenu === menuItem) {
       this.activeSubMenu = null;
+    } else {
+      this.activeSubMenu = menuItem;
     }
-  }
-
-  keepSubMenuOpen(menuItem: string) {
-    this.activeSubMenu = menuItem;
   }
 }

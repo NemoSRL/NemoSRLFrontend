@@ -1,31 +1,28 @@
 <div class="nav-container">
+  <button class="btn btn-secondary" #apriNav (click)="toggleSidebar()">
+    <svg style="margin-bottom: 3px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
+      viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+    </svg>Menu
+  </button>
 
-    <button class="btn btn-secondary" #apriNav (click)="toggleSidebar()">
-      <svg style="margin-bottom: 3px;"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
-        viewBox="0 0 16 16">
-        <path fill-rule="evenodd"
-          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-      </svg>Menu
-    </button>
-  
   <div class="sidebar" [class.active]="isSidebarOpen">
     <button class="btn btn-secondary" (click)="toggleSidebar()">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
       </svg>
     </button>
-    <h2 class="text-white">Menu</h2> 
+    <h2 class="text-white">Menu</h2>
     <nav class="nav flex-column">
       <div>
         <a class="nav-link funzionante" routerLink="/" (click)="toggleSidebar()">Home</a>
       </div>
       <div>
-        <span class="nav-link" href="#" (mouseover)="showSubMenu('item1')"
-          (mouseleave)="hideSubMenu('item1')">Prodotti</span>
-        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item1'" (mouseover)="keepSubMenuOpen('item1')"
-          (mouseleave)="hideSubMenu('item1')">
+        <span class="nav-link funzionante" href="#" (click)="toggleSubMenu('item1')">Prodotti</span>
+        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item1'">
           <nav class="nav flex-column">
-            <a class="nav-link funzionante" routerLink="/products" (click)="toggleSidebar()" >Prodotti</a>
+            <a class="nav-link funzionante" routerLink="/products" (click)="toggleSidebar()">Prodotti</a>
             <a class="nav-link funzionante" routerLink="/reports" (click)="toggleSidebar()">Reports</a>
             <a class="nav-link funzionante" routerLink="/labels" (click)="toggleSidebar()">Etichette</a>
             <span class="nav-link">Posizioni</span>
@@ -36,10 +33,8 @@
         </div>
       </div>
       <div>
-        <span class="nav-link" href="#" (mouseover)="showSubMenu('item2')"
-          (mouseleave)="hideSubMenu('item2')">Fornitori</span>
-        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item2'" (mouseover)="keepSubMenuOpen('item2')"
-          (mouseleave)="hideSubMenu('item2')">
+        <span class="nav-link funzionante" href="#" (click)="toggleSubMenu('item2')">Fornitori</span>
+        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item2'">
           <nav class="nav flex-column">
             <span class="nav-link" href="#">Fornitori</span>
             <span class="nav-link" href="#">Accordo di Fornitura</span>
@@ -51,10 +46,8 @@
         </div>
       </div>
       <div>
-        <span class="nav-link" href="#" (mouseover)="showSubMenu('item3')"
-          (mouseleave)="hideSubMenu('item3')">Clienti</span>
-        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item3'" (mouseover)="keepSubMenuOpen('item3')"
-          (mouseleave)="hideSubMenu('item3')">
+        <span class="nav-link funzionante" href="#" (click)="toggleSubMenu('item3')">Clienti</span>
+        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item3'">
           <nav class="nav flex-column">
             <span class="nav-link" href="#">Clienti</span>
             <span class="nav-link" href="#">Prenotazioni</span>
@@ -69,10 +62,8 @@
         </div>
       </div>
       <div>
-        <span class="nav-link" href="#" (mouseover)="showSubMenu('item5')"
-          (mouseleave)="hideSubMenu('item5')">Promozioni</span>
-        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item5'" (mouseover)="keepSubMenuOpen('item5')"
-          (mouseleave)="hideSubMenu('item5')">
+        <span class="nav-link funzionante" href="#" (click)="toggleSubMenu('item5')">Promozioni</span>
+        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item5'">
           <nav class="nav flex-column">
             <span class="nav-link" href="#">Offerte</span>
             <span class="nav-link" href="#">Promozioni</span>
@@ -81,10 +72,8 @@
         </div>
       </div>
       <div>
-        <span class="nav-link" href="#" (mouseover)="showSubMenu('item6')" (mouseleave)="hideSubMenu('item6')">Mercato
-          Esterno</span>
-        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item6'" (mouseover)="keepSubMenuOpen('item6')"
-          (mouseleave)="hideSubMenu('item6')">
+        <span class="nav-link funzionante" href="#" (click)="toggleSubMenu('item6')">Mercato Esterno</span>
+        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item6'">
           <nav class="nav flex-column">
             <span class="nav-link" href="#">Concorrenza</span>
             <span class="nav-link" href="#">Offerte Concorrenza</span>
@@ -95,24 +84,18 @@
         </div>
       </div>
       <div>
-        <span class="nav-link" href="#" (mouseover)="showSubMenu('item7')"
-          (mouseleave)="hideSubMenu('item7')">Vendite</span>
-        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item7'" (mouseover)="keepSubMenuOpen('item7')"
-          (mouseleave)="hideSubMenu('item7')">
+        <span class="nav-link funzionante" href="#" (click)="toggleSubMenu('item7')">Vendite</span>
+        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item7'">
           <nav class="nav flex-column">
             <span class="nav-link" href="#">Vendite</span>
-
           </nav>
         </div>
       </div>
       <div>
-        <span class="nav-link" href="#" (mouseover)="showSubMenu('item7')"
-          (mouseleave)="hideSubMenu('item7')">Altro</span>
-        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item7'" (mouseover)="keepSubMenuOpen('item7')"
-          (mouseleave)="hideSubMenu('item7')">
+        <span class="nav-link funzionante" href="#" (click)="toggleSubMenu('item8')">Altro</span>
+        <div class="collapse sub-menu" [class.show]="activeSubMenu === 'item8'">
           <nav class="nav flex-column">
             <span class="nav-link" href="#">Personale</span>
-
           </nav>
         </div>
       </div>
