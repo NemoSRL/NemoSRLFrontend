@@ -73,3 +73,9 @@ color: white;
   padding: 0;
   
 }
+
+
+.required-asterisk {
+  color: red;
+  font-size: small;
+}

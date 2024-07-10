@@ -27,7 +27,11 @@ export class EditProductsComponent {
   private modalService = inject(NgbModal);
   closeResult = '';
 
-  open(content: TemplateRef<any>) {
+  open(content: TemplateRef<any>, templateName : string) {
+    if(templateName === "main"){
+      this.initInput();
+      
+    }
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -89,14 +93,13 @@ export class EditProductsComponent {
     },  errore => this.messageService.add("Errore eliminazione."));
   }
 
-  ngOnInit() : void {
-    console.log(this.product?.sogliaminima)
-    console.log(this.product)
+  initInput() : void {
+    
     this.nome = this.product?.nome || "";
-    this.qualita = this.product?.qualita || "non trovata";
+    this.qualita = this.product?.qualita || "";
     this.qntMinima = this.product?.sogliaminima || 0;
     this.qnt = this.product?.quantita || 0;
-    console.log(this.qualita)
+    
   }
 
   closeAllModal(){

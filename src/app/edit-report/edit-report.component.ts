@@ -34,7 +34,11 @@ export class EditReportComponent {
   private modalService = inject(NgbModal);
   closeResult = '';
 
-  open(content: TemplateRef<any>) {
+  open(content: TemplateRef<any>, templateName : string) {
+    if(templateName === "main"){
+      this.ngOnInit();
+      
+    }
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(

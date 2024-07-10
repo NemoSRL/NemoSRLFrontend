@@ -6,23 +6,23 @@
 	<div class="modal-body">
 		<form>
 			<div class="mb-3">
-				<label for="etichetta">etichetta</label>
+				<label for="etichetta"><span class="required-asterisk">*</span>etichetta</label>
 				<div class="input-group">
 					<select [(ngModel)]="etichetta" name="etichetta">
 						<option value="" style="display: none;" disabled selected="selected"></option>
 						<option *ngFor="let label of labels" value="{{label.id}}">{{label.id}}</option>
 					</select>
 				</div>
-				<label for="data">Data</label>
+				<label for="data"><span class="required-asterisk">*</span>Data</label>
 				<div class="input-group">
 					<input id="data" type="date" placeholder="data" name="data" [(ngModel)]="data" />
 
 				</div>
-				<label for="dettagli">Dettagli</label>
+				<label for="dettagli"><span class="required-asterisk">*</span>Dettagli</label>
 				<div class="input-group">
 					<input id="dettagli" placeholder="dettagli" name="dettagli" [(ngModel)]="dettagli" />
 				</div>
-				<label for="personale">Personale</label>
+				<label for="personale"><span class="required-asterisk">*</span>Personale</label>
 				<div class="input-group">
 					<select [(ngModel)]="personale" name="personale">
 						<option value="" style="display: none;" disabled selected="selected"></option>
@@ -46,7 +46,7 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-primary"
-			(click)="open(conferma)">Aggiungi</button>
+			(click)="open(conferma, 'conferma')">Aggiungi</button>
 	</div>
 </ng-template>
 
@@ -64,6 +64,6 @@
 	</div>
 </ng-template>
 
-<button class="btn btn-lg btn-primary" (click)="open(content)">Aggiungi</button>
+<button class="btn btn-lg btn-primary" (click)="open(content, 'main')">Aggiungi</button>
 
 <hr />

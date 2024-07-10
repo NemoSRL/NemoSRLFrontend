@@ -44,7 +44,11 @@ export class AddLabelComponent {
     private messageService : MessageService,
     private slotService : SlotService
   ) {}
-  open(content: TemplateRef<any>) {
+  open(content: TemplateRef<any>, templateName : string) {
+    if(templateName === "main"){
+      this.ngOnInit();
+      this.resetInput();
+    }
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -55,6 +59,17 @@ export class AddLabelComponent {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
       );
+  }
+
+  resetInput() : void {
+    this.id = 0;
+    this.dataArrivo = new Date();
+    this.descrizione = '';
+    this.abbattimento = true;
+    this.peso = 0;
+    this.prodotto = 0;
+    this.scontoextra = 0;
+    this.posizioneid ='';
   }
   selectedPosition: string = '';
   addEtichetta(): void {
@@ -94,6 +109,7 @@ export class AddLabelComponent {
       }, errore => this.messageService.add("Errore inserimento."));
       
     this.modalService.dismissAll();
+    
   }
   private getDismissReason(reason: any): string {
     switch (reason) {

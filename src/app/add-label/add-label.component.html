@@ -6,11 +6,11 @@
   <div class="modal-body">
     <form>
       <div class="mb-3">
-        <label for="dataArrivo">DataArrivo</label>
+        <label for="dataArrivo"><span class="required-asterisk">*</span>DataArrivo</label>
         <div class="input-group">
           <input id="dataArrivo" placeholder="DataArrivo" name="DataArrivo" [(ngModel)]="dataArrivo" type="date"/>
         </div>
-        <label for="descrizione">Descrizione</label>
+        <label for="descrizione"><span class="required-asterisk">*</span>Descrizione</label>
         <div class="input-group">
           <input id="descrizione" placeholder="Descrizione" name="descriozione" [(ngModel)]="descrizione" />
 
@@ -19,11 +19,11 @@
         <div class="input-group">
           <input id="abbattimento" type="checkbox" placeholder="Abbattimento" name="abbattimento" [(ngModel)]="abbattimento" />
         </div>
-        <label for="peso">Peso</label>
+        <label for="peso"><span class="required-asterisk">*</span>Peso</label>
         <div class="input-group">
           <input id="peso" placeholder="Peso" name="peso" [(ngModel)]="peso" />
         </div>
-        <label for="prodotto">Prodotto</label>
+        <label for="prodotto"><span class="required-asterisk">*</span>Prodotto</label>
         <div class="input-group">
           <select [(ngModel)]="prodotto" name="prodotto">
             <option value="" disabled selected="selected"></option>
@@ -32,12 +32,12 @@
           </select>
         </div>
         
-
-        <label for="scontoextra">Sconto Extra</label>
+        
+        <label for="scontoextra"><span class="required-asterisk">*</span>Sconto Extra</label>
         <div class="input-group">
-          <input id="scontoextra" placeholder="Sconto Extra" name="scontoextra" [(ngModel)]="scontoextra" />
+          <input id="scontoextra"  placeholder="Sconto Extra" name="scontoextra" [(ngModel)]="scontoextra" />
         </div>
-        <label for="posizione">Posizione</label>
+        <label for="posizione"><span class="required-asterisk">*</span>Posizione</label>
         <div class="input-group">
           <select [(ngModel)]="selectedPosition" name="selectedPosition" (ngModelChange)="onPositionChange($event)">
             <option value="" disabled selected="selected"></option>
@@ -54,7 +54,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="open(conferma)">Aggiungi</button>
+    <button type="button" class="btn btn-primary" (click)="open(conferma, 'conferma')">Aggiungi</button>
   </div>
 </ng-template>
 <ng-template #conferma let-modal>
@@ -70,6 +70,6 @@
 		</div>
 	</div>
 </ng-template>
-<button class="btn btn-lg btn-primary" (click)="open(content)">Aggiungi</button>
+<button class="btn btn-lg btn-primary" (click)="open(content, 'main')">Aggiungi</button>
 
 <hr />

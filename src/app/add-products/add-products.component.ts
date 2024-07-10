@@ -18,7 +18,10 @@ export class AddProductsComponent {
 
   constructor(private modalService: NgbModal, private productService: ProdottiService, private messageService: MessageService) {}
 
-  open(content: TemplateRef<any>) {
+  open(content: TemplateRef<any>, templateName : string) {
+    if(templateName === "main"){
+      this.resetInput()
+    }
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
@@ -30,7 +33,12 @@ export class AddProductsComponent {
   }
 
 
-
+  resetInput(): void {
+    this.nome = '';
+    this.qualita = '';
+    this.qntMinima = 0;
+    this.qnt= 0;
+  }
   addProduct(): void {
     if(!(popolato(this.nome) && popolato(this.qualita) && popolato(this.qnt) && popolato(this.qntMinima))) {
       alert("Ti sei dimenticato qualche campo!")

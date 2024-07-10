@@ -10,11 +10,11 @@
                 <div class="input-group">
                     <input id="Codice" placeholder="Codice" name="Codice" value="{{product?.id}}" readonly disabled />
                 </div>
-				<label for="nome">Nome</label>
+				<label for="nome"><span class="required-asterisk">*</span>Nome</label>
 				<div class="input-group">
 					<input id="nome" placeholder="nome" name="nome" value="{{product?.nome}}" [(ngModel)]="nome" />
 				</div>
-				<label for="qualita">Qualità</label>
+				<label for="qualita"><span class="required-asterisk">*</span>Qualità</label>
 				<div class="input-group">
 					<select name="qualita" id="qualita" [(ngModel)]="qualita">
 						<option selected disabled style="display: none;">{{product?.qualita}}</option>
@@ -24,12 +24,12 @@
 					</select>
 
 				</div>
-				<label for="qntMinima">Quantità Minima</label>
+				<label for="qntMinima"><span class="required-asterisk">*</span>Quantità Minima</label>
 				<div class="input-group">
 					<input id="qntMinima" placeholder="Quantità Minima" name="qntMinima"
 						value="{{product?.sogliaminima}}" [(ngModel)]="qntMinima" />
 				</div>
-				<label for="qnt">Quantità</label>
+				<label for="qnt"><span class="required-asterisk">*</span>Quantità</label>
 				<div class="input-group">
 					<input id="qnt" placeholder="Quantità" name="qnt" [(ngModel)]="qnt" />
 				</div>
@@ -38,9 +38,9 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn-danger btn"
-			(click)="open(confermaDelete)">Elimina</button>
+			(click)="open(confermaDelete, 'confermaDelete')">Elimina</button>
 		<button type="button" class="btn btn-primary"
-			(click)="open(confermaEdit)">Modifica</button>
+			(click)="open(confermaEdit, 'confermaEdit')">Modifica</button>
 	</div>
 </ng-template>
 
@@ -72,7 +72,7 @@
 	</div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)"><svg xmlns="http://www.w3.org/2000/svg"
+<button class="btn btn-lg btn-outline-primary" (click)="open(content, 'main')"><svg xmlns="http://www.w3.org/2000/svg"
 		width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
 		<path
 			d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z">

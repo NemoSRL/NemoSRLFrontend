@@ -6,11 +6,11 @@
 	<div class="modal-body">
 		<form>
 			<div class="mb-3">
-				<label for="nome">Nome</label>
+				<label for="nome"><span class="required-asterisk">*</span>Nome</label>
 				<div class="input-group">
 					<input id="nome" placeholder="nome" name="nome" [(ngModel)]="nome" />
 				</div>
-				<label>Qualità</label>
+				<label><span class="required-asterisk">*</span>Qualità</label>
 				<div class="input-group">
 					<select name="qualita" id="qualita" [(ngModel)]="qualita">
 						<option [ngValue]="'Vivo'">Vivo</option>
@@ -19,11 +19,11 @@
 					</select>
 				</div>
 
-				<label for="qntMinima">Quantità Minima</label>
+				<label for="qntMinima"><span class="required-asterisk">*</span>Quantità Minima</label>
 				<div class="input-group">
 					<input id="qntMinima" placeholder="Quantità Minima" name="qntMinima" [(ngModel)]="qntMinima" />
 				</div>
-				<label for="qnt">Quantità</label>
+				<label for="qnt"><span class="required-asterisk">*</span>Quantità</label>
 				<div class="input-group">
 					<input id="qnt" placeholder="Quantità" name="qnt" [(ngModel)]="qnt" />
 				</div>
@@ -32,7 +32,7 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button " class="btn btn-primary"
-			(click)="open(conferma)">Aggiungi</button>
+			(click)="open(conferma, 'conferma')">Aggiungi</button>
 	</div>
 </ng-template>
 
@@ -51,6 +51,6 @@
 </ng-template>
 
 
-<button class="btn btn-lg btn-primary" (click)="open(content)">Aggiungi</button>
+<button class="btn btn-lg btn-primary" (click)="open(content, 'main')">Aggiungi</button>
 
 <hr />

@@ -32,7 +32,11 @@ export class AddReportComponent {
     private staffMemberService: PersonaleService,
     private messageService : MessageService
   ) {}
-  open(content: TemplateRef<any>) {
+  open(content: TemplateRef<any>, templateName : string) {
+    if(templateName === "main"){
+      this.ngOnInit();
+      this.resetInput();
+    }
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -44,7 +48,14 @@ export class AddReportComponent {
         }
       );
   }
-
+  resetInput() : void {
+    this.etichetta=undefined;
+    this.data = new Date();
+    this.dettagli = "";
+    this.personale = "";
+    this.spostamento = undefined;
+    this.spostato = undefined;
+  }
   addReport(): void {
     if(!(popolato(this.personale) && popolato(this.dettagli) && popolato(this.data) && popolato(this.etichetta))) {
       alert("Ti sei dimenticato qualche campo!")
