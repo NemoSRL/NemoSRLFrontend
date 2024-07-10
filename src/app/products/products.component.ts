@@ -117,4 +117,8 @@ export class ProductsComponent {
     this.selectAttributo.nativeElement.selectedIndex=0;
   }
   products: Prodotto[] = [];
+
+  onProductAdded() {
+    this.getProducts();
+  }
 }

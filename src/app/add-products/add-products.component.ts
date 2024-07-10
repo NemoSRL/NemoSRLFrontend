@@ -1,54 +1,57 @@
-import { Component, inject, TemplateRef } from '@angular/core';
-import { Prodotto } from '../services/prodotti.service';
-import {
-  ModalDismissReasons,
-  NgbDatepickerModule,
-  NgbModal,
-} from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, Output, TemplateRef } from '@angular/core';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProdottiService } from '../services/prodotti.service';
 import { MessageService } from '../services/message.service';
+
 @Component({
   selector: 'app-add-products',
   templateUrl: './add-products.component.html',
-  styleUrl: './add-products.component.css',
+  styleUrls: ['./add-products.component.css']
 })
 export class AddProductsComponent {
   nome: string = '';
   qualita: string = '';
   qntMinima: number = 0;
   qnt: number = 0;
-  private modalService = inject(NgbModal);
   closeResult = '';
-  constructor(private productService: ProdottiService, private messageService : MessageService) {}
+  @Output() productAdded = new EventEmitter<void>();
+
+  constructor(private modalService: NgbModal, private productService: ProdottiService, private messageService: MessageService) {}
+
   open(content: TemplateRef<any>) {
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
   }
-  closeAllModals(){
-    this.modalService.dismissAll()
+
+  closeAllModals() {
+    this.modalService.dismissAll();
   }
 
   addProduct(): void {
-    //console.log({id:-1, nome:this.nome, qualita: this.qualita, sogliaminima : this.qntMinima, quantita : this.qnt})
-    this.productService
-      .updateProdotto({
-        id: undefined,
-        nome: this.nome,
-        qualita: this.qualita,
-        sogliaminima: this.qntMinima,
-        quantita: this.qnt,
-      })
-      .subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore inserimento."));
+    this.productService.updateProdotto({
+      id: undefined,
+      nome: this.nome,
+      qualita: this.qualita,
+      sogliaminima: this.qntMinima,
+      quantita: this.qnt,
+    }).subscribe(
+      successo => {
+        console.log("successo");
+        setTimeout(() => {
+          this.productAdded.emit(); // Emitting the event after a delay
+        }, 2000); // Delay of 2 seconds
+      },
+      errore => this.messageService.add("Errore inserimento.")
+    );
     this.modalService.dismissAll();
   }
+
   private getDismissReason(reason: any): string {
     switch (reason) {
       case ModalDismissReasons.ESC:

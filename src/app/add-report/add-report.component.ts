@@ -50,6 +50,7 @@ export class AddReportComponent {
     } else{
       this.spostato = false;
     }
+    if(this.spostamento === "") this.spostamento = undefined
     this.reportService
       .addReport({
         np: -1,
