@@ -9,6 +9,7 @@ import {
 import { EtichetteService, Etichetta } from '../services/etichette.service';
 import { Personale, PersonaleService } from '../services/personale.service';
 import { MessageService } from '../services/message.service';
+import { popolato } from '../checker';
 @Component({
   selector: 'app-edit-report',
   templateUrl: './edit-report.component.html',
@@ -28,7 +29,7 @@ export class EditReportComponent {
     private messageService : MessageService
   ) {}
   @Input() report?: Report;
-
+  @Output() reportModifed = new EventEmitter<void>();
   tempReport?: Report;
   private modalService = inject(NgbModal);
   closeResult = '';
@@ -59,7 +60,15 @@ export class EditReportComponent {
   spostamento?: string;
   spostato?: boolean;
   editReport(): void {
-    this.modalService.dismissAll();
+    if(!(popolato(this.personale) && popolato(this.dettagli) && popolato(this.data) && popolato(this.etichetta))) {
+      alert("Ti sei dimenticato qualche campo!")
+      return
+    } 
+    if(!isNaN(this.etichetta!)){
+      alert("l'etichetta  deve essere un numero!")
+      return
+    }
+    
     if(this.spostamento === ""){
       this.spostato = undefined;
     } 
@@ -75,13 +84,24 @@ export class EditReportComponent {
         tipo:this.spostamento,
         spostato:this.spostato,
       })
-      .subscribe(successo => {console.log("ok");}, errore => this.messageService.add("Errore modifica."));
+      .subscribe(successo => {
+        console.log("ok");
+        setTimeout(() => {
+          this.reportModifed.emit(); // Emitting the event after a delay
+        }, 1000); // Delay of 1 seconds
+      }, errore => this.messageService.add("Errore modifica."));
+      this.modalService.dismissAll();
   }
   deleteReport(): void {
     this.modalService.dismissAll();
     this.reportService
       .deleteReport(this.report?.np ?? -1, this.report?.etichetta ?? -1)
-      .subscribe(successo => console.log("ok"), errore => this.messageService.add("Errore eliminazione."));
+      .subscribe(successo => {
+        console.log("ok");
+        setTimeout(() => {
+          this.reportModifed.emit(); // Emitting the event after a delay
+        }, 1000); // Delay of 1 seconds
+      }, errore => this.messageService.add("Errore eliminazione."));
   }
   labels: Etichetta[] = [];
   private getLabels(): void {
@@ -119,4 +139,6 @@ export class EditReportComponent {
       this.spostatoDiv=true
     }
   }
+
+
 }

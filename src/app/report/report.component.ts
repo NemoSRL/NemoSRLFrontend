@@ -105,4 +105,8 @@ export class ReportComponent {
     this.selectAttributo.nativeElement.selectedIndex=0;
   }
   reports: Report[] = [];
+
+  onReportModified(){
+    this.getReports();
+  }
 }

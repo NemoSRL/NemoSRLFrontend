@@ -1,7 +1,7 @@
 <div class="main-container">
 	<h2>Reports</h2>
 
-	<app-add-report></app-add-report>
+	<app-add-report (reportModifed)="onReportModified()"></app-add-report>
 	<div class="input-group">
 		<button class="btn btn-primary marR2" (click)="getReportsBy()">Cerca</button>
 		<input #inputValore [(ngModel)]="textSearch" class="marR2">
@@ -35,7 +35,7 @@
 
 			<tr>
 				<th scope="row">{{ report.np| number}}</th>
-				<td><app-edit-report [report]="report"></app-edit-report></td>
+				<td><app-edit-report [report]="report" (reportModifed)="onReportModified()"></app-edit-report></td>
 				<td>
 					<app-detail-label [etichettaId]="report.etichetta"></app-detail-label>
 				</td>

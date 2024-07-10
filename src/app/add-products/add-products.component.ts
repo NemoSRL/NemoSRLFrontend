@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, TemplateRef } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProdottiService } from '../services/prodotti.service';
 import { MessageService } from '../services/message.service';
-
+import { popolato } from '../checker';
 @Component({
   selector: 'app-add-products',
   templateUrl: './add-products.component.html',
@@ -29,11 +29,21 @@ export class AddProductsComponent {
     );
   }
 
-  closeAllModals() {
-    this.modalService.dismissAll();
-  }
+
 
   addProduct(): void {
+    if(!(popolato(this.nome) && popolato(this.qualita) && popolato(this.qnt) && popolato(this.qntMinima))) {
+      alert("Ti sei dimenticato qualche campo!")
+      return
+    } 
+    if(isNaN(this.qnt) || isNaN(this.qntMinima)){
+      alert("Quantità e soglia minima devono essere dei numeri!")
+      return
+    }
+    if(this.qnt<0 || this.qntMinima<0){
+      alert("Quantità e soglia minima devono essere maggiori di zero!")
+      return
+    }
     this.productService.updateProdotto({
       id: undefined,
       nome: this.nome,
@@ -45,7 +55,7 @@ export class AddProductsComponent {
         console.log("successo");
         setTimeout(() => {
           this.productAdded.emit(); // Emitting the event after a delay
-        }, 2000); // Delay of 2 seconds
+        }, 1000); // Delay of 1 seconds
       },
       errore => this.messageService.add("Errore inserimento.")
     );

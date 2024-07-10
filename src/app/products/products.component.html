@@ -2,7 +2,7 @@
 	<h2>Prodotti</h2>
 
 
-	<app-add-products (productAdded)="onProductAdded()"></app-add-products>
+	<app-add-products (productAdded)="onProductModified()"></app-add-products>
 
 	<div class="input-group">
 
@@ -36,7 +36,7 @@
 
 			<tr>
 				<th scope="row">{{ product.id| number}}</th>
-				<td><app-edit-products [product]="product"></app-edit-products></td>
+				<td><app-edit-products [product]="product" (productEdited)="onProductModified()"></app-edit-products></td>
 				<td>
 					{{ product.nome }}
 				</td>

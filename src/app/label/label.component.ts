@@ -102,4 +102,7 @@ export class LabelComponent {
   }
 
   labels: Etichetta[] = [];
+  onLabelModified(){
+    this.getLabels();
+  }
 }

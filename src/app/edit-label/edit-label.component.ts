@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, Input } from '@angular/core';
+import { Component, inject, TemplateRef, Input, EventEmitter, Output } from '@angular/core';
 import {
   ModalDismissReasons,
   NgbDatepickerModule,
@@ -16,6 +16,7 @@ import {
 import { Vendita, VenditaService } from '../services/vendita.service';
 import { MessageService } from '../services/message.service';
 import { Slot, SlotService } from '../services/slot.service';
+import { popolato } from '../checker';
 
 @Component({
   selector: 'app-edit-label',
@@ -23,6 +24,7 @@ import { Slot, SlotService } from '../services/slot.service';
   styleUrl: './edit-label.component.css',
 })
 export class EditLabelComponent {
+  @Output() labelModified = new EventEmitter<void>();
   spostamento?: string;
   dataarrivo?: Date = new Date('2000-00-00');
   descrizione?: string = '';
@@ -76,7 +78,18 @@ export class EditLabelComponent {
 
   selectedVendita: string = '';
   editEtichette(): void {
-   
+    if(!(popolato(this.dataarrivo) && popolato(this.peso) && popolato(this.prodotto) && popolato(this.scontoextra) && popolato(this.selectedPosition) && popolato(this.selectedSlot) && popolato(this.descrizione))) {
+      alert("Ti sei dimenticato qualche campo!")
+      return
+    } 
+    if(isNaN(this.peso!) || isNaN(this.scontoextra!)){
+      alert("Peso e sconto extra minima devono essere dei numeri!")
+      return
+    }
+    if(this.peso!<0 || this.scontoextra!<0){
+      alert("Peso deve essere maggiore di zero e sconto extra deve essere maggiore o uguale di zero!")
+      return
+    }
 
     const updatedEtichetta: Etichetta = {
       id: this.etichetta?.id ?? -1,
@@ -92,11 +105,21 @@ export class EditLabelComponent {
       oldPosizioneNp: this.etichetta?.posizionenp
     };
     console.log(updatedEtichetta);
-    this.etichetteService.updateEtichetta(updatedEtichetta).subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore modifica."));
+    this.etichetteService.updateEtichetta(updatedEtichetta).subscribe(successo => {
+      console.log("successo");
+      setTimeout(() => {
+        this.labelModified.emit(); // Emitting the event after a delay
+      }, 1000); // Delay of 1 seconds
+    }, errore => this.messageService.add("Errore modifica."));
     this.modalService.dismissAll();
   }
   deleteEtichette(): void {
-    this.etichetteService.deleteEtichette(this.etichetta?.id ?? -1).subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore eliminazione."));
+    this.etichetteService.deleteEtichette(this.etichetta?.id ?? -1).subscribe(successo => {
+      console.log("successo");
+      setTimeout(() => {
+        this.labelModified.emit(); // Emitting the event after a delay
+      }, 1000); // Delay of 1 seconds
+    }, errore => this.messageService.add("Errore eliminazione."));
     this.modalService.dismissAll();
   }
 

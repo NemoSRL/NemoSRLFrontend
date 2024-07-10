@@ -6,6 +6,11 @@
 	<div class="modal-body">
 		<form>
 			<div class="mb-3">
+				<label for="Codice">Codice</label>
+				<div class="input-group">
+					<input id="Codice" placeholder="Codice" name="Codice" value="{{report?.np}}"
+							disabled readonly/>
+				</div>
 				<label for="etichetta">etichetta</label>
 				<div class="input-group">
 					<select [(ngModel)]="etichetta" name="etichetta">

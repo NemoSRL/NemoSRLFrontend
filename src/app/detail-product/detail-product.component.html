@@ -6,6 +6,10 @@
     <div class="modal-body">
         <form>
             <div class="mb-3">
+                <label for="Codice">Codice</label>
+                <div class="input-group">
+                    <input id="Codice" placeholder="Codice" name="Codice" value="{{product?.id}}" readonly disabled />
+                </div>
                 <label for="nome">Nome</label>
                 <div class="input-group">
                     <input id="nome" placeholder="nome" name="nome" value="{{product?.nome}}" readonly disabled />

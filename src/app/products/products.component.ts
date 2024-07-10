@@ -111,7 +111,7 @@ export class ProductsComponent {
   }
   products: Prodotto[] = [];
 
-  onProductAdded() {
+  onProductModified() {
     this.getProducts();
   }
 }

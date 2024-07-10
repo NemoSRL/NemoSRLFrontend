@@ -6,6 +6,11 @@
     <div class="modal-body">
         <form>
             <div class="mb-3">
+                <label for="codice">Id</label>
+                <div class="input-group">
+                    <input id="id" placeholder="id" name="id"
+                        value="{{etichetta?.id}}" readonly disabled />
+                </div>
                 <label for="dataarrivo">Data Arrivo</label>
                 <div class="input-group">
                     <input id="dataarrivo" placeholder="Data Arrivo" name="dataarrivo" type="date"

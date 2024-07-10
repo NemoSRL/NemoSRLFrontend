@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, inject, Output, TemplateRef } from '@angular/core';
 import { ReportService } from '../services/report.service';
 import {
   ModalDismissReasons,
@@ -9,12 +9,14 @@ import { Report } from '../services/report.service';
 import { Etichetta, EtichetteService } from '../services/etichette.service';
 import { PersonaleService , Personale} from '../services/personale.service';
 import { MessageService } from '../services/message.service';
+import { popolato } from '../checker';
 @Component({
   selector: 'app-add-report',
   templateUrl: './add-report.component.html',
   styleUrl: './add-report.component.css',
 })
 export class AddReportComponent {
+  @Output() reportModifed = new EventEmitter<void>();
   etichetta?: number;
   data?: Date;
   dettagli?: string;
@@ -44,6 +46,14 @@ export class AddReportComponent {
   }
 
   addReport(): void {
+    if(!(popolato(this.personale) && popolato(this.dettagli) && popolato(this.data) && popolato(this.etichetta))) {
+      alert("Ti sei dimenticato qualche campo!")
+      return
+    } 
+    if(!isNaN(this.etichetta!)){
+      alert("l'etichetta  deve essere un numero!")
+      return
+    }
     
     if(this.spostamento === "" || this.spostamento === null || this.spostamento === undefined){
       this.spostato = undefined;
@@ -61,7 +71,12 @@ export class AddReportComponent {
         tipo: this.spostamento,
         spostato: this.spostato
       })
-      .subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore inserimento."));
+      .subscribe(successo => {
+        console.log("successo");
+        setTimeout(() => {
+          this.reportModifed.emit(); // Emitting the event after a delay
+        }, 1000); // Delay of 1 seconds
+      }, errore => this.messageService.add("Errore inserimento."));
     this.modalService.dismissAll();
   }
   private getDismissReason(reason: any): string {

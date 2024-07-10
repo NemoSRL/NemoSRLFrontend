@@ -1,7 +1,7 @@
 <div class="main-container">
   <h2>Etichette</h2>
 
-  <app-add-label></app-add-label>
+  <app-add-label (labelModified)="onLabelModified()"></app-add-label>
   <div class="input-group">
     <button class="btn btn-primary marR2" (click)="getLabelsBy()">Cerca</button>
     <input #inputValore [(ngModel)]="textSearch" class="marR2">
@@ -38,7 +38,7 @@
 
       <tr>
         <th scope="row">{{ label.id| number}}</th>
-        <td><app-edit-label [etichetta]="label"></app-edit-label></td>
+        <td><app-edit-label [etichetta]="label" (labelModified)="onLabelModified()"></app-edit-label></td>
 
 
         <td>

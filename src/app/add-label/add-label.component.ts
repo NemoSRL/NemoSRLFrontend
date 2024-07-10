@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, inject, Output, TemplateRef } from '@angular/core';
 import {
   ModalDismissReasons,
   NgbDatepickerModule,
@@ -15,24 +15,22 @@ import {
 import { Vendita, VenditaService } from '../services/vendita.service';
 import { MessageService } from '../services/message.service';
 import { Slot, SlotService } from '../services/slot.service';
+import { popolato } from '../checker';
 @Component({
   selector: 'app-add-label',
   templateUrl: './add-label.component.html',
   styleUrl: './add-label.component.css',
 })
 export class AddLabelComponent {
+  @Output() labelModified = new EventEmitter<void>();
   id?: number = 0;
   dataArrivo?: Date;
   descrizione: string = '';
   abbattimento: boolean = true;
   peso: number = 0;
-  prodotto?: number ;
-  venditanp?: number = undefined;
-  venditadata?: Date = undefined;
-  ordineuscita: number = 0;
+  prodotto: number = 0;
   scontoextra: number = 0;
   posizioneid?: string='';
-  prenotazione?: string;
 
   private modalService = inject(NgbModal);
   closeResult = '';
@@ -60,7 +58,18 @@ export class AddLabelComponent {
   }
   selectedPosition: string = '';
   addEtichetta(): void {
-    
+    if(!(popolato(this.dataArrivo) && popolato(this.peso) && popolato(this.prodotto) && popolato(this.scontoextra) && popolato(this.selectedPosition) && popolato(this.selectedSlot) && popolato(this.descrizione))) {
+      alert("Ti sei dimenticato qualche campo!")
+      return
+    } 
+    if(isNaN(this.peso) || isNaN(this.scontoextra)){
+      alert("Peso e sconto extra minima devono essere dei numeri!")
+      return
+    }
+    if(this.peso<0 || this.scontoextra<0){
+      alert("Peso deve essere maggiore di zero e sconto extra deve essere maggiore o uguale di zero!")
+      return
+    }
 
     this.etichetteService
       .addEtichetta({
@@ -77,7 +86,12 @@ export class AddLabelComponent {
         oldPosizioneNp: parseInt(this.selectedSlot)
         
       })
-      .subscribe(successo => console.log("successo"), errore => this.messageService.add("Errore inserimento."));
+      .subscribe(successo => {
+        console.log("successo");
+        setTimeout(() => {
+          this.labelModified.emit(); // Emitting the event after a delay
+        }, 1000); // Delay of 1 seconds
+      }, errore => this.messageService.add("Errore inserimento."));
       
     this.modalService.dismissAll();
   }

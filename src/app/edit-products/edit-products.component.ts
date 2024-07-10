@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, Input } from '@angular/core';
+import { Component, inject, TemplateRef, Input, Output, EventEmitter } from '@angular/core';
 
 import {
   ModalDismissReasons,
@@ -9,6 +9,7 @@ import { Prodotto } from '../services/prodotti.service';
 
 import { ProdottiService } from '../services/prodotti.service';
 import { MessageService } from '../services/message.service';
+import { popolato } from '../checker';
 @Component({
   selector: 'app-edit-products',
   templateUrl: './edit-products.component.html',
@@ -21,7 +22,7 @@ export class EditProductsComponent {
   qnt: number = -3;
   constructor(private productService: ProdottiService, private messageService : MessageService) {}
   @Input() product?: Prodotto;
-
+  @Output() productEdited = new EventEmitter<void>();
   tempProd?: Prodotto;
   private modalService = inject(NgbModal);
   closeResult = '';
@@ -50,6 +51,18 @@ export class EditProductsComponent {
     }
   }
   editProduct(): void {
+    if(!(popolato(this.nome) && popolato(this.qualita) && popolato(this.qnt) && popolato(this.qntMinima))) {
+      alert("Ti sei dimenticato qualche campo!")
+      return
+    } 
+    if(!isNaN(this.qnt) && !isNaN(this.qntMinima)){
+      alert("Quantità e soglia minima devono essere dei numeri!")
+      return
+    }
+    if(this.qnt<0 || this.qntMinima<0){
+      alert("Quantità e soglia minima devono essere maggiori di zero!")
+      return
+    }
     const updatedProduct: Prodotto = {
       id: this.product?.id ?? -1,
       nome: this.nome,
@@ -58,12 +71,22 @@ export class EditProductsComponent {
       quantita: this.qnt,
     };
     console.log(updatedProduct);
-    this.productService.updateProdotto(updatedProduct).subscribe(successo => console.log("successo"),  errore => this.messageService.add("Errore modifica."));
+    this.productService.updateProdotto(updatedProduct).subscribe(successo => {
+      console.log("successo");
+        setTimeout(() => {
+          this.productEdited.emit(); // Emitting the event after a delay
+        }, 1000); // Delay of 1 seconds
+    },  errore => this.messageService.add("Errore modifica."));
     this.modalService.dismissAll();
   }
   deleteProduct(): void {
     this.modalService.dismissAll();
-    this.productService.deleteProdotto(this.product?.id ?? -1).subscribe(successo => console.log("successo"),  errore => this.messageService.add("Errore eliminazione."));
+    this.productService.deleteProdotto(this.product?.id ?? -1).subscribe(successo => {
+      console.log("successo");
+        setTimeout(() => {
+          this.productEdited.emit(); // Emitting the event after a delay
+        }, 1000); // Delay of 1 seconds
+    },  errore => this.messageService.add("Errore eliminazione."));
   }
 
   ngOnInit() : void {
