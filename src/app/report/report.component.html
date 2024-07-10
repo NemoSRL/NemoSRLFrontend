@@ -20,14 +20,14 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th scope="col">codice</th>
-				<th scope="col" [width]="10">Dettagli/Modifica</th>
-				<th scope="col">Etichetta</th>
-				<th scope="col">Data</th>
-				<th scope="col">Dettagli</th>
-				<th scope="col">Personale</th>
-				<th scope="col">Spostamento</th>
-				<th scope="col">Spostato</th>
+				<th scope="col" sortable="np" (sort)="onSort($event)">codice</th>
+				<th scope="col"  [width]="10">Dettagli/Modifica</th>
+				<th scope="col" sortable="etichetta" (sort)="onSort($event)">Etichetta</th>
+				<th scope="col" sortable="data" (sort)="onSort($event)">Data</th>
+				<th scope="col" sortable="dettagli" (sort)="onSort($event)">Dettagli</th>
+				<th scope="col" sortable="personale" (sort)="onSort($event)">Personale</th>
+				<th scope="col" sortable="tipo"(sort)="onSort($event)">Spostamento</th>
+				<th scope="col" sortable="spostato"(sort)="onSort($event)" >Spostato</th>
 			</tr>
 		</thead>
 		<tbody>

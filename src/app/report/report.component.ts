@@ -15,8 +15,8 @@ import { Report } from '../services/report.service';
 import { ReportService } from '../services/report.service';
 import { EtichetteService, Etichetta } from '../services/etichette.service';
 import { MessageService } from '../services/message.service';
-export type SortColumn = keyof Report | '';
-export type SortDirection = 'asc' | 'desc' | '';
+import { SortEvent, SortColumn, SortDirection } from '../sort-types'; 
+
 const rotate: { [key: string]: SortDirection } = {
   asc: 'desc',
   desc: '',
@@ -28,10 +28,6 @@ const compare = (
   v2: string | number | Date | undefined | boolean
 ) => ((v1 ?? 0) < (v2 ?? 0) ? -1 : (v1 ?? 0) > (v2 ?? 0) ? 1 : 0);
 
-export interface SortEvent {
-  column: SortColumn;
-  direction: SortDirection;
-}
 
 @Directive({
   selector: 'th[sortable]',
@@ -62,23 +58,22 @@ export class ReportComponent {
   @ViewChildren(NgbdSortableHeader)
   headers!: QueryList<NgbdSortableHeader>;
 
-  onSort({ column, direction }: SortEvent) {
-    // resetting other headers
+  onSort({ column, direction }: SortEvent): void {
     for (const header of this.headers) {
       if (header.sortable !== column) {
         header.direction = '';
       }
     }
 
-    // sorting countries
     if (direction === '' || column === '') {
       this.reports = this.reports;
     } else {
       this.reports = [...this.reports].sort((a, b) => {
-        const res = compare(a[column], b[column]);
+        const res = compare((a as any)[column], (b as any)[column]);
         return direction === 'asc' ? res : -res;
       });
     }
+
   }
   textSearch: string = '';
   attributeSearch: string = '';

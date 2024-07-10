@@ -1,7 +1,7 @@
 import { MessageService } from '../services/message.service';
 import { Prodotto } from '../services/prodotti.service';
 import { ProdottiService } from '../services/prodotti.service';
-
+import { SortEvent, SortColumn, SortDirection } from '../sort-types'; 
 import {
   Component,
   Directive,
@@ -17,8 +17,6 @@ import {
 
 import { Observable, of } from 'rxjs';
 
-export type SortColumn = keyof Prodotto | '';
-export type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = {
   asc: 'desc',
   desc: '',
@@ -30,10 +28,7 @@ const compare = (
   v2: string | number | undefined
 ) => ((v1 ?? 0) < (v2 ?? 0) ? -1 : (v1 ?? 0) > (v2 ?? 0) ? 1 : 0);
 
-export interface SortEvent {
-  column: SortColumn;
-  direction: SortDirection;
-}
+
 
 @Directive({
   selector: 'th[sortable]',
@@ -66,25 +61,23 @@ export class ProductsComponent {
   @ViewChildren(NgbdSortableHeader)
   headers!: QueryList<NgbdSortableHeader>;
 
-  onSort({ column, direction }: SortEvent) {
-    // resetting other headers
+  onSort({ column, direction }: SortEvent): void {
     for (const header of this.headers) {
       if (header.sortable !== column) {
         header.direction = '';
       }
     }
 
-    // sorting countries
     if (direction === '' || column === '') {
       this.products = this.products;
     } else {
       this.products = [...this.products].sort((a, b) => {
-        const res = compare(a[column], b[column]);
+        const res = compare((a as any)[column], (b as any)[column]);
         return direction === 'asc' ? res : -res;
       });
     }
-  }
 
+  }
   constructor(private productService: ProdottiService, private messageService : MessageService) {}
   textSearch: string = '';
   attributeSearch: string = '';

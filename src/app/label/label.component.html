@@ -22,15 +22,15 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">Id</th>
-        <th scope="col" [width]="10">Dettagli/Modifica</th>
-        <th scope="col">Prodotto</th>
-        <th scope="col">Posizione</th>
-        <th scope="col">Peso</th>
-        <th scope="col">Descrizione</th>
-        <th scope="col">Data Arrivo</th>
-        <th scope="col">Abbattimento</th>
-        <th scope="col">Sconto Extra</th>
+        <th scope="col" sortable="id" (sort)="onSort($event)">Id</th>
+        <th scope="col"  [width]="10">Dettagli/Modifica</th>
+        <th scope="col" sortable="prodotto" (sort)="onSort($event)">Prodotto</th>
+        <th scope="col" sortable="posizioneluogo"(sort)="onSort($event)">Posizione</th>
+        <th scope="col" sortable="peso" (sort)="onSort($event)">Peso</th>
+        <th scope="col" sortable="descrizione" (sort)="onSort($event)">Descrizione</th>
+        <th scope="col" sortable="dataarrivo" (sort)="onSort($event)">Data Arrivo</th>
+        <th scope="col" sortable="abbattimento"(sort)="onSort($event)" >Abbattimento</th>
+        <th scope="col" sortable="scontoextra" (sort)="onSort($event)">Sconto Extra</th>
       </tr>
     </thead>
     <tbody>

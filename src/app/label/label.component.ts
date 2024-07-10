@@ -11,9 +11,8 @@ import {
 } from '@angular/core';
 import { Etichetta, EtichetteService } from '../services/etichette.service';
 import { MessageService } from '../services/message.service';
+import { SortEvent, SortColumn, SortDirection } from '../sort-types'; 
 
-export type SortColumn = keyof Etichetta | '';
-export type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = {
   asc: 'desc',
   desc: '',
@@ -25,10 +24,7 @@ const compare = (
   v2: string | number | Date | boolean | undefined
 ) => ((v1 ?? 0) < (v2 ?? 0) ? -1 : (v1 ?? 0) > (v2 ?? 0) ? 1 : 0);
 
-export interface SortEvent {
-  column: SortColumn;
-  direction: SortDirection;
-}
+
 
 @Directive({
   selector: 'th[sortable]',
@@ -58,20 +54,18 @@ export class NgbdSortableHeader {
 export class LabelComponent {
   @ViewChildren(NgbdSortableHeader)
   headers!: QueryList<NgbdSortableHeader>;
-  onSort({ column, direction }: SortEvent) {
-    // resetting other headers
+  onSort({ column, direction }: SortEvent): void {
     for (const header of this.headers) {
       if (header.sortable !== column) {
         header.direction = '';
       }
     }
 
-    // sorting countries
     if (direction === '' || column === '') {
       this.labels = this.labels;
     } else {
       this.labels = [...this.labels].sort((a, b) => {
-        const res = compare(a[column], b[column]);
+        const res = compare((a as any)[column], (b as any)[column]);
         return direction === 'asc' ? res : -res;
       });
     }
