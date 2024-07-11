@@ -68,10 +68,7 @@ export class EditReportComponent {
       alert("Ti sei dimenticato qualche campo!")
       return
     } 
-    if(!isNaN(this.etichetta!)){
-      alert("l'etichetta  deve essere un numero!")
-      return
-    }
+    
     
     if(this.spostamento === ""){
       this.spostato = undefined;

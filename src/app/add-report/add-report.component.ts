@@ -61,10 +61,7 @@ export class AddReportComponent {
       alert("Ti sei dimenticato qualche campo!")
       return
     } 
-    if(!isNaN(this.etichetta!)){
-      alert("l'etichetta  deve essere un numero!")
-      return
-    }
+    
     
     if(this.spostamento === "" || this.spostamento === null || this.spostamento === undefined){
       this.spostato = undefined;

@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 const GET_ALL_PERSONALE = 'personale';
-
+const GET_PERSONALE_BY_ID = 'personale';
 export interface Personale {
   readonly cf: string;
   readonly nome: string;
@@ -22,6 +22,13 @@ export class PersonaleService {
   public getAllPersonale(): Observable<Personale[]> {
     return this.httpClient.get<Personale[]>(
       `${this.apiUrl}/${GET_ALL_PERSONALE}`
+    );
+  }
+
+  public getPersonaleById(id: string): Observable<Personale> {
+    return this.httpClient.get<Personale>(
+      `${this.apiUrl}/${GET_PERSONALE_BY_ID}/${id}`,
+      { params: { id } }
     );
   }
 }

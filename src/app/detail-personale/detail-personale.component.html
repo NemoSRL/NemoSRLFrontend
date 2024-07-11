@@ -1,0 +1,39 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Aggiorna Prodotto</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <label for="cf">Codice Fiscale</label>
+                <div class="input-group">
+                    <input id="cf" placeholder="cf" name="cf" value="{{personale?.cf}}" readonly disabled />
+                </div>
+                <label for="nome">Nome</label>
+                <div class="input-group">
+                    <input id="nome" placeholder="nome" name="nome" value="{{personale?.nome}}" readonly disabled />
+                </div>
+                <label for="cognome">Cognome</label>
+                <div class="input-group">
+                    <input name="cognome" id="cognome" value="{{personale?.cognome}}" readonly disabled>
+                </div>
+                <label for="Ruolo">Ruolo</label>
+                <div class="input-group">
+                    <input name="Ruolo" id="Ruolo" value="{{personale?.ruolo}}" readonly disabled>
+                </div>
+                <label for="Telefono">Telefono</label>
+                <div class="input-group">
+                    <input id="Telefono" placeholder="Telefono" name="Telefono" value="{{personale?.telefono}}" readonly disabled />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn-danger btn" (click)="modal.close('Close click')">Chiudi</button>
+    </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary button-as-text" (click)="open(content)">
+    {{personaleId}}
+</button>

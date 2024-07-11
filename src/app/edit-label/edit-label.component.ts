@@ -26,7 +26,7 @@ import { popolato } from '../checker';
 export class EditLabelComponent {
   @Output() labelModified = new EventEmitter<void>();
   spostamento?: string;
-  dataarrivo?: Date = new Date('2000-00-00');
+  dataarrivo?: Date;
   descrizione?: string = '';
   abbattimento?: boolean = false;
   peso?: number = -1;
@@ -161,7 +161,7 @@ export class EditLabelComponent {
     this.scontoextra=this.etichetta?.scontoextra;
     this.selectedPosition=this.etichetta?.posizioneid;
     this.selectedSlot=this.etichetta?.posizionenp || -1;
-
+    this.dataarrivo=this.etichetta?.dataarrivo
   }
   closeAllModal(){
     this.modalService.dismissAll()

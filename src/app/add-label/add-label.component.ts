@@ -147,7 +147,7 @@ export class AddLabelComponent {
     
   }
   closeAllModal(){
-    this.modalService.dismissAll()
+    this.modalService.dismissAll();
   }
   slots : Slot[] = []
   selectedSlot = '';

@@ -30,6 +30,7 @@ import { DetailLabelComponent } from './detail-label/detail-label.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
 import { HomeComponent } from './home/home.component';
 import { MessagesComponent } from './messages/messages.component';
+import { DetailPersonaleComponent } from './detail-personale/detail-personale.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,8 @@ import { MessagesComponent } from './messages/messages.component';
     DetailLabelComponent,
     DetailProductComponent,
     HomeComponent,
-    MessagesComponent
+    MessagesComponent,
+    DetailPersonaleComponent
   ],
   imports: [ 
 

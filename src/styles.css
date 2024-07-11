@@ -79,3 +79,6 @@ color: white;
   color: red;
   font-size: small;
 }
+.cliccabile {
+  cursor: pointer;
+}
