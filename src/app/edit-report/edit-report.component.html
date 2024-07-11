@@ -6,17 +6,15 @@
 	<div class="modal-body">
 		<form>
 			<div class="mb-3">
-				<label for="Codice">Codice</label>
+				<label for="Codice">NP</label>
 				<div class="input-group">
 					<input id="Codice" placeholder="Codice" name="Codice" value="{{report?.np}}"
 							disabled readonly/>
 				</div>
-				<label for="etichetta"><span class="required-asterisk">*</span>etichetta</label>
+				<label for="etichetta">etichetta</label>
 				<div class="input-group">
-					<select [(ngModel)]="etichetta" name="etichetta">
-						<option value="{{report?.etichetta}}" disabled selected="selected" style="display: none;">{{report?.etichetta}}</option>
-						<option *ngFor="let label of labels" value="{{label.id}}">{{label.id}}</option>
-					</select>
+					<input id="etichetta" placeholder="etichetta" name="etichetta" value="{{report?.etichetta}}"
+							disabled readonly/>
 				</div>
 				<label for="data"><span class="required-asterisk">*</span>Data</label>
 				<div class="input-group">

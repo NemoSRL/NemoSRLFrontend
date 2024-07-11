@@ -17,7 +17,6 @@ export interface Report {
   readonly data?: Date;
   readonly dettagli?: string;
   readonly personale?: string;
-  readonly oldEtichetta?: number;
   readonly tipo?: string;
   readonly spostato?: boolean;
 }

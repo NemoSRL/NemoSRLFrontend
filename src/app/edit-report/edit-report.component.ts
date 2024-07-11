@@ -70,18 +70,18 @@ export class EditReportComponent {
     } 
     
     
-    if(this.spostamento === ""){
+    if(this.spostamento === "" || this.spostamento === null){
+      
       this.spostato = undefined;
     } 
     if(this.spostamento === "") this.spostamento = undefined
     this.reportService
       .updateReport({
         np: this.report?.np,
+        etichetta: this.report?.etichetta,
         data: this.data,
         dettagli: this.dettagli,
-        etichetta: this.etichetta,
         personale: this.personale,
-        oldEtichetta: this.report?.etichetta,
         tipo:this.spostamento,
         spostato:this.spostato,
       })

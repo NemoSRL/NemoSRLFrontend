@@ -20,7 +20,7 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th scope="col" class="cliccabile" sortable="np" (sort)="onSort($event)">codice</th>
+				<th scope="col" class="cliccabile" sortable="np" (sort)="onSort($event)">NP</th>
 				<th scope="col"  [width]="10">Dettagli/Modifica</th>
 				<th scope="col" class="cliccabile" sortable="etichetta" (sort)="onSort($event)">Etichetta</th>
 				<th scope="col" class="cliccabile"sortable="data" (sort)="onSort($event)">Data</th>
@@ -32,6 +32,8 @@
 		</thead>
 		<tbody>
 			@for (report of reports; track report.np) {
+				
+
 
 			<tr>
 				<th scope="row">{{ report.np| number}}</th>
