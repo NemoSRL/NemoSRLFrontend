@@ -1,21 +1,23 @@
 
+import { Subscription } from 'rxjs';
 import { MessageService } from '../services/message.service';
 import { Personale, PersonaleService } from '../services/personale.service';
-import { Component, inject, TemplateRef, Input } from '@angular/core';
+import { Component, inject, TemplateRef, Input, ViewChild } from '@angular/core';
 
 import {
   ModalDismissReasons,
   NgbDatepickerModule,
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
+import { PersonaleDetailDataService } from '../services/event.service';
 @Component({
   selector: 'app-detail-personale',
   templateUrl: './detail-personale.component.html',
   styleUrl: './detail-personale.component.css'
 })
 export class DetailPersonaleComponent {
-  constructor(private personaleService: PersonaleService, private messageService : MessageService) {}
-  @Input() personaleId?: string;
+  constructor(private personaleService: PersonaleService, private messageService : MessageService, private personaleDetailDataService : PersonaleDetailDataService) {}
+  personaleId?: string;
   personale?: Personale;
 
   private modalService = inject(NgbModal);
@@ -44,9 +46,20 @@ export class DetailPersonaleComponent {
         return `with: ${reason}`;
     }
   }
+  @ViewChild('content', { static: true }) content?: TemplateRef<any>;
+  private param1Subscription?: Subscription;
   ngOnInit(): void {
-    this.personaleService
-      .getPersonaleById(this.personaleId!)
-      .subscribe((personale) => {this.personale = personale;}, errore => this.messageService.add("Errore caricamento dati personale."));
+    this.param1Subscription = this.personaleDetailDataService.param1Observable$.subscribe(
+      (param: any) => {
+        this.personaleId=param
+        this.personaleService
+        .getPersonaleById(this.personaleId!)
+        .subscribe((personale) => {this.personale = personale;}, errore => this.messageService.add("Errore caricamento dati personale."));
+        this.open(this.content!)
+      })
+    
   }
+    
+      
+    
 }

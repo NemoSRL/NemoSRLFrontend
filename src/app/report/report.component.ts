@@ -16,6 +16,8 @@ import { ReportService } from '../services/report.service';
 import { EtichetteService, Etichetta } from '../services/etichette.service';
 import { MessageService } from '../services/message.service';
 import { SortEvent, SortColumn, SortDirection } from '../sort-types'; 
+import { ReportEditDataService, LabelDetailDataService, PersonaleDetailDataService } from '../services/event.service';
+import { Personale } from '../services/personale.service';
 
 const rotate: { [key: string]: SortDirection } = {
   asc: 'desc',
@@ -57,7 +59,7 @@ export class NgbdSortableHeader {
 export class ReportComponent {
   @ViewChildren(NgbdSortableHeader)
   headers!: QueryList<NgbdSortableHeader>;
-
+  
   onSort({ column, direction }: SortEvent): void {
     for (const header of this.headers) {
       if (header.sortable !== column) {
@@ -86,8 +88,13 @@ export class ReportComponent {
         .subscribe((reports) => (this.reports = reports), errore => this.messageService.add("Errore caricamento reports."));
     }
   }
-  constructor(private reportService: ReportService, private messageService : MessageService) {}
-
+  constructor(private reportService: ReportService, private messageService : MessageService, private editDataService : ReportEditDataService, private personaleDetailDataService : PersonaleDetailDataService, private labelDetailDataService : LabelDetailDataService) {}
+  public premuto(object : any, tipo : string): void {
+    if(tipo==="edit") this.editDataService.emitParam1(object as Report);
+    if(tipo==="personale") this.personaleDetailDataService.emitParam1(object as string)
+    if(tipo==="label") this.labelDetailDataService.emitParam1(object as number)
+      
+  }
   getReports(): void {
     this.reportService
       .getAllReports()

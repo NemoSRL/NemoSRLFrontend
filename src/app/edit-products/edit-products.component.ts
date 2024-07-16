@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, inject, TemplateRef, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 
 import {
   ModalDismissReasons,
@@ -10,17 +10,20 @@ import { Prodotto } from '../services/prodotti.service';
 import { ProdottiService } from '../services/prodotti.service';
 import { MessageService } from '../services/message.service';
 import { popolato } from '../checker';
+import { ProductEditDataService } from '../services/event.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-edit-products',
   templateUrl: './edit-products.component.html',
   styleUrl: './edit-products.component.css',
 })
 export class EditProductsComponent {
+  @ViewChild('content', { static: true }) content?: TemplateRef<any>;
   nome: string = "";
   qualita: string = "";
   qntMinima: number = -3;
   qnt: number = -3;
-  constructor(private productService: ProdottiService, private messageService : MessageService) {}
+  constructor(private productService: ProdottiService, private messageService : MessageService, private EditDataService: ProductEditDataService) {}
   @Input() product?: Prodotto;
   @Output() productEdited = new EventEmitter<void>();
   tempProd?: Prodotto;
@@ -28,10 +31,10 @@ export class EditProductsComponent {
   closeResult = '';
 
   open(content: TemplateRef<any>, templateName : string) {
-    if(templateName === "main"){
+    /*if(templateName === "main"){
       this.initInput();
       
-    }
+    }*/
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -59,7 +62,7 @@ export class EditProductsComponent {
       alert("Ti sei dimenticato qualche campo!")
       return
     } 
-    if(!isNaN(this.qnt) && !isNaN(this.qntMinima)){
+    if(isNaN(this.qnt) || isNaN(this.qntMinima)){
       alert("Quantità e soglia minima devono essere dei numeri!")
       return
     }
@@ -92,7 +95,7 @@ export class EditProductsComponent {
         }, 1000); // Delay of 1 seconds
     },  errore => this.messageService.add("Errore eliminazione."));
   }
-
+ 
   initInput() : void {
     
     this.nome = this.product?.nome || "";
@@ -102,6 +105,22 @@ export class EditProductsComponent {
     
   }
 
+
+  private param1Subscription?: Subscription;
+  ngOnInit(): void {
+    
+    this.param1Subscription = this.EditDataService.param1Observable$.subscribe(
+      (param: any) => {
+        this.product = param as Prodotto;
+        this.initInput()
+        this.open(this.content!, "main")
+      }
+    );
+  }
+  openParam1(param1: string) {
+    // La tua logica per aprire param1
+    alert( param1);
+  }
   closeAllModal(){
     this.modalService.dismissAll()
   }

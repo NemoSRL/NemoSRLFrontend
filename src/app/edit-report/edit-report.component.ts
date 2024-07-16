@@ -10,13 +10,15 @@ import { EtichetteService, Etichetta } from '../services/etichette.service';
 import { Personale, PersonaleService } from '../services/personale.service';
 import { MessageService } from '../services/message.service';
 import { popolato } from '../checker';
+import { Subscription } from 'rxjs';
+import { ReportEditDataService } from '../services/event.service';
 @Component({
   selector: 'app-edit-report',
   templateUrl: './edit-report.component.html',
   styleUrl: './edit-report.component.css',
 })
 export class EditReportComponent {
-  
+  @ViewChild('content', { static: true }) content?: TemplateRef<any>;
   
   etichetta?: number;
   data?: Date;
@@ -26,19 +28,20 @@ export class EditReportComponent {
     private reportService: ReportService,
     private labelService: EtichetteService,
     private staffMemberService: PersonaleService,
-    private messageService : MessageService
+    private messageService : MessageService,
+    private editDataService : ReportEditDataService
   ) {}
-  @Input() report?: Report;
+  report?: Report;
   @Output() reportModifed = new EventEmitter<void>();
   tempReport?: Report;
   private modalService = inject(NgbModal);
   closeResult = '';
 
   open(content: TemplateRef<any>, templateName : string) {
-    if(templateName === "main"){
+    /*if(templateName === "main"){
       this.ngOnInit();
       
-    }
+    }*/
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -115,10 +118,21 @@ export class EditReportComponent {
     this.staffMemberService.getAllPersonale()
     .subscribe(staffMembers => (this.staffMembers = staffMembers), errore => this.messageService.add("Errore caricamento personale."))
   }
+  private param1Subscription?: Subscription;
   ngOnInit(): void {
-    this.getLabels();
-    this.getStaffMembers();
-    this.initInput()
+    
+    
+    this.param1Subscription = this.editDataService.param1Observable$.subscribe(
+      (param: any) => {
+        this.report = param as Report;
+        this.initInput()
+        this.getLabels();
+      
+        
+        this.getStaffMembers();
+        this.open(this.content!, "main")
+      }
+    );
   }
   initInput(): void {
     this.etichetta = this.report?.etichetta;

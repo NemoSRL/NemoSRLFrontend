@@ -16,6 +16,7 @@ import {
 } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
+import { ProductEditDataService } from '../services/event.service';
 
 const rotate: { [key: string]: SortDirection } = {
   asc: 'desc',
@@ -78,10 +79,14 @@ export class ProductsComponent {
     }
 
   }
-  constructor(private productService: ProdottiService, private messageService : MessageService) {}
+  constructor(private productService: ProdottiService, private messageService : MessageService, private EditDataService : ProductEditDataService) {}
   textSearch: string = '';
   attributeSearch: string = '';
   
+  public premuto(object : Prodotto): void {
+    this.EditDataService.emitParam1(object);
+  }
+
   getProductsBy(): void {
     console.log(`text: ${this.textSearch} attribute: ${this.attributeSearch}`)
     if (this.attributeSearch === '') {
@@ -106,7 +111,7 @@ export class ProductsComponent {
   }
   resetButton() : void {
     this.getProducts();
-    this.inputValore.nativeElement.value="";
+    this.inputValore.nativeElement.value="aa";
     this.selectAttributo.nativeElement.selectedIndex=0;
   }
   products: Prodotto[] = [];

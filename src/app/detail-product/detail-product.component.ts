@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, Input } from '@angular/core';
+import { Component, inject, TemplateRef, Input, ViewChild } from '@angular/core';
 
 import {
   ModalDismissReasons,
@@ -9,14 +9,16 @@ import { Prodotto } from '../services/prodotti.service';
 
 import { ProdottiService } from '../services/prodotti.service';
 import { MessageService } from '../services/message.service';
+import { Subscription } from 'rxjs';
+import { ProductDetailDataService } from '../services/event.service';
 @Component({
   selector: 'app-detail-product',
   templateUrl: './detail-product.component.html',
   styleUrl: './detail-product.component.css',
 })
 export class DetailProductComponent {
-  constructor(private productService: ProdottiService, private messageService : MessageService) {}
-  @Input() productId?: number;
+  constructor(private productService: ProdottiService, private messageService : MessageService, private productDetailDataService : ProductDetailDataService) {}
+  productId?: number;
   product?: Prodotto;
 
   private modalService = inject(NgbModal);
@@ -45,9 +47,15 @@ export class DetailProductComponent {
         return `with: ${reason}`;
     }
   }
+  @ViewChild('content', { static: true }) content?: TemplateRef<any>;
+  private param1Subscription?: Subscription;
   ngOnInit(): void {
+    this.param1Subscription = this.productDetailDataService.param1Observable$.subscribe(
+      (param: any) => {
+        this.productId=param
     this.productService
       .getProdottoById(this.productId ?? 0)
       .subscribe((product) => {this.product = product; console.log(product)}, errore => this.messageService.add("Errore caricamento prodotti."));
-  }
+      this.open(this.content!)
+  })}
 }

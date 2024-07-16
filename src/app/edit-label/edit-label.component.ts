@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, Input, EventEmitter, Output } from '@angular/core';
+import { Component, inject, TemplateRef, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import {
   ModalDismissReasons,
   NgbDatepickerModule,
@@ -17,6 +17,8 @@ import { Vendita, VenditaService } from '../services/vendita.service';
 import { MessageService } from '../services/message.service';
 import { Slot, SlotService } from '../services/slot.service';
 import { popolato } from '../checker';
+import { LabelEditDataService, ProductDetailDataService } from '../services/event.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-label',
@@ -24,6 +26,7 @@ import { popolato } from '../checker';
   styleUrl: './edit-label.component.css',
 })
 export class EditLabelComponent {
+  @ViewChild('content', { static: true }) content?: TemplateRef<any>;
   @Output() labelModified = new EventEmitter<void>();
   spostamento?: string;
   dataarrivo?: Date;
@@ -43,18 +46,19 @@ export class EditLabelComponent {
     private positionService: PosizioneService,
     
     private messageService : MessageService,
-    private slotService : SlotService
+    private slotService : SlotService,
+    private editDataService : LabelEditDataService
   ) {}
-  @Input() etichetta?: Etichetta;
-  @Input() etichettaId?: number = 0;
+  etichetta?: Etichetta;
+
   private modalService = inject(NgbModal);
   closeResult = '';
 
   open(content: TemplateRef<any>, templateName : string) {
-    if(templateName === "main"){
+    /*if(templateName === "main"){
       this.ngOnInit();
       
-    }
+    }*/
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -143,13 +147,17 @@ export class EditLabelComponent {
   }
  
 
-
+  private param1Subscription?: Subscription; 
   ngOnInit(): void {
+    this.param1Subscription = this.editDataService.param1Observable$.subscribe(
+      (param: any) => {
+        this.etichetta=param
     this.getProducts();
     this.getPositions();
     this.onPositionChange(this.etichetta?.posizioneid || "")
     this.initInput()
-    
+    this.open(this.content!, "main")
+      })
   }
 
   initInput() : void {

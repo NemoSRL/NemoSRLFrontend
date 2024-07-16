@@ -12,6 +12,7 @@ import {
 import { Etichetta, EtichetteService } from '../services/etichette.service';
 import { MessageService } from '../services/message.service';
 import { SortEvent, SortColumn, SortDirection } from '../sort-types'; 
+import { LabelEditDataService, ProductDetailDataService } from '../services/event.service';
 
 const rotate: { [key: string]: SortDirection } = {
   asc: 'desc',
@@ -81,8 +82,12 @@ export class LabelComponent {
         .subscribe((labels) => (this.labels = labels), errore => this.messageService.add("Errore caricamento etichette."));
     }
   }
-  constructor(private labelService: EtichetteService, private messageService : MessageService) {}
-
+  constructor(private labelService: EtichetteService, private messageService : MessageService, private editDataService : LabelEditDataService,
+    private productDetailDataService : ProductDetailDataService) {}
+    public premuto(object : any, tipo : string): void {
+      if(tipo==="edit") this.editDataService.emitParam1(object as Etichetta);
+      if(tipo==="product") this.productDetailDataService.emitParam1(object as number)
+    }
   getLabels(): void {
     this.labelService
       .readAllEtichette()
