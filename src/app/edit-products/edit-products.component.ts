@@ -59,7 +59,7 @@ export class EditProductsComponent {
       alert("Ti sei dimenticato qualche campo!")
       return
     } 
-    if(!isNaN(this.qnt) && !isNaN(this.qntMinima)){
+    if(isNaN(this.qnt) || isNaN(this.qntMinima)){
       alert("Quantità e soglia minima devono essere dei numeri!")
       return
     }
