@@ -75,10 +75,9 @@ export class EtichetteService {
   }
 
   public deleteEtichette(codice: number): Observable<Etichetta> {
+    const url = `${this.apiUrl}/${DELETE_ETICHETTA}/${codice}`;
     return this.httpClient.delete<Etichetta>(
-      `${this.apiUrl}/${DELETE_ETICHETTA}`,
-      { body: { codice } }
-    );
+      url, { body: { codice } });
   }
 
   public getAttributi(): Observable<string[]> {

@@ -117,6 +117,7 @@ export class EditLabelComponent {
     this.modalService.dismissAll();
   }
   deleteEtichette(): void {
+    this.modalService.dismissAll();
     this.etichetteService.deleteEtichette(this.etichetta?.id ?? -1).subscribe(successo => {
       console.log("successo");
       setTimeout(() => {
