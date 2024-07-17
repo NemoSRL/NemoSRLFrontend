@@ -8,7 +8,7 @@ const GET_ALL_REPORTS = 'report';
 const GET_REPORTS_BY = 'report/ricerca';
 const GET_ATTRIBUTI = 'report';
 const UPDATE_REPORT = 'report';
-const DELETE_REPORT = 'report';
+const DELETE_REPORT = 'report/elimina';
 const ADD_REPORT = 'report';
 const GET_REPORT_BY_ID = 'report';
 export interface Report {
@@ -63,7 +63,7 @@ export class ReportService {
   }
 
   public deleteReport(codice: number, etichetta: number): Observable<Report> {
-    const url = `${this.apiUrl}/${DELETE_REPORT}/${codice}`;
-    return this.httpClient.delete<Report>(url, { body: { codice, etichetta } });
+    const url = `${this.apiUrl}/${DELETE_REPORT}`;
+    return this.httpClient.get<Report>(url, { params: {"id" : codice, "etichetta" : etichetta} } );
   }
 }

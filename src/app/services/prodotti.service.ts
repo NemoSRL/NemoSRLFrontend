@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 const GET_ALL_PRODOTTI = 'prodotti';
 const GET_PRODOTTI_BY = 'prodotti/ricerca';
 const UPDATE_PRODOTTO = 'prodotti';
-const DELETE_PRODOTTO = 'prodotti';
+const DELETE_PRODOTTO = 'prodotti/elimina';
 const GET_ATTRIBUTI = 'prodotti';
 const GET_PRODOTTO_BY_ID = 'prodotti';
 export interface Prodotto {
@@ -61,6 +61,6 @@ export class ProdottiService {
 
   public deleteProdotto(codice: Codice) {
     const url = `${this.apiUrl}/${DELETE_PRODOTTO}/${codice}`;
-    return this.httpClient.delete(url, { body: { codice } });
+    return this.httpClient.get(url);
   }
 }

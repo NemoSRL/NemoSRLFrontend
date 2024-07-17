@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 const GET_ALL_ETICHETTE = 'etichette';
 const GET_ETICHETTE_BY = 'etichette/ricerca';
 const UPDATE_ETICHETTA = 'etichette';
-const DELETE_ETICHETTA = 'etichette';
+const DELETE_ETICHETTA = 'etichette/elimina';
 const GET_ATTRIBUTI = 'etichette';
 const ADD_ETICHETTA = 'etichette';
 const GET_ETICHETTA_BY_ID = 'etichette';
@@ -61,7 +61,7 @@ export class EtichetteService {
     } else{
       return this.httpClient.get<Etichetta[]>(
         `${this.apiUrl}/${GET_ETICHETTE_BY}`,
-        { params: { attributo, valore } }
+        { params: { [attributo] : valore } }
       );
 
     }
@@ -76,8 +76,8 @@ export class EtichetteService {
 
   public deleteEtichette(codice: number): Observable<Etichetta> {
     const url = `${this.apiUrl}/${DELETE_ETICHETTA}/${codice}`;
-    return this.httpClient.delete<Etichetta>(
-      url, { body: { codice } });
+    return this.httpClient.get<Etichetta>(
+      url);
   }
 
   public getAttributi(): Observable<string[]> {
